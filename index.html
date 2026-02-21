@@ -1028,3 +1028,1679 @@
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get Started | FunctionalFIT Package | Freddy Fit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --dark: #111111;
+      --card: #161616;
+      --border: #222222;
+      --lime: #29a8e0;
+      --lime-dark: #1a8bbf;
+      --lime-glow: rgba(41, 168, 224, 0.15);
+      --white: #f5f5f0;
+      --muted: #888;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body: 'Barlow', sans-serif;
+      --font-condensed: 'Barlow Condensed', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: #ffffff;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .nav-logo {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-logo img {
+      height: 50px;
+      width: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-condensed);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #333333;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--lime); }
+
+    .nav-cta {
+      background: var(--lime);
+      color: #fff !important;
+      padding: 0.5rem 1.4rem;
+      clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+    }
+
+    .nav-cta:hover { background: var(--lime-dark) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 10rem 2rem 6rem;
+      position: relative;
+      background: linear-gradient(180deg, var(--black) 0%, var(--dark) 100%);
+    }
+
+    .hero::before {
+      content: 'FIT';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-display);
+      font-size: 35vw;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(41, 168, 224, 0.06);
+      z-index: 0;
+      user-select: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-condensed);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--lime);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      line-height: 1;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* ── PACKAGE CARD ── */
+    .package-section {
+      padding: 0 5rem 6rem;
+      position: relative;
+      z-index: 1;
+      margin-top: -3rem;
+    }
+
+    .package-card {
+      background: linear-gradient(145deg, var(--card) 0%, var(--dark) 100%);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 4rem;
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .package-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--lime), var(--lime-dark));
+    }
+
+    .package-label {
+      font-family: var(--font-condensed);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--lime);
+      margin-bottom: 0.75rem;
+    }
+
+    .package-title {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+
+    .package-desc {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+      max-width: 700px;
+    }
+
+    .package-cta {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .price {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      color: var(--lime);
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--lime);
+      color: #fff;
+      font-family: var(--font-condensed);
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 1rem 2.5rem;
+      text-decoration: none;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .btn-primary:hover { 
+      background: var(--lime-dark); 
+      transform: translateY(-2px); 
+    }
+
+    .btn-secondary {
+      display: inline-block;
+      border: 1px solid #0a0a0a;
+      background: transparent;
+      color: #0a0a0a;
+      font-family: var(--font-condensed);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 1rem 2rem;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+
+    .btn-secondary:hover { 
+      border-color: var(--lime); 
+      color: var(--lime);
+      background: rgba(41, 168, 224, 0.05);
+    }
+
+    /* ── CONSULTATION SECTION ── */
+    .consultation-section {
+      background: #ffffff;
+      padding: 6rem 5rem;
+    }
+
+    .section-label {
+      font-family: var(--font-condensed);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--lime);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 0.95;
+      color: #0a0a0a;
+      margin-bottom: 1rem;
+    }
+
+    .section-title .dim { color: #555; }
+
+    .consultation-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-top: 3rem;
+      align-items: start;
+    }
+
+    .consultation-content h3 {
+      font-family: var(--font-condensed);
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #0a0a0a;
+      margin-bottom: 1.5rem;
+    }
+
+    .consultation-list {
+      list-style: none;
+    }
+
+    .consultation-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid #e5e5e5;
+      font-size: 1rem;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    .consultation-list li::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--lime);
+      flex-shrink: 0;
+      margin-top: 0.5rem;
+    }
+
+    .consultation-cta {
+      margin-top: 2.5rem;
+    }
+
+    /* ── JOURNEY SECTION ── */
+    .journey-section {
+      background: var(--black);
+      padding: 6rem 5rem;
+    }
+
+    .journey-section .section-label { color: var(--lime); }
+    .journey-section .section-title { color: var(--white); }
+    .journey-section .section-title .dim { color: var(--muted); }
+
+    .sessions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .session-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .session-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--lime);
+      opacity: 0.3;
+      transition: opacity 0.3s;
+    }
+
+    .session-card:hover {
+      border-color: var(--lime);
+      transform: translateY(-4px);
+    }
+
+    .session-card:hover::before {
+      opacity: 1;
+    }
+
+    .session-number {
+      font-family: var(--font-display);
+      font-size: 4rem;
+      color: var(--lime);
+      opacity: 0.15;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .session-label {
+      font-family: var(--font-condensed);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--lime);
+      margin-bottom: 0.5rem;
+    }
+
+    .session-title {
+      font-family: var(--font-condensed);
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 1.25rem;
+    }
+
+    .session-list {
+      list-style: none;
+    }
+
+    .session-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .session-list li::before {
+      content: '→';
+      color: var(--lime);
+      flex-shrink: 0;
+    }
+
+    /* ── BETWEEN SESSIONS ── */
+    .between-section {
+      background: var(--dark);
+      padding: 4rem 5rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .between-section h3 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    .between-section p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* ── GUARANTEE SECTION ── */
+    .guarantee-section {
+      background: linear-gradient(135deg, var(--lime) 0%, var(--lime-dark) 100%);
+      padding: 5rem;
+      text-align: center;
+    }
+
+    .guarantee-icon {
+      width: 70px;
+      height: 70px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 2rem;
+      font-size: 2rem;
+    }
+
+    .guarantee-section h3 {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      color: #fff;
+      margin-bottom: 1.5rem;
+    }
+
+    .guarantee-section p {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.9);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* ── WHAT'S NEXT SECTION ── */
+    .next-section {
+      background: #ffffff;
+      padding: 6rem 5rem;
+    }
+
+    .next-section .section-label { color: var(--lime-dark); }
+    .next-section .section-title { color: #0a0a0a; }
+    .next-section .section-title .dim { color: #555; }
+
+    .next-intro {
+      font-size: 1.1rem;
+      color: #444;
+      max-width: 700px;
+      line-height: 1.8;
+      margin-bottom: 3rem;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .option-card {
+      background: #f5f5f5;
+      border: 1px solid #e0e0e0;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .option-card:hover {
+      background: #ebebeb;
+      transform: translateY(-4px);
+      border-color: var(--lime);
+    }
+
+    .option-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--lime-glow);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 1.5rem;
+      color: var(--lime);
+    }
+
+    .option-card h4 {
+      font-family: var(--font-condensed);
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #0a0a0a;
+      margin-bottom: 0.75rem;
+    }
+
+    .option-card p {
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    /* ── FINAL CTA ── */
+    .final-cta {
+      background: var(--black);
+      padding: 6rem 5rem;
+      text-align: center;
+    }
+
+    .final-cta h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    .final-cta p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #ffffff;
+      border-top: 1px solid #e0e0e0;
+      padding: 3rem 5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-logo {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .footer-logo img {
+      height: 35px;
+      width: auto;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-family: var(--font-condensed);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #333333;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--lime); }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: #666666;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .sessions-grid { grid-template-columns: 1fr; }
+      .options-grid { grid-template-columns: repeat(2, 1fr); }
+      .consultation-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { padding: 8rem 1.5rem 4rem; }
+      .package-section { padding: 0 1.5rem 4rem; }
+      .package-card { padding: 2.5rem; }
+      .consultation-section,
+      .journey-section,
+      .between-section,
+      .guarantee-section,
+      .next-section,
+      .final-cta { padding: 4rem 1.5rem; }
+      .options-grid { grid-template-columns: 1fr; }
+      .package-cta { flex-direction: column; align-items: flex-start; }
+      footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-content > * {
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards;
+    }
+
+    .hero-eyebrow { animation-delay: 0.1s; }
+    .hero-title { animation-delay: 0.2s; }
+    .hero-sub { animation-delay: 0.3s; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo"><img src="Untitled_design__6_-removebg-preview.png" alt="FreddyFit Logo"></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="get-started.html" class="nav-cta">Get Started</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-eyebrow">Start Your Transformation</p>
+      <h1 class="hero-title">GET STARTED WITH FREDDYFIT</h1>
+      <p class="hero-sub">Your journey to fitness excellence begins with our proven FunctionalFIT Package</p>
+    </div>
+  </section>
+
+  <!-- PACKAGE CARD -->
+  <section class="package-section">
+    <div class="package-card">
+      <p class="package-label">The Foundation</p>
+      <h2 class="package-title">FunctionalFIT Package</h2>
+      <p class="package-desc">Whether you choose to train at home, in our Oakville studio, online, or in a small group, every client must complete their individual FunctionalFIT Package. This program includes 4 one-on-one sessions spread over 3–4 weeks, designed to assess your body, establish a baseline, and set you up for long-term success.</p>
+      <div class="package-cta">
+        <span class="price">$299.00</span>
+        <a href="#contact" class="btn-primary">Get Started Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONSULTATION -->
+  <section class="consultation-section">
+    <p class="section-label">What to Expect</p>
+    <h2 class="section-title">CONSULTATION</h2>
+    <div class="consultation-grid">
+      <div class="consultation-content">
+        <h3>Initial Assessment & Goal Setting</h3>
+        <ul class="consultation-list">
+          <li>Discuss your goals using the SMART approach (Specific, Measurable, Attainable, Realistic, and Timely) for both short-term and long-term objectives.</li>
+          <li>Identify any mental and physical obstacles that may impact your training progress.</li>
+          <li>Record your body weight and body fat metrics to establish a clear baseline.</li>
+          <li>Build a strong foundation for your personalized fitness journey.</li>
+        </ul>
+        <div class="consultation-cta">
+          <a href="#contact" class="btn-secondary">Schedule Your Complimentary Consultation</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4-SESSION JOURNEY -->
+  <section class="journey-section">
+    <p class="section-label">Your Program</p>
+    <h2 class="section-title">YOUR 4-SESSION <span class="dim">JOURNEY</span></h2>
+    
+    <div class="sessions-grid">
+      <!-- Session 1 -->
+      <div class="session-card">
+        <div class="session-number">01</div>
+        <p class="session-label">Session 1</p>
+        <h3 class="session-title">Lower Body Functional Screening</h3>
+        <ul class="session-list">
+          <li>Identify current movement patterns and any potential limitations.</li>
+          <li>Conduct a functional screening assessment of the lower body.</li>
+          <li>Perform supporting lower-body breakout assessments as needed (ankle, knee, hip, and Lumbo-Pelvic-Hip Complex).</li>
+          <li>Assign food logging to track nutrition habits and daily intake.</li>
+          <li>Assign one individualized program to complete.</li>
+        </ul>
+      </div>
+
+      <!-- Session 2 -->
+      <div class="session-card">
+        <div class="session-number">02</div>
+        <p class="session-label">Session 2</p>
+        <h3 class="session-title">Corrective Protocol & HIIT Workout</h3>
+        <ul class="session-list">
+          <li>Incorporate and assign a daily lower-body corrective protocol based on findings from Session 1.</li>
+          <li>Review Phase 1 of your personalized nutrition plan.</li>
+          <li>Complete a HIIT workout to assess cardiovascular fitness.</li>
+          <li>Assign two individualized programs to complete between sessions.</li>
+        </ul>
+      </div>
+
+      <!-- Session 3 -->
+      <div class="session-card">
+        <div class="session-number">03</div>
+        <p class="session-label">Session 3</p>
+        <h3 class="session-title">Upper Body Screening & Assessments</h3>
+        <ul class="session-list">
+          <li>Conduct a functional screening assessment of the upper body.</li>
+          <li>Perform supporting upper-body breakout assessments as needed (shoulder and neck).</li>
+          <li>Assign two individualized programs to complete between sessions.</li>
+          <li>Discuss the projected length of training required to achieve your goals.</li>
+          <li>Provide a customized email outline detailing the recommended training investment and estimated timeframe.</li>
+        </ul>
+      </div>
+
+      <!-- Session 4 -->
+      <div class="session-card">
+        <div class="session-number">04</div>
+        <p class="session-label">Session 4</p>
+        <h3 class="session-title">Programming Foundation & Strength Testing</h3>
+        <ul class="session-list">
+          <li>Incorporate and assign a daily upper-body corrective protocol based on findings from Session 3.</li>
+          <li>Break down one new barbell functional movement with proper technique and coaching cues.</li>
+          <li>Work up to a 5-rep max on the functional movement to establish a benchmark.</li>
+          <li>Discuss scheduling options should you choose to continue training.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- BETWEEN SESSIONS -->
+  <section class="between-section">
+    <h3>Between Sessions</h3>
+    <p>After each session, you'll be assigned tasks—whether corrective exercises, nutrition adjustments, or movement-based activities—to reinforce your training and accelerate progress.</p>
+  </section>
+
+  <!-- GUARANTEE -->
+  <section class="guarantee-section">
+    <div class="guarantee-icon">✓</div>
+    <h3>Our Commitment to You</h3>
+    <p>We stand behind the quality of our FunctionalFIT Package. If at any point during your initial 4 sessions you feel this program isn't the right fit for you, we offer a 100% money-back guarantee. All we ask is that you provide genuine feedback on what we can do to improve. Your success and satisfaction are our top priorities.</p>
+  </section>
+
+  <!-- WHAT HAPPENS NEXT -->
+  <section class="next-section">
+    <p class="section-label">Continue Your Journey</p>
+    <h2 class="section-title">WHAT HAPPENS <span class="dim">NEXT?</span></h2>
+    <p class="next-intro">Upon completing the FunctionalFIT Package, we integrate your goals with the data collected to create a personalized, long-term training plan. Based on your preferred approach, we transition you into the training style that fits your lifestyle.</p>
+    
+    <div class="options-grid">
+      <div class="option-card">
+        <div class="option-icon">👤</div>
+        <h4>One-on-One Sessions</h4>
+        <p>Fully personalized attention and customized programming</p>
+      </div>
+      <div class="option-card">
+        <div class="option-icon">👥</div>
+        <h4>Small Group Training</h4>
+        <p>Individualized programs in a motivating group environment</p>
+      </div>
+      <div class="option-card">
+        <div class="option-icon">🏠</div>
+        <h4>In-Home Training</h4>
+        <p>Professional training in the comfort of your own space</p>
+      </div>
+      <div class="option-card">
+        <div class="option-icon">💻</div>
+        <h4>Online Training</h4>
+        <p>Flexible training with daily accountability</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <h2>Ready to Transform Your Fitness?</h2>
+    <p>Start your journey with the FunctionalFIT Package today</p>
+    <a href="#contact" class="btn-primary">Get Started – $299</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="index.html" class="footer-logo"><img src="Untitled_design__6_-removebg-preview.png" alt="FreddyFit Logo"></a>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <p class="footer-copy">© 2025 FreddyFit. All rights reserved.</p>
+  </footer>
+
+</body>
+</ht
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get Started | FunctionalFIT Package | Freddy Fit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --dark: #111111;
+      --card: #161616;
+      --border: #222222;
+      --lime: #29a8e0;
+      --lime-dark: #1a8bbf;
+      --lime-glow: rgba(41, 168, 224, 0.15);
+      --white: #f5f5f0;
+      --muted: #888;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body: 'Barlow', sans-serif;
+      --font-condensed: 'Barlow Condensed', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: #ffffff;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .nav-logo {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-logo img {
+      height: 50px;
+      width: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-condensed);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #333333;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--lime); }
+
+    .nav-cta {
+      background: var(--lime);
+      color: #fff !important;
+      padding: 0.5rem 1.4rem;
+      clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+    }
+
+    .nav-cta:hover { background: var(--lime-dark) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 10rem 2rem 6rem;
+      position: relative;
+      background: linear-gradient(180deg, var(--black) 0%, var(--dark) 100%);
+    }
+
+    .hero::before {
+      content: 'FIT';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-display);
+      font-size: 35vw;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(41, 168, 224, 0.06);
+      z-index: 0;
+      user-select: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-condensed);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--lime);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      line-height: 1;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* ── PACKAGE CARD ── */
+    .package-section {
+      padding: 0 5rem 6rem;
+      position: relative;
+      z-index: 1;
+      margin-top: -3rem;
+    }
+
+    .package-card {
+      background: linear-gradient(145deg, var(--card) 0%, var(--dark) 100%);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 4rem;
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .package-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--lime), var(--lime-dark));
+    }
+
+    .package-label {
+      font-family: var(--font-condensed);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--lime);
+      margin-bottom: 0.75rem;
+    }
+
+    .package-title {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+
+    .package-desc {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+      max-width: 700px;
+    }
+
+    .package-cta {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .price {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      color: var(--lime);
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--lime);
+      color: #fff;
+      font-family: var(--font-condensed);
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 1rem 2.5rem;
+      text-decoration: none;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .btn-primary:hover { 
+      background: var(--lime-dark); 
+      transform: translateY(-2px); 
+    }
+
+    .btn-secondary {
+      display: inline-block;
+      border: 1px solid #0a0a0a;
+      background: transparent;
+      color: #0a0a0a;
+      font-family: var(--font-condensed);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 1rem 2rem;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+
+    .btn-secondary:hover { 
+      border-color: var(--lime); 
+      color: var(--lime);
+      background: rgba(41, 168, 224, 0.05);
+    }
+
+    /* ── CONSULTATION SECTION ── */
+    .consultation-section {
+      background: #ffffff;
+      padding: 6rem 5rem;
+    }
+
+    .section-label {
+      font-family: var(--font-condensed);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--lime);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 0.95;
+      color: #0a0a0a;
+      margin-bottom: 1rem;
+    }
+
+    .section-title .dim { color: #555; }
+
+    .consultation-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-top: 3rem;
+      align-items: start;
+    }
+
+    .consultation-content h3 {
+      font-family: var(--font-condensed);
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #0a0a0a;
+      margin-bottom: 1.5rem;
+    }
+
+    .consultation-list {
+      list-style: none;
+    }
+
+    .consultation-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid #e5e5e5;
+      font-size: 1rem;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    .consultation-list li::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--lime);
+      flex-shrink: 0;
+      margin-top: 0.5rem;
+    }
+
+    .consultation-cta {
+      margin-top: 2.5rem;
+    }
+
+    /* ── JOURNEY SECTION ── */
+    .journey-section {
+      background: var(--black);
+      padding: 6rem 5rem;
+    }
+
+    .journey-section .section-label { color: var(--lime); }
+    .journey-section .section-title { color: var(--white); }
+    .journey-section .section-title .dim { color: var(--muted); }
+
+    .sessions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .session-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .session-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--lime);
+      opacity: 0.3;
+      transition: opacity 0.3s;
+    }
+
+    .session-card:hover {
+      border-color: var(--lime);
+      transform: translateY(-4px);
+    }
+
+    .session-card:hover::before {
+      opacity: 1;
+    }
+
+    .session-number {
+      font-family: var(--font-display);
+      font-size: 4rem;
+      color: var(--lime);
+      opacity: 0.15;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .session-label {
+      font-family: var(--font-condensed);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--lime);
+      margin-bottom: 0.5rem;
+    }
+
+    .session-title {
+      font-family: var(--font-condensed);
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 1.25rem;
+    }
+
+    .session-list {
+      list-style: none;
+    }
+
+    .session-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .session-list li::before {
+      content: '→';
+      color: var(--lime);
+      flex-shrink: 0;
+    }
+
+    /* ── BETWEEN SESSIONS ── */
+    .between-section {
+      background: var(--dark);
+      padding: 4rem 5rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .between-section h3 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    .between-section p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* ── GUARANTEE SECTION ── */
+    .guarantee-section {
+      background: linear-gradient(135deg, var(--lime) 0%, var(--lime-dark) 100%);
+      padding: 5rem;
+      text-align: center;
+    }
+
+    .guarantee-icon {
+      width: 70px;
+      height: 70px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 2rem;
+      font-size: 2rem;
+    }
+
+    .guarantee-section h3 {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      color: #fff;
+      margin-bottom: 1.5rem;
+    }
+
+    .guarantee-section p {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.9);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* ── WHAT'S NEXT SECTION ── */
+    .next-section {
+      background: #ffffff;
+      padding: 6rem 5rem;
+    }
+
+    .next-section .section-label { color: var(--lime-dark); }
+    .next-section .section-title { color: #0a0a0a; }
+    .next-section .section-title .dim { color: #555; }
+
+    .next-intro {
+      font-size: 1.1rem;
+      color: #444;
+      max-width: 700px;
+      line-height: 1.8;
+      margin-bottom: 3rem;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .option-card {
+      background: #f5f5f5;
+      border: 1px solid #e0e0e0;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .option-card:hover {
+      background: #ebebeb;
+      transform: translateY(-4px);
+      border-color: var(--lime);
+    }
+
+    .option-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--lime-glow);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 1.5rem;
+      color: var(--lime);
+    }
+
+    .option-card h4 {
+      font-family: var(--font-condensed);
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #0a0a0a;
+      margin-bottom: 0.75rem;
+    }
+
+    .option-card p {
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    /* ── FINAL CTA ── */
+    .final-cta {
+      background: var(--black);
+      padding: 6rem 5rem;
+      text-align: center;
+    }
+
+    .final-cta h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    .final-cta p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #ffffff;
+      border-top: 1px solid #e0e0e0;
+      padding: 3rem 5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-logo {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .footer-logo img {
+      height: 35px;
+      width: auto;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-family: var(--font-condensed);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #333333;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--lime); }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: #666666;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .sessions-grid { grid-template-columns: 1fr; }
+      .options-grid { grid-template-columns: repeat(2, 1fr); }
+      .consultation-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { padding: 8rem 1.5rem 4rem; }
+      .package-section { padding: 0 1.5rem 4rem; }
+      .package-card { padding: 2.5rem; }
+      .consultation-section,
+      .journey-section,
+      .between-section,
+      .guarantee-section,
+      .next-section,
+      .final-cta { padding: 4rem 1.5rem; }
+      .options-grid { grid-template-columns: 1fr; }
+      .package-cta { flex-direction: column; align-items: flex-start; }
+      footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-content > * {
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards;
+    }
+
+    .hero-eyebrow { animation-delay: 0.1s; }
+    .hero-title { animation-delay: 0.2s; }
+    .hero-sub { animation-delay: 0.3s; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo"><img src="Untitled_design__6_-removebg-preview.png" alt="FreddyFit Logo"></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="get-started.html" class="nav-cta">Get Started</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-eyebrow">Start Your Transformation</p>
+      <h1 class="hero-title">GET STARTED WITH FREDDYFIT</h1>
+      <p class="hero-sub">Your journey to fitness excellence begins with our proven FunctionalFIT Package</p>
+    </div>
+  </section>
+
+  <!-- PACKAGE CARD -->
+  <section class="package-section">
+    <div class="package-card">
+      <p class="package-label">The Foundation</p>
+      <h2 class="package-title">FunctionalFIT Package</h2>
+      <p class="package-desc">Whether you choose to train at home, in our Oakville studio, online, or in a small group, every client must complete their individual FunctionalFIT Package. This program includes 4 one-on-one sessions spread over 3–4 weeks, designed to assess your body, establish a baseline, and set you up for long-term success.</p>
+      <div class="package-cta">
+        <span class="price">$299.00</span>
+        <a href="#contact" class="btn-primary">Get Started Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONSULTATION -->
+  <section class="consultation-section">
+    <p class="section-label">What to Expect</p>
+    <h2 class="section-title">CONSULTATION</h2>
+    <div class="consultation-grid">
+      <div class="consultation-content">
+        <h3>Initial Assessment & Goal Setting</h3>
+        <ul class="consultation-list">
+          <li>Discuss your goals using the SMART approach (Specific, Measurable, Attainable, Realistic, and Timely) for both short-term and long-term objectives.</li>
+          <li>Identify any mental and physical obstacles that may impact your training progress.</li>
+          <li>Record your body weight and body fat metrics to establish a clear baseline.</li>
+          <li>Build a strong foundation for your personalized fitness journey.</li>
+        </ul>
+        <div class="consultation-cta">
+          <a href="#contact" class="btn-secondary">Schedule Your Complimentary Consultation</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4-SESSION JOURNEY -->
+  <section class="journey-section">
+    <p class="section-label">Your Program</p>
+    <h2 class="section-title">YOUR 4-SESSION <span class="dim">JOURNEY</span></h2>
+    
+    <div class="sessions-grid">
+      <!-- Session 1 -->
+      <div class="session-card">
+        <div class="session-number">01</div>
+        <p class="session-label">Session 1</p>
+        <h3 class="session-title">Lower Body Functional Screening</h3>
+        <ul class="session-list">
+          <li>Identify current movement patterns and any potential limitations.</li>
+          <li>Conduct a functional screening assessment of the lower body.</li>
+          <li>Perform supporting lower-body breakout assessments as needed (ankle, knee, hip, and Lumbo-Pelvic-Hip Complex).</li>
+          <li>Assign food logging to track nutrition habits and daily intake.</li>
+          <li>Assign one individualized program to complete.</li>
+        </ul>
+      </div>
+
+      <!-- Session 2 -->
+      <div class="session-card">
+        <div class="session-number">02</div>
+        <p class="session-label">Session 2</p>
+        <h3 class="session-title">Corrective Protocol & HIIT Workout</h3>
+        <ul class="session-list">
+          <li>Incorporate and assign a daily lower-body corrective protocol based on findings from Session 1.</li>
+          <li>Review Phase 1 of your personalized nutrition plan.</li>
+          <li>Complete a HIIT workout to assess cardiovascular fitness.</li>
+          <li>Assign two individualized programs to complete between sessions.</li>
+        </ul>
+      </div>
+
+      <!-- Session 3 -->
+      <div class="session-card">
+        <div class="session-number">03</div>
+        <p class="session-label">Session 3</p>
+        <h3 class="session-title">Upper Body Screening & Assessments</h3>
+        <ul class="session-list">
+          <li>Conduct a functional screening assessment of the upper body.</li>
+          <li>Perform supporting upper-body breakout assessments as needed (shoulder and neck).</li>
+          <li>Assign two individualized programs to complete between sessions.</li>
+          <li>Discuss the projected length of training required to achieve your goals.</li>
+          <li>Provide a customized email outline detailing the recommended training investment and estimated timeframe.</li>
+        </ul>
+      </div>
+
+      <!-- Session 4 -->
+      <div class="session-card">
+        <div class="session-number">04</div>
+        <p class="session-label">Session 4</p>
+        <h3 class="session-title">Programming Foundation & Strength Testing</h3>
+        <ul class="session-list">
+          <li>Incorporate and assign a daily upper-body corrective protocol based on findings from Session 3.</li>
+          <li>Break down one new barbell functional movement with proper technique and coaching cues.</li>
+          <li>Work up to a 5-rep max on the functional movement to establish a benchmark.</li>
+          <li>Discuss scheduling options should you choose to continue training.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- BETWEEN SESSIONS -->
+  <section class="between-section">
+    <h3>Between Sessions</h3>
+    <p>After each session, you'll be assigned tasks—whether corrective exercises, nutrition adjustments, or movement-based activities—to reinforce your training and accelerate progress.</p>
+  </section>
+
+  <!-- GUARANTEE -->
+  <section class="guarantee-section">
+    <div class="guarantee-icon">✓</div>
+    <h3>Our Commitment to You</h3>
+    <p>We stand behind the quality of our FunctionalFIT Package. If at any point during your initial 4 sessions you feel this program isn't the right fit for you, we offer a 100% money-back guarantee. All we ask is that you provide genuine feedback on what we can do to improve. Your success and satisfaction are our top priorities.</p>
+  </section>
+
+  <!-- WHAT HAPPENS NEXT -->
+  <section class="next-section">
+    <p class="section-label">Continue Your Journey</p>
+    <h2 class="section-title">WHAT HAPPENS <span class="dim">NEXT?</span></h2>
+    <p class="next-intro">Upon completing the FunctionalFIT Package, we integrate your goals with the data collected to create a personalized, long-term training plan. Based on your preferred approach, we transition you into the training style that fits your lifestyle.</p>
+    
+    <div class="options-grid">
+      <div class="option-card">
+        <div class="option-icon">👤</div>
+        <h4>One-on-One Sessions</h4>
+        <p>Fully personalized attention and customized programming</p>
+      </div>
+      <div class="option-card">
+        <div class="option-icon">👥</div>
+        <h4>Small Group Training</h4>
+        <p>Individualized programs in a motivating group environment</p>
+      </div>
+      <div class="option-card">
+        <div class="option-icon">🏠</div>
+        <h4>In-Home Training</h4>
+        <p>Professional training in the comfort of your own space</p>
+      </div>
+      <div class="option-card">
+        <div class="option-icon">💻</div>
+        <h4>Online Training</h4>
+        <p>Flexible training with daily accountability</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <h2>Ready to Transform Your Fitness?</h2>
+    <p>Start your journey with the FunctionalFIT Package today</p>
+    <a href="#contact" class="btn-primary">Get Started – $299</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="index.html" class="footer-logo"><img src="Untitled_design__6_-removebg-preview.png" alt="FreddyFit Logo"></a>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <p class="footer-copy">© 2025 FreddyFit. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
