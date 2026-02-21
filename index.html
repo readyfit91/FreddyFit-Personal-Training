@@ -1,25 +1,3 @@
-
-What can I help you with today?
-
-
-You've used 90% of your session limit
-Get more usage
-
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>Freddy Fit | Visualize. Do. Become.</title> <link rel="preconnect" href="https://fonts.googleapis.com" /> <link rel="preconnect" href="htt
-
-pasted
-
-
-when will my usage reset
-
-
-Claude is AI and can make mistakes. Please double-check responses.
-Usage reset timing - Claude
-Pasted content
-191.20 KB •956 lines
-•
-Formatting may be inconsistent from source
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -348,8 +326,81 @@ Formatting may be inconsistent from source
       padding: 7rem 5rem;
     }
 
-    .section-label {
-      font-family: var(--font-condensed);
+    /* Alternating section backgrounds */
+    #services {
+      background: #ffffff;
+    }
+    #about {
+      background: #ffffff;
+    }
+
+    /* Text colors for light sections */
+    #services .section-title,
+    #about .section-title,
+    .specialties .section-title {
+      color: #0a0a0a;
+    }
+    #services .section-title .dim,
+    #about .section-title .dim,
+    .specialties .section-title .dim {
+      color: #555555;
+    }
+    #services .section-intro,
+    #about .section-intro {
+      color: #444444;
+    }
+    .specialties .section-label {
+      color: var(--lime-dark);
+    }
+    #services .section-label,
+    #about .section-label {
+      color: #1a8ab5;
+    }
+
+    /* Contact section text */
+    .contact-section .section-label {
+      color: #1a8ab5;
+    }
+    .contact-section .section-title {
+      color: #0a0a0a;
+    }
+    .contact-section .section-title .dim {
+      color: #555555;
+    }
+    .contact-section p {
+      color: #444444;
+    }
+
+    /* Light section card overrides */
+    #services .service-card {
+      background: #f5f5f5;
+      border: 1px solid #e0e0e0;
+    }
+    #services .service-card:hover { background: #ebebeb; }
+    #services .service-name { color: #0a0a0a; }
+    #services .service-desc { color: #555555; }
+
+    .specialties .spec-tag {
+      border-color: #cccccc;
+      color: #333333;
+    }
+    .specialties .spec-tag:hover {
+      border-color: var(--lime-dark);
+      color: var(--lime-dark);
+    }
+
+    #about .step-title { color: #0a0a0a; }
+    #about .step-desc { color: #555555; }
+
+    /* Contact form on gray bg */
+    .contact-section label { color: #333333; }
+    .contact-section input,
+    .contact-section select,
+    .contact-section textarea {
+      background: #ffffff;
+      border-color: #cccccc;
+      color: #0a0a0a;
+    }
       font-size: 0.75rem;
       font-weight: 600;
       letter-spacing: 0.3em;
@@ -434,7 +485,7 @@ Formatting may be inconsistent from source
 
     /* ── SPECIALTIES ── */
     .specialties {
-      background: var(--dark);
+      background: #f0f0f0;
       padding: 5rem;
     }
 
@@ -559,6 +610,7 @@ Formatting may be inconsistent from source
 
     /* ── CONTACT FORM ── */
     .contact-section {
+      background: #f0f0f0;
       padding: 7rem 5rem;
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -747,7 +799,7 @@ Formatting may be inconsistent from source
       <h1 class="hero-title">VISU<span class="accent">AL</span>IZE &nbsp; DO &nbsp; BECOME</h1>
       <p class="hero-sub">Personal training designed around your goals — one-on-one, small group, in-home, and online programs built to transform.</p>
       <div class="hero-buttons">
-        <a href="#contact" class="btn-primary">Book Free Consult</a>
+        <a href="#contact" class="btn-primary">Book Complimentary Consult</a>
         <a href="#services" class="btn-secondary">View Services</a>
       </div>
       <div class="app-badges">
@@ -904,8 +956,8 @@ Formatting may be inconsistent from source
   <section class="contact-section" id="contact">
     <div class="contact-left">
       <p class="section-label">Get Started</p>
-      <h2 class="section-title">BOOK A FREE<br><span class="dim">CONSULT</span></h2>
-      <p class="contact-desc">Schedule a free 15-minute phone consultation. We'll talk through your goals, your history, and figure out the best path forward — no commitment required.</p>
+      <h2 class="section-title">BOOK A COMPLIMENTARY<br><span class="dim">CONSULT</span></h2>
+      <p class="contact-desc">Schedule a complimentary 15-minute phone consultation. We'll talk through your goals, your history, and figure out the best path forward — no commitment required.</p>
       <div class="contact-info">
         <div class="contact-info-item"><div class="contact-info-dot"></div>15 min complimentary call</div>
         <div class="contact-info-item"><div class="contact-info-dot"></div>No obligation, no pressure</div>
