@@ -942,12 +942,26 @@
     border: 1px solid rgba(46,163,213,0.15);
     font-size: 0.88rem; color: var(--text-muted-light); font-weight: 400;
     display: flex; align-items: center; gap: 0.6rem;
+    flex-wrap: wrap;
   }
   .rm-free-badge {
     background: var(--gradient-blue); color: #fff;
     font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
     font-size: 0.75rem; letter-spacing: 1.5px;
     padding: 0.25rem 0.6rem; border-radius: 4px; flex-shrink: 0;
+  }
+
+  @media (max-width: 600px) {
+    .rm-slide-cta {
+      padding: 0.75rem 0.85rem;
+      font-size: 0.8rem;
+      gap: 0.4rem;
+    }
+    .rm-free-badge {
+      font-size: 0.65rem;
+      padding: 0.2rem 0.5rem;
+      letter-spacing: 0.8px;
+    }
   }
 
   /* ===== ABOUT PAGE ===== */
