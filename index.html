@@ -792,6 +792,131 @@
     box-shadow: 0 6px 20px var(--blue-glow);
   }
 
+  /* Payment Modal */
+  .payment-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .payment-modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .payment-modal-content {
+    background: var(--light-surface);
+    border-radius: 12px;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: slideInUp 0.4s ease;
+  }
+
+  @keyframes slideInUp {
+    from {
+      transform: translateY(50px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .payment-modal-header {
+    padding: 2rem;
+    border-bottom: 1px solid var(--light-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .payment-modal-header h2 {
+    font-size: 1.5rem;
+    color: var(--text-on-light);
+    margin: 0;
+  }
+
+  .payment-modal-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-muted-light);
+    transition: color 0.3s ease;
+  }
+
+  .payment-modal-close:hover {
+    color: var(--text-on-light);
+  }
+
+  .payment-modal-body {
+    padding: 2rem;
+  }
+
+  .payment-info {
+    background: var(--light-card-alt);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid var(--blue);
+  }
+
+  .payment-info h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+    color: var(--text-on-light);
+  }
+
+  .payment-info p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-muted-light);
+  }
+
+  .stripe-embed {
+    margin-top: 1.5rem;
+  }
+
+  @media (max-width: 600px) {
+    .payment-modal-content {
+      width: 95%;
+      border-radius: 8px;
+    }
+
+    .payment-modal-header {
+      padding: 1.5rem;
+    }
+
+    .payment-modal-header h2 {
+      font-size: 1.25rem;
+    }
+
+    .payment-modal-body {
+      padding: 1.5rem;
+    }
+  }
+
   /* Between sessions */
   .rm-between {
     padding: 3rem 2rem;
@@ -883,6 +1008,13 @@
     background: var(--dark-card); border-radius: 12px;
     padding: 2rem; border: 1px solid var(--dark-border);
     position: relative; overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .rm-price-inner:hover {
+    border-color: var(--blue);
+    box-shadow: 0 0 20px var(--blue-glow);
+    transform: translateY(-4px);
   }
   .rm-price-inner::before {
     content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
@@ -900,6 +1032,32 @@
   .rm-price-detail {
     font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem;
     letter-spacing: 1.5px; color: var(--text-muted-dark); text-transform: uppercase;
+  }
+  .rm-price-cta {
+    margin-top: 1.5rem;
+    display: inline-block;
+  }
+  .rm-price-btn {
+    background: var(--gradient-blue);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 6px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px var(--blue-glow);
+  }
+  .rm-price-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--blue-glow);
+  }
+  .rm-price-btn:active {
+    transform: translateY(0);
   }
 
   /* Consultation slide CTA */
@@ -1380,10 +1538,13 @@
       <div class="section-line"></div>
     </div>
     <div class="rm-price-banner">
-      <div class="rm-price-inner">
+      <div class="rm-price-inner" onclick="openPaymentModal()">
         <div class="rm-price-label">FunctionalFIT Package</div>
         <div class="rm-price-amount">$299</div>
         <div class="rm-price-detail">Complimentary Consultation + 4 Sessions &bull; Full Assessment &bull; Custom Programming</div>
+        <div class="rm-price-cta">
+          <button class="rm-price-btn" onclick="event.stopPropagation(); openPaymentModal();">Purchase Now</button>
+        </div>
       </div>
     </div>
   </div>
@@ -1510,6 +1671,26 @@
         <button class="rm-nav-btn rm-nav-next" id="rmNext" onclick="nextSlide()">Next &rarr;</button>
       </div>
 
+    </div>
+  </div>
+
+  <!-- Payment Modal -->
+  <div id="paymentModal" class="payment-modal">
+    <div class="payment-modal-content">
+      <div class="payment-modal-header">
+        <h2>Complete Payment</h2>
+        <button class="payment-modal-close" onclick="closePaymentModal()">&times;</button>
+      </div>
+      <div class="payment-modal-body">
+        <div class="payment-info">
+          <h3>FunctionalFIT Package</h3>
+          <p>Complimentary Consultation + 4 Sessions • Full Assessment • Custom Programming</p>
+          <p style="margin-top: 0.5rem; font-weight: 600; color: var(--blue);">$299</p>
+        </div>
+        <div class="stripe-embed">
+          <iframe src="https://buy.stripe.com/5kQ14nawL8Ft4l6fnh3Ru05" width="100%" height="600" frameborder="0" allow="payment" style="border-radius: 8px; display: block;"></iframe>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1858,18 +2039,45 @@ function updateSlideshow() {
   document.getElementById('rmPrev').disabled = currentSlide === 0;
   const nextBtn = document.getElementById('rmNext');
   if (currentSlide === totalSlides - 1) {
-    nextBtn.textContent = 'Complete \u2713';
-    nextBtn.disabled = true;
-    nextBtn.style.opacity = '0.6';
+    nextBtn.textContent = 'Complete Payment';
+    nextBtn.disabled = false;
+    nextBtn.style.opacity = '1';
   } else {
     nextBtn.innerHTML = 'Next &rarr;';
     nextBtn.disabled = false;
     nextBtn.style.opacity = '1';
   }
 }
-function nextSlide() { if (currentSlide < totalSlides - 1) { currentSlide++; updateSlideshow(); } }
+function nextSlide() { 
+  if (currentSlide < totalSlides - 1) { 
+    currentSlide++; 
+    updateSlideshow(); 
+  } else if (currentSlide === totalSlides - 1) {
+    openPaymentModal();
+  }
+}
+
+function openPaymentModal() {
+  document.getElementById('paymentModal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePaymentModal() {
+  document.getElementById('paymentModal').classList.remove('show');
+  document.body.style.overflow = 'auto';
+}
+
+// Close modal when clicking outside the modal content
+window.addEventListener('click', function(event) {
+  const modal = document.getElementById('paymentModal');
+  if (event.target === modal) {
+    closePaymentModal();
+  }
+});
+
 function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlideshow(); } }
 function goSlide(n) { currentSlide = n; updateSlideshow(); }
+
 </script>
 </body>
 </html>
