@@ -1265,9 +1265,343 @@
 
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* QUIZ MODAL STYLES */
+  .quiz-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+  }
+  .quiz-modal.active {
+    display: flex;
+  }
+  .quiz-container {
+    background: var(--light-surface);
+    border-radius: 12px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 2rem;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    animation: fadeUp 0.4s ease;
+  }
+  .quiz-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .quiz-header h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    color: var(--text-on-light);
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+  }
+  .quiz-header p {
+    color: var(--text-muted-light);
+    font-size: 0.95rem;
+  }
+  .quiz-step {
+    margin-bottom: 2rem;
+  }
+  .quiz-step-title {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-on-light);
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--blue);
+    padding-bottom: 0.5rem;
+  }
+  .quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .quiz-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border: 2px solid var(--light-border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: var(--light-card-alt);
+  }
+  .quiz-option:hover {
+    border-color: var(--blue);
+    background: var(--light-surface);
+  }
+  .quiz-option input[type="radio"] {
+    cursor: pointer;
+    accent-color: var(--blue);
+    width: 18px;
+    height: 18px;
+  }
+  .quiz-option label {
+    cursor: pointer;
+    flex: 1;
+    font-size: 0.95rem;
+    color: var(--text-on-light);
+  }
+  .quiz-step-5-note {
+    background: rgba(46, 163, 213, 0.1);
+    border-left: 4px solid var(--blue);
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-on-light);
+  }
+  .quiz-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .quiz-btn-skip, .quiz-btn-submit {
+    flex: 1;
+    padding: 0.85rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+  }
+  .quiz-btn-skip {
+    background: var(--light-card-alt);
+    color: var(--text-on-light);
+    border: 2px solid var(--light-border);
+  }
+  .quiz-btn-skip:hover {
+    border-color: var(--text-muted-light);
+  }
+  .quiz-btn-submit {
+    background: var(--gradient-blue);
+    color: white;
+    box-shadow: 0 4px 15px rgba(46, 163, 213, 0.3);
+  }
+  .quiz-btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(46, 163, 213, 0.4);
+  }
+  .quiz-progress {
+    font-size: 0.85rem;
+    color: var(--text-muted-light);
+    text-align: center;
+    margin-top: 1rem;
+  }
+  .quiz-message {
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.1rem;
+    color: var(--text-on-light);
+    line-height: 1.6;
+  }
+  .quiz-message-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  @media (max-width: 600px) {
+    .quiz-container {
+      padding: 1.5rem;
+      max-height: 90vh;
+    }
+    .quiz-header h2 {
+      font-size: 1.5rem;
+    }
+    .quiz-option {
+      padding: 0.6rem;
+      gap: 0.6rem;
+    }
+  }
 </style>
 </head>
 <body>
+
+<!-- Performance Assessment Quiz Modal -->
+<div id="quizModal" class="quiz-modal">
+  <div class="quiz-container">
+    <!-- Initial Prompt -->
+    <div id="quizPrompt" style="display: flex; flex-direction: column;">
+      <div class="quiz-header">
+        <h2>Performance Assessment</h2>
+        <p>Take the performance assessment</p>
+      </div>
+      <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 1rem;">
+        <button class="quiz-btn-submit" onclick="startQuiz()" style="flex: 1;">Yes, Let's Go</button>
+        <button class="quiz-btn-skip" onclick="skipQuiz()" style="flex: 1;">No, Skip</button>
+      </div>
+    </div>
+
+    <!-- Quiz Content -->
+    <div id="quizContent" style="display: none;">
+      <div class="quiz-header">
+        <h2>Performance Assessment</h2>
+        <p>Let's find your best path forward</p>
+      </div>
+
+      <form id="quizForm" action="https://formsubmit.co/readyfit91@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="New Performance Assessment Quiz Response">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="Timestamp" value="">
+        <!-- Step 1 -->
+        <div class="quiz-step">
+          <div class="quiz-step-title">Step 1: What's Your Primary Goal?</div>
+          <div class="quiz-options">
+            <div class="quiz-option">
+              <input type="radio" id="goal1" name="Primary Goal" value="Lose 15–30 lbs">
+              <label for="goal1">Lose 15–30 lbs</label>
+            </div>
+            <div class="quiz-option">
+              <input type="radio" id="goal1b" name="Primary Goal" value="Lose 30–50 lbs">
+              <label for="goal1b">Lose 30–50 lbs</label>
+            </div>
+            <div class="quiz-option">
+              <input type="radio" id="goal2" name="Primary Goal" value="Build lean muscle">
+              <label for="goal2">Build lean muscle</label>
+            </div>
+            <div class="quiz-option">
+              <input type="radio" id="goal3" name="Primary Goal" value="Increase strength">
+              <label for="goal3">Increase strength</label>
+            </div>
+            <div class="quiz-option">
+              <input type="radio" id="goal4" name="Primary Goal" value="Improve athletic performance">
+              <label for="goal4">Improve athletic performance</label>
+            </div>
+            <div class="quiz-option">
+              <input type="radio" id="goal5" name="Primary Goal" value="Reduce chronic pain">
+              <label for="goal5">Reduce chronic pain (lower back, knee, shoulder, neck, etc.)</label>
+            </div>
+            <div class="quiz-option">
+              <input type="radio" id="goal6" name="Primary Goal" value="Get back in shape">
+              <label for="goal6">Get back in shape after time off</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="quiz-step">
+          <div class="quiz-step-title">Step 2: What's Currently Holding You Back?</div>
+          <div class="quiz-options">
+            <div class="quiz-option">
+              <input type="radio" id="barrier1" name="Current Barriers" value="Lack of structure">
+              <label for="barrier1">Lack of structure</label>
+            </div>
+            <div class="quiz-option">
+              <input type="radio" id="barrier2" name="Current Barriers" value="Inconsistent discipline">
+              <label for="barrier2">Inconsistent discipline</label>
+            </div>
+            <div class="quiz-option">
+              <input type="radio" id="barrier3" name="Current Barriers" value="No accountability">
+              <label for="barrier3">No accountability</label>
+            </div>
+            <div class="quiz-option">
+              <input type="radio" id="barrier4" name="Current Barriers" value="Busy schedule">
+              <label for="barrier4">Busy schedule</label>
+            </div>
+            <div class="quiz-option">
+              <input type="radio" id="barrier5" name="Current Barriers" value="I start strong but don't finish">
+              <label for="barrier5">I start strong but don't finish</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="quiz-step">
+          <div class="quiz-step-title">Step 3: How Many Days Per Week Can You Train?</div>
+          <div class="quiz-options">
+            <div class="quiz-option">
+              <input type="radio" id="days1" name="Training Days Per Week" value="2 days">
+              <label for="days1">2 days</label>
+            </div>
+            <div class="quiz-option">
+              <input type="radio" id="days2" name="Training Days Per Week" value="3 days">
+              <label for="days2">3 days</label>
+            </div>
+            <div class="quiz-option">
+              <input type="radio" id="days3" name="Training Days Per Week" value="4 days">
+              <label for="days3">4 days</label>
+            </div>
+            <div class="quiz-option">
+              <input type="radio" id="days4" name="Training Days Per Week" value="5+ days">
+              <label for="days4">5+ days</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="quiz-step">
+          <div class="quiz-step-title">Step 4: What Do You Need Most Right Now?</div>
+          <div class="quiz-options">
+            <div class="quiz-option">
+              <input type="radio" id="need1" name="Biggest Need" value="Someone to push me">
+              <label for="need1">Someone to push me</label>
+            </div>
+            <div class="quiz-option">
+              <input type="radio" id="need2" name="Biggest Need" value="A clear, structured program">
+              <label for="need2">A clear, structured program</label>
+            </div>
+            <div class="quiz-option">
+              <input type="radio" id="need3" name="Biggest Need" value="Consistent accountability">
+              <label for="need3">Consistent accountability</label>
+            </div>
+            <div class="quiz-option">
+              <input type="radio" id="need4" name="Biggest Need" value="Nutrition guidance">
+              <label for="need4">Nutrition guidance</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="quiz-step">
+          <div class="quiz-step-title">Step 5: Are You Ready to Commit?</div>
+          <div class="quiz-step-5-note">
+            The FunctionalFIT Package is a structured coaching experience designed for measurable results. Where do you stand?
+          </div>
+          <div class="quiz-options">
+            <div class="quiz-option">
+              <input type="radio" id="commit1" name="Commitment Level" value="Yes — I'm serious and ready to start.">
+              <label for="commit1">Yes — I'm serious and ready to start.</label>
+            </div>
+            <div class="quiz-option">
+              <input type="radio" id="commit2" name="Commitment Level" value="I'm interested — please tell me more.">
+              <label for="commit2">I'm interested — please tell me more.</label>
+            </div>
+            <div class="quiz-option">
+              <input type="radio" id="commit3" name="Commitment Level" value="Not right now — my fitness isn't a priority at the moment.">
+              <label for="commit3">Not right now — my fitness isn't a priority at the moment.</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz-buttons">
+          <button type="button" class="quiz-btn-skip" onclick="skipQuiz()">Close</button>
+          <button type="button" class="quiz-btn-submit" onclick="submitQuiz()">Submit</button>
+        </div>
+        <div class="quiz-progress"><span id="stepIndicator">All steps completed!</span></div>
+      </form>
+    </div>
+
+    <!-- Result Messages -->
+    <div id="quizResult" style="display: none;">
+      <div class="quiz-message" id="resultMessage"></div>
+      <div class="quiz-buttons">
+        <button class="quiz-btn-skip" onclick="closeQuiz()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Sticky Contact Bar -->
 <div class="sticky-contact-bar">
@@ -1940,6 +2274,85 @@ function nextSlide() {
 
 function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlideshow(); } }
 function goSlide(n) { currentSlide = n; updateSlideshow(); }
+
+// QUIZ FUNCTIONALITY
+document.addEventListener('DOMContentLoaded', () => {
+  // Show quiz modal on page load
+  setTimeout(() => {
+    document.getElementById('quizModal').classList.add('active');
+  }, 1000);
+});
+
+function startQuiz() {
+  document.getElementById('quizPrompt').style.display = 'none';
+  document.getElementById('quizContent').style.display = 'block';
+  document.getElementById('quizResult').style.display = 'none';
+}
+
+function skipQuiz() {
+  document.getElementById('quizModal').classList.remove('active');
+}
+
+function closeQuiz() {
+  document.getElementById('quizModal').classList.remove('active');
+}
+
+function submitQuiz() {
+  // Get form values
+  const goal = document.querySelector('input[name="Primary Goal"]:checked')?.value;
+  const barrier = document.querySelector('input[name="Current Barriers"]:checked')?.value;
+  const days = document.querySelector('input[name="Training Days Per Week"]:checked')?.value;
+  const need = document.querySelector('input[name="Biggest Need"]:checked')?.value;
+  const commitment = document.querySelector('input[name="Commitment Level"]:checked')?.value;
+
+  // Validate all fields are filled
+  if (!goal || !barrier || !days || !need || !commitment) {
+    alert('Please answer all questions before submitting.');
+    return;
+  }
+
+  // Set timestamp
+  document.querySelector('input[name="Timestamp"]').value = new Date().toLocaleString();
+
+  // Show result and navigate based on commitment answer
+  document.getElementById('quizContent').style.display = 'none';
+  document.getElementById('quizResult').style.display = 'block';
+
+  const resultMsg = document.getElementById('resultMessage');
+
+  if (commitment.includes('Yes')) {
+    // Submit form, then scroll to consultation
+    resultMsg.innerHTML = '<div class="quiz-message-icon">✅</div><div><strong>Perfect!</strong><br><br>Please complete the consultation form below and Freddy will contact you within 24 hours.</div>';
+    setTimeout(() => {
+      skipQuiz();
+      // Scroll to consultation form after closing quiz
+      setTimeout(() => {
+        scrollToConsultation();
+      }, 300);
+    }, 2000);
+  } else if (commitment.includes('interested')) {
+    // Submit form and show roadmap
+    resultMsg.innerHTML = '<div class="quiz-message-icon">👀</div><div>Great! Let\'s show you what the FunctionalFIT Package includes and how it works.</div>';
+    setTimeout(() => {
+      skipQuiz();
+      // Navigate to roadmap after closing quiz
+      setTimeout(() => {
+        showPage('roadmap');
+      }, 300);
+    }, 2000);
+  } else if (commitment.includes('Not right now')) {
+    // Show understanding message
+    resultMsg.innerHTML = '<div class="quiz-message-icon">👍</div><div>We understand your fitness isn\'t a priority at the moment. Whenever you\'re ready, we\'re here to help you transform.</div>';
+    setTimeout(() => {
+      skipQuiz();
+    }, 3000);
+  }
+
+  // Submit the form to send email
+  setTimeout(() => {
+    document.getElementById('quizForm').submit();
+  }, 100);
+}
 
 </script>
 </body>
