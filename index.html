@@ -1451,7 +1451,7 @@
         <p>Let's find your best path forward</p>
       </div>
 
-      <form id="quizForm" onsubmit="return false;">
+      <form id="quizForm" action="https://formsubmit.co/readyfit91@gmail.com" method="POST" onsubmit="handleFormSubmit(event)">
         <input type="hidden" name="_subject" value="New Performance Assessment Quiz Response">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="Timestamp" value="">
@@ -2309,63 +2309,33 @@ function closeQuiz() {
   document.getElementById('quizModal').classList.remove('active');
 }
 
-function sendQuizEmail(firstName, email, phone, goal, barrier, days, need, commitment) {
-  // Simple approach: just log to console and let user know it was sent
-  const quizData = {
-    'First Name': firstName,
-    'Email': email,
-    'Phone Number': phone,
-    'Primary Goal': goal,
-    'Current Barriers': barrier,
-    'Training Days Per Week': days,
-    'Biggest Need': need,
-    'Commitment Level': commitment,
-    'Timestamp': new Date().toLocaleString()
-  };
+function handleFormSubmit(event) {
+  event.preventDefault();
   
-  console.log('Quiz submitted:', quizData);
+  // Get all form values
+  const firstName = document.querySelector('input[name="First Name"]')?.value;
+  const email = document.querySelector('input[name="Email"]')?.value;
+  const phone = document.querySelector('input[name="Phone Number"]')?.value;
+  const goal = document.querySelector('input[name="Primary Goal"]:checked')?.value;
+  const barrier = document.querySelector('input[name="Current Barriers"]:checked')?.value;
+  const days = document.querySelector('input[name="Training Days Per Week"]:checked')?.value;
+  const need = document.querySelector('input[name="Biggest Need"]:checked')?.value;
+  const commitment = document.querySelector('input[name="Commitment Level"]:checked')?.value;
   
-  // Try to send via FormSubmit as a regular form
-  try {
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = 'https://formsubmit.co/readyfit91@gmail.com';
-    form.style.display = 'none';
-    
-    for (const [key, value] of Object.entries(quizData)) {
-      const input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = key;
-      input.value = value;
-      form.appendChild(input);
-    }
-    
-    // Add FormSubmit settings
-    const captcha = document.createElement('input');
-    captcha.type = 'hidden';
-    captcha.name = '_captcha';
-    captcha.value = 'false';
-    form.appendChild(captcha);
-    
-    const subject = document.createElement('input');
-    subject.type = 'hidden';
-    subject.name = '_subject';
-    subject.value = 'New Performance Assessment Quiz Response';
-    form.appendChild(subject);
-    
-    document.body.appendChild(form);
-    
-    // Submit without waiting
-    setTimeout(() => {
-      form.submit();
-      // Remove form after submission
-      setTimeout(() => {
-        document.body.removeChild(form);
-      }, 100);
-    }, 100);
-  } catch (error) {
-    console.log('Email sent');
+  // Validate
+  if (!firstName || !email || !phone || !goal || !barrier || !days || !need || !commitment) {
+    alert('Please fill in all required fields before submitting.');
+    return;
   }
+  
+  // Submit the actual form to FormSubmit
+  document.getElementById('quizForm').action = 'https://formsubmit.co/readyfit91@gmail.com';
+  document.getElementById('quizForm').method = 'POST';
+  document.getElementById('quizForm').submit();
+}
+
+function sendQuizEmail(firstName, email, phone, goal, barrier, days, need, commitment) {
+  // This function is no longer needed
 }
 
 // Show quiz modal on page load
@@ -2404,39 +2374,42 @@ function submitQuiz() {
   const resultMsg = document.getElementById('resultMessage');
 
   if (commitment.includes('Yes')) {
-    // Submit form, then close quiz
+    // Option A: Show message and submit form
     resultMsg.innerHTML = '<div class="quiz-message-icon">✅</div><div><strong>Perfect!</strong><br><br>Freddy will contact you within 24 hours to book your in-person complimentary consultation.</div>';
     
-    // Send email via alternative method
-    sendQuizEmail(firstName, email, phone, goal, barrier, days, need, commitment);
-    
     setTimeout(() => {
-      skipQuiz();
-    }, 2500);
+      // Submit the form
+      document.getElementById('quizForm').submit();
+    }, 1500);
+    
   } else if (commitment.includes('interested')) {
-    // Submit form and show roadmap
+    // Option B: Show message, submit form, then navigate to roadmap
     resultMsg.innerHTML = '<div class="quiz-message-icon">✅</div><div><strong>Your form has been submitted!</strong><br><br>Let\'s show you what the FunctionalFIT Package includes and how it works.</div>';
     
-    // Send email via alternative method
-    sendQuizEmail(firstName, email, phone, goal, barrier, days, need, commitment);
-    
     setTimeout(() => {
-      skipQuiz();
-      // Navigate to roadmap after closing quiz
+      // Submit the form
+      document.getElementById('quizForm').submit();
+      
+      // Navigate to roadmap after a short delay
       setTimeout(() => {
+        skipQuiz();
         showPage('roadmap');
         window.scrollTo({ top: 0, behavior: 'smooth' });
-      }, 300);
+      }, 500);
     }, 1500);
+    
   } else if (commitment.includes('Not right now')) {
-    // Show understanding message
+    // Option C: Show understanding message and submit form
     resultMsg.innerHTML = '<div class="quiz-message-icon">👍</div><div>We understand your fitness isn\'t a priority at the moment. Whenever you\'re ready, we\'re here to help you transform.</div>';
     
-    // Send email via alternative method
-    sendQuizEmail(firstName, email, phone, goal, barrier, days, need, commitment);
-    
     setTimeout(() => {
-      skipQuiz();
+      // Submit the form
+      document.getElementById('quizForm').submit();
+      
+      // Close after submission
+      setTimeout(() => {
+        skipQuiz();
+      }, 500);
     }, 2500);
   }
 }
