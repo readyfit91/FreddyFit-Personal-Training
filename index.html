@@ -2312,25 +2312,33 @@ function closeQuiz() {
 function sendQuizEmail(firstName, email, phone, goal, barrier, days, need, commitment) {
   // Create FormData
   const formData = new FormData();
-  formData.append('email', email);
   formData.append('_subject', 'New Performance Assessment Quiz Response');
   formData.append('First Name', firstName);
-  formData.append('Phone', phone);
+  formData.append('Email', email);
+  formData.append('Phone Number', phone);
   formData.append('Primary Goal', goal);
   formData.append('Current Barriers', barrier);
   formData.append('Training Days Per Week', days);
   formData.append('Biggest Need', need);
   formData.append('Commitment Level', commitment);
+  formData.append('Timestamp', new Date().toLocaleString());
   formData.append('_captcha', 'false');
   
   // Send via FormSubmit without redirect
   fetch('https://formsubmit.co/readyfit91@gmail.com', {
     method: 'POST',
-    headers: {
-      'Accept': 'application/json'
-    },
     body: formData
-  }).catch(e => console.log('Email sent'));
+  })
+  .then(response => {
+    console.log('Email sent successfully');
+    return response.json();
+  })
+  .then(data => {
+    console.log('Success:', data);
+  })
+  .catch(error => {
+    console.log('Email submitted (background)');
+  });
 }
 
 // Show quiz modal on page load
