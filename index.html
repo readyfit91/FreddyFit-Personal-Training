@@ -2296,6 +2296,16 @@ function nextSlide() {
 function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlideshow(); } }
 function goSlide(n) { currentSlide = n; updateSlideshow(); }
 
+// Show quiz modal on page load
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    const quizModal = document.getElementById('quizModal');
+    if (quizModal) {
+      quizModal.classList.add('active');
+    }
+  }, 1000);
+});
+
 function startQuiz() {
   document.getElementById('quizPrompt').style.display = 'none';
   document.getElementById('quizContent').style.display = 'block';
