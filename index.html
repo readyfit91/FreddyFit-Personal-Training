@@ -2347,7 +2347,7 @@ function submitQuiz() {
 
   if (commitment.includes('Yes')) {
     // Submit form, then scroll to consultation
-    resultMsg.innerHTML = '<div class="quiz-message-icon">✅</div><div><strong>Perfect!</strong><br><br>Please complete the consultation form below and Freddy will contact you within 24 hours.</div>';
+    resultMsg.innerHTML = '<div class="quiz-message-icon">✅</div><div><strong>Perfect!</strong><br><br>Freddy will contact you within 24 hours to book your in-person complimentary consultation.</div>';
     
     // Submit form via AJAX (no redirect)
     const formData = new FormData(document.getElementById('quizForm'));
@@ -2358,11 +2358,8 @@ function submitQuiz() {
     
     setTimeout(() => {
       skipQuiz();
-      // Scroll to consultation form after closing quiz
-      setTimeout(() => {
-        scrollToConsultation();
-      }, 300);
-    }, 1500);
+      // Don't navigate anywhere - just close the quiz
+    }, 2500);
   } else if (commitment.includes('interested')) {
     // Submit form and show roadmap
     resultMsg.innerHTML = '<div class="quiz-message-icon">✅</div><div><strong>Your form has been submitted!</strong><br><br>Let\'s show you what the FunctionalFIT Package includes and how it works.</div>';
