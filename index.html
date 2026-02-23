@@ -2342,41 +2342,8 @@ function submitQuiz() {
   // Set timestamp
   document.querySelector('input[name="Timestamp"]').value = new Date().toLocaleString();
 
-  // Show result and navigate based on commitment answer
-  document.getElementById('quizContent').style.display = 'none';
-  document.getElementById('quizResult').style.display = 'block';
-
-  const resultMsg = document.getElementById('resultMessage');
-
-  if (commitment.includes('Yes')) {
-    // Option A
-    resultMsg.innerHTML = '<div class="quiz-message-icon">✅</div><div><strong>Perfect!</strong><br><br>Freddy will contact you within 24 hours to book your in-person complimentary consultation.</div>';
-    
-    setTimeout(() => {
-      document.getElementById('quizForm').submit();
-      skipQuiz();
-    }, 1500);
-    
-  } else if (commitment.includes('interested')) {
-    // Option B
-    resultMsg.innerHTML = '<div class="quiz-message-icon">✅</div><div><strong>Your form has been submitted!</strong><br><br>Let\'s show you what the FunctionalFIT Package includes and how it works.</div>';
-    
-    setTimeout(() => {
-      document.getElementById('quizForm').submit();
-      skipQuiz();
-      showPage('roadmap');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 1500);
-    
-  } else if (commitment.includes('Not right now')) {
-    // Option C
-    resultMsg.innerHTML = '<div class="quiz-message-icon">👍</div><div>We understand your fitness isn\'t a priority at the moment. Whenever you\'re ready, we\'re here to help you transform.</div>';
-    
-    setTimeout(() => {
-      document.getElementById('quizForm').submit();
-      skipQuiz();
-    }, 2500);
-  }
+  // Submit the form immediately
+  document.getElementById('quizForm').submit();
 }
 
 </script>
