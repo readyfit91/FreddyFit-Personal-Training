@@ -2333,6 +2333,13 @@ function sendQuizEmail(firstName, email, phone, goal, barrier, days, need, commi
   }).catch(e => console.log('Email sent'));
 }
 
+// Show quiz modal on page load
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    document.getElementById('quizModal').classList.add('active');
+  }, 1000);
+});
+
 function submitQuiz() {
   // Get contact info
   const firstName = document.querySelector('input[name="First Name"]')?.value;
