@@ -1587,16 +1587,16 @@
         <div class="quiz-step">
           <div class="quiz-step-title">Step 5: Are You Ready to Commit?</div>
           <div class="quiz-step-5-note">
-            The FunctionalFIT Package is a structured coaching experience designed for measurable results. Where do you stand?
+            The FunctionalFIT Package is a structured coaching experience designed for measurable results. <strong>100% Money Back Guarantee:</strong> If you're not satisfied with your results within the duration of the package, we'll refund your entire investment. Where do you stand?
           </div>
           <div class="quiz-options">
             <div class="quiz-option">
-              <input type="radio" id="commit1" name="Commitment Level" value="Yes — I'm serious and ready to start.">
-              <label for="commit1">Yes — I'm serious and ready to start.</label>
+              <input type="radio" id="commit1" name="Commitment Level" value="I am serious and ready to start. I want to book my consultation and upon completion want to sign up for the FunctionalFIT Package one time payment of $299 - I am aware if I am not satisfied with my results within the duration of the package you will give me my money back.">
+              <label for="commit1">I am serious and ready to start. I want to book my consultation and upon completion want to sign up for the FunctionalFIT Package one time payment of $299 - I am aware if I am not satisfied with my results within the duration of the package you will give me my money back.</label>
             </div>
             <div class="quiz-option">
-              <input type="radio" id="commit2" name="Commitment Level" value="I'm interested — please tell me more.">
-              <label for="commit2">I'm interested — please tell me more.</label>
+              <input type="radio" id="commit2" name="Commitment Level" value="I'm interested — please tell me more about the FunctionalFIT Package.">
+              <label for="commit2">I'm interested — please tell me more about the FunctionalFIT Package.</label>
             </div>
             <div class="quiz-option">
               <input type="radio" id="commit3" name="Commitment Level" value="Not right now — my fitness isn't a priority at the moment.">
@@ -2348,35 +2348,43 @@ function submitQuiz() {
   if (commitment.includes('Yes')) {
     // Submit form, then scroll to consultation
     resultMsg.innerHTML = '<div class="quiz-message-icon">✅</div><div><strong>Perfect!</strong><br><br>Please complete the consultation form below and Freddy will contact you within 24 hours.</div>';
+    
+    // Submit form in background
+    document.getElementById('quizForm').submit();
+    
     setTimeout(() => {
       skipQuiz();
       // Scroll to consultation form after closing quiz
       setTimeout(() => {
         scrollToConsultation();
       }, 300);
-    }, 2000);
+    }, 1500);
   } else if (commitment.includes('interested')) {
     // Submit form and show roadmap
     resultMsg.innerHTML = '<div class="quiz-message-icon">👀</div><div>Great! Let\'s show you what the FunctionalFIT Package includes and how it works.</div>';
+    
+    // Submit form in background
+    document.getElementById('quizForm').submit();
+    
     setTimeout(() => {
       skipQuiz();
       // Navigate to roadmap after closing quiz
       setTimeout(() => {
         showPage('roadmap');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }, 300);
-    }, 2000);
+    }, 1500);
   } else if (commitment.includes('Not right now')) {
     // Show understanding message
     resultMsg.innerHTML = '<div class="quiz-message-icon">👍</div><div>We understand your fitness isn\'t a priority at the moment. Whenever you\'re ready, we\'re here to help you transform.</div>';
+    
+    // Submit form in background
+    document.getElementById('quizForm').submit();
+    
     setTimeout(() => {
       skipQuiz();
-    }, 3000);
+    }, 2500);
   }
-
-  // Submit the form to send email
-  setTimeout(() => {
-    document.getElementById('quizForm').submit();
-  }, 100);
 }
 
 </script>
