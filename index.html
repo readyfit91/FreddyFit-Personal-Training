@@ -2295,14 +2295,6 @@ function nextSlide() {
 function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlideshow(); } }
 function goSlide(n) { currentSlide = n; updateSlideshow(); }
 
-// QUIZ FUNCTIONALITY
-document.addEventListener('DOMContentLoaded', () => {
-  // Show quiz modal on page load
-  setTimeout(() => {
-    document.getElementById('quizModal').classList.add('active');
-  }, 1000);
-});
-
 function startQuiz() {
   document.getElementById('quizPrompt').style.display = 'none';
   document.getElementById('quizContent').style.display = 'block';
@@ -2315,6 +2307,30 @@ function skipQuiz() {
 
 function closeQuiz() {
   document.getElementById('quizModal').classList.remove('active');
+}
+
+function sendQuizEmail(firstName, email, phone, goal, barrier, days, need, commitment) {
+  // Create FormData
+  const formData = new FormData();
+  formData.append('email', email);
+  formData.append('_subject', 'New Performance Assessment Quiz Response');
+  formData.append('First Name', firstName);
+  formData.append('Phone', phone);
+  formData.append('Primary Goal', goal);
+  formData.append('Current Barriers', barrier);
+  formData.append('Training Days Per Week', days);
+  formData.append('Biggest Need', need);
+  formData.append('Commitment Level', commitment);
+  formData.append('_captcha', 'false');
+  
+  // Send via FormSubmit without redirect
+  fetch('https://formsubmit.co/readyfit91@gmail.com', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json'
+    },
+    body: formData
+  }).catch(e => console.log('Email sent'));
 }
 
 function submitQuiz() {
@@ -2346,22 +2362,11 @@ function submitQuiz() {
   const resultMsg = document.getElementById('resultMessage');
 
   if (commitment.includes('Yes')) {
-    // Submit form, then scroll to consultation
+    // Submit form, then close quiz
     resultMsg.innerHTML = '<div class="quiz-message-icon">✅</div><div><strong>Perfect!</strong><br><br>Freddy will contact you within 24 hours to book your in-person complimentary consultation.</div>';
     
-    // Submit form via AJAX with proper headers
-    const formData = new FormData(document.getElementById('quizForm'));
-    // Add FormSubmit specific field
-    formData.append('_next', 'https://yoursite.com/thank-you');
-    
-    fetch('https://formsubmit.co/ajax/readyfit91@gmail.com', {
-      method: 'POST',
-      body: formData
-    }).then(response => {
-      console.log('Form submitted successfully');
-    }).catch(error => {
-      console.log('Form sent:', error);
-    });
+    // Send email via alternative method
+    sendQuizEmail(firstName, email, phone, goal, barrier, days, need, commitment);
     
     setTimeout(() => {
       skipQuiz();
@@ -2370,18 +2375,8 @@ function submitQuiz() {
     // Submit form and show roadmap
     resultMsg.innerHTML = '<div class="quiz-message-icon">✅</div><div><strong>Your form has been submitted!</strong><br><br>Let\'s show you what the FunctionalFIT Package includes and how it works.</div>';
     
-    // Submit form via AJAX with proper headers
-    const formData = new FormData(document.getElementById('quizForm'));
-    formData.append('_next', 'https://yoursite.com/thank-you');
-    
-    fetch('https://formsubmit.co/ajax/readyfit91@gmail.com', {
-      method: 'POST',
-      body: formData
-    }).then(response => {
-      console.log('Form submitted successfully');
-    }).catch(error => {
-      console.log('Form sent:', error);
-    });
+    // Send email via alternative method
+    sendQuizEmail(firstName, email, phone, goal, barrier, days, need, commitment);
     
     setTimeout(() => {
       skipQuiz();
@@ -2395,18 +2390,8 @@ function submitQuiz() {
     // Show understanding message
     resultMsg.innerHTML = '<div class="quiz-message-icon">👍</div><div>We understand your fitness isn\'t a priority at the moment. Whenever you\'re ready, we\'re here to help you transform.</div>';
     
-    // Submit form via AJAX with proper headers
-    const formData = new FormData(document.getElementById('quizForm'));
-    formData.append('_next', 'https://yoursite.com/thank-you');
-    
-    fetch('https://formsubmit.co/ajax/readyfit91@gmail.com', {
-      method: 'POST',
-      body: formData
-    }).then(response => {
-      console.log('Form submitted successfully');
-    }).catch(error => {
-      console.log('Form sent:', error);
-    });
+    // Send email via alternative method
+    sendQuizEmail(firstName, email, phone, goal, barrier, days, need, commitment);
     
     setTimeout(() => {
       skipQuiz();
