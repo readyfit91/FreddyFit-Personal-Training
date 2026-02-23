@@ -1455,6 +1455,26 @@
         <input type="hidden" name="_subject" value="New Performance Assessment Quiz Response">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="Timestamp" value="">
+        
+        <!-- Contact Information -->
+        <div class="quiz-step">
+          <div class="quiz-step-title">Contact Information</div>
+          <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+            <div>
+              <label style="display: block; font-weight: 600; font-size: 0.9rem; color: var(--text-on-light); margin-bottom: 0.4rem;">First Name</label>
+              <input type="text" name="First Name" placeholder="Your first name" required style="width: 100%; padding: 0.7rem 0.9rem; border-radius: 6px; border: 1.5px solid rgba(0,0,0,0.1); background: var(--light-card-alt); color: var(--text-on-light); font-family: 'Barlow', sans-serif; font-size: 0.92rem;">
+            </div>
+            <div>
+              <label style="display: block; font-weight: 600; font-size: 0.9rem; color: var(--text-on-light); margin-bottom: 0.4rem;">Email</label>
+              <input type="email" name="Email" placeholder="you@example.com" required style="width: 100%; padding: 0.7rem 0.9rem; border-radius: 6px; border: 1.5px solid rgba(0,0,0,0.1); background: var(--light-card-alt); color: var(--text-on-light); font-family: 'Barlow', sans-serif; font-size: 0.92rem;">
+            </div>
+            <div>
+              <label style="display: block; font-weight: 600; font-size: 0.9rem; color: var(--text-on-light); margin-bottom: 0.4rem;">Phone Number</label>
+              <input type="tel" name="Phone Number" placeholder="(555) 123-4567" required style="width: 100%; padding: 0.7rem 0.9rem; border-radius: 6px; border: 1.5px solid rgba(0,0,0,0.1); background: var(--light-card-alt); color: var(--text-on-light); font-family: 'Barlow', sans-serif; font-size: 0.92rem;">
+            </div>
+          </div>
+        </div>
+        
         <!-- Step 1 -->
         <div class="quiz-step">
           <div class="quiz-step-title">Step 1: What's Your Primary Goal?</div>
@@ -2298,6 +2318,11 @@ function closeQuiz() {
 }
 
 function submitQuiz() {
+  // Get contact info
+  const firstName = document.querySelector('input[name="First Name"]')?.value;
+  const email = document.querySelector('input[name="Email"]')?.value;
+  const phone = document.querySelector('input[name="Phone Number"]')?.value;
+  
   // Get form values
   const goal = document.querySelector('input[name="Primary Goal"]:checked')?.value;
   const barrier = document.querySelector('input[name="Current Barriers"]:checked')?.value;
@@ -2306,8 +2331,8 @@ function submitQuiz() {
   const commitment = document.querySelector('input[name="Commitment Level"]:checked')?.value;
 
   // Validate all fields are filled
-  if (!goal || !barrier || !days || !need || !commitment) {
-    alert('Please answer all questions before submitting.');
+  if (!firstName || !email || !phone || !goal || !barrier || !days || !need || !commitment) {
+    alert('Please fill in all required fields before submitting.');
     return;
   }
 
