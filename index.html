@@ -1451,7 +1451,7 @@
         <p>Let's find your best path forward</p>
       </div>
 
-      <form id="quizForm" action="https://formsubmit.co/readyfit91@gmail.com" method="POST">
+      <form id="quizForm" onsubmit="return false;">
         <input type="hidden" name="_subject" value="New Performance Assessment Quiz Response">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="Timestamp" value="">
@@ -1595,8 +1595,8 @@
               <label for="commit1">I am serious and ready to start. I want you to contact me to book a complimentary consultation and upon completion of the consultation I want to sign up for the FunctionalFIT Package one time payment of $299 - I am aware if I am not satisfied with my results within the duration of the package you will give me my money back.</label>
             </div>
             <div class="quiz-option">
-              <input type="radio" id="commit2" name="Commitment Level" value="I'm interested — please tell me more about the FunctionalFIT Package.">
-              <label for="commit2">I'm interested — please tell me more about the FunctionalFIT Package.</label>
+              <input type="radio" id="commit2" name="Commitment Level" value="I am interested — Please contact me to schedule a complimentary consultation and answer some of my questions regarding the FunctionalFIT Package.">
+              <label for="commit2">I am interested — Please contact me to schedule a complimentary consultation and answer some of my questions regarding the FunctionalFIT Package.</label>
             </div>
             <div class="quiz-option">
               <input type="radio" id="commit3" name="Commitment Level" value="Not right now — my fitness isn't a priority at the moment.">
@@ -2349,8 +2349,12 @@ function submitQuiz() {
     // Submit form, then scroll to consultation
     resultMsg.innerHTML = '<div class="quiz-message-icon">✅</div><div><strong>Perfect!</strong><br><br>Please complete the consultation form below and Freddy will contact you within 24 hours.</div>';
     
-    // Submit form in background
-    document.getElementById('quizForm').submit();
+    // Submit form via AJAX (no redirect)
+    const formData = new FormData(document.getElementById('quizForm'));
+    fetch('https://formsubmit.co/readyfit91@gmail.com', {
+      method: 'POST',
+      body: formData
+    }).catch(error => console.log('Form submitted'));
     
     setTimeout(() => {
       skipQuiz();
@@ -2363,8 +2367,12 @@ function submitQuiz() {
     // Submit form and show roadmap
     resultMsg.innerHTML = '<div class="quiz-message-icon">✅</div><div><strong>Your form has been submitted!</strong><br><br>Let\'s show you what the FunctionalFIT Package includes and how it works.</div>';
     
-    // Submit form in background
-    document.getElementById('quizForm').submit();
+    // Submit form via AJAX (no redirect)
+    const formData = new FormData(document.getElementById('quizForm'));
+    fetch('https://formsubmit.co/readyfit91@gmail.com', {
+      method: 'POST',
+      body: formData
+    }).catch(error => console.log('Form submitted'));
     
     setTimeout(() => {
       skipQuiz();
@@ -2378,8 +2386,12 @@ function submitQuiz() {
     // Show understanding message
     resultMsg.innerHTML = '<div class="quiz-message-icon">👍</div><div>We understand your fitness isn\'t a priority at the moment. Whenever you\'re ready, we\'re here to help you transform.</div>';
     
-    // Submit form in background
-    document.getElementById('quizForm').submit();
+    // Submit form via AJAX (no redirect)
+    const formData = new FormData(document.getElementById('quizForm'));
+    fetch('https://formsubmit.co/readyfit91@gmail.com', {
+      method: 'POST',
+      body: formData
+    }).catch(error => console.log('Form submitted'));
     
     setTimeout(() => {
       skipQuiz();
