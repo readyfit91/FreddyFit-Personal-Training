@@ -2349,27 +2349,39 @@ function submitQuiz() {
     // Submit form, then scroll to consultation
     resultMsg.innerHTML = '<div class="quiz-message-icon">✅</div><div><strong>Perfect!</strong><br><br>Freddy will contact you within 24 hours to book your in-person complimentary consultation.</div>';
     
-    // Submit form via AJAX (no redirect)
+    // Submit form via AJAX with proper headers
     const formData = new FormData(document.getElementById('quizForm'));
-    fetch('https://formsubmit.co/readyfit91@gmail.com', {
+    // Add FormSubmit specific field
+    formData.append('_next', 'https://yoursite.com/thank-you');
+    
+    fetch('https://formsubmit.co/ajax/readyfit91@gmail.com', {
       method: 'POST',
       body: formData
-    }).catch(error => console.log('Form submitted'));
+    }).then(response => {
+      console.log('Form submitted successfully');
+    }).catch(error => {
+      console.log('Form sent:', error);
+    });
     
     setTimeout(() => {
       skipQuiz();
-      // Don't navigate anywhere - just close the quiz
     }, 2500);
   } else if (commitment.includes('interested')) {
     // Submit form and show roadmap
     resultMsg.innerHTML = '<div class="quiz-message-icon">✅</div><div><strong>Your form has been submitted!</strong><br><br>Let\'s show you what the FunctionalFIT Package includes and how it works.</div>';
     
-    // Submit form via AJAX (no redirect)
+    // Submit form via AJAX with proper headers
     const formData = new FormData(document.getElementById('quizForm'));
-    fetch('https://formsubmit.co/readyfit91@gmail.com', {
+    formData.append('_next', 'https://yoursite.com/thank-you');
+    
+    fetch('https://formsubmit.co/ajax/readyfit91@gmail.com', {
       method: 'POST',
       body: formData
-    }).catch(error => console.log('Form submitted'));
+    }).then(response => {
+      console.log('Form submitted successfully');
+    }).catch(error => {
+      console.log('Form sent:', error);
+    });
     
     setTimeout(() => {
       skipQuiz();
@@ -2383,12 +2395,18 @@ function submitQuiz() {
     // Show understanding message
     resultMsg.innerHTML = '<div class="quiz-message-icon">👍</div><div>We understand your fitness isn\'t a priority at the moment. Whenever you\'re ready, we\'re here to help you transform.</div>';
     
-    // Submit form via AJAX (no redirect)
+    // Submit form via AJAX with proper headers
     const formData = new FormData(document.getElementById('quizForm'));
-    fetch('https://formsubmit.co/readyfit91@gmail.com', {
+    formData.append('_next', 'https://yoursite.com/thank-you');
+    
+    fetch('https://formsubmit.co/ajax/readyfit91@gmail.com', {
       method: 'POST',
       body: formData
-    }).catch(error => console.log('Form submitted'));
+    }).then(response => {
+      console.log('Form submitted successfully');
+    }).catch(error => {
+      console.log('Form sent:', error);
+    });
     
     setTimeout(() => {
       skipQuiz();
