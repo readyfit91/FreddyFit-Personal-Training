@@ -1591,8 +1591,8 @@
           </div>
           <div class="quiz-options">
             <div class="quiz-option">
-              <input type="radio" id="commit1" name="Commitment Level" value="I am serious and ready to start. I want to book my consultation and upon completion want to sign up for the FunctionalFIT Package one time payment of $299 - I am aware if I am not satisfied with my results within the duration of the package you will give me my money back.">
-              <label for="commit1">I am serious and ready to start. I want to book my consultation and upon completion want to sign up for the FunctionalFIT Package one time payment of $299 - I am aware if I am not satisfied with my results within the duration of the package you will give me my money back.</label>
+              <input type="radio" id="commit1" name="Commitment Level" value="I am serious and ready to start. I want you to contact me to book a complimentary consultation and upon completion of the consultation I want to sign up for the FunctionalFIT Package one time payment of $299 - I am aware if I am not satisfied with my results within the duration of the package you will give me my money back.">
+              <label for="commit1">I am serious and ready to start. I want you to contact me to book a complimentary consultation and upon completion of the consultation I want to sign up for the FunctionalFIT Package one time payment of $299 - I am aware if I am not satisfied with my results within the duration of the package you will give me my money back.</label>
             </div>
             <div class="quiz-option">
               <input type="radio" id="commit2" name="Commitment Level" value="I'm interested — please tell me more about the FunctionalFIT Package.">
@@ -2361,7 +2361,7 @@ function submitQuiz() {
     }, 1500);
   } else if (commitment.includes('interested')) {
     // Submit form and show roadmap
-    resultMsg.innerHTML = '<div class="quiz-message-icon">👀</div><div>Great! Let\'s show you what the FunctionalFIT Package includes and how it works.</div>';
+    resultMsg.innerHTML = '<div class="quiz-message-icon">✅</div><div><strong>Your form has been submitted!</strong><br><br>Let\'s show you what the FunctionalFIT Package includes and how it works.</div>';
     
     // Submit form in background
     document.getElementById('quizForm').submit();
