@@ -2296,13 +2296,32 @@
 </footer>
 
 <script>
-function showPage(name) {
+var pageTitles = {
+  home: 'Freddy Fit | Personal Training in St. Louis',
+  roadmap: 'Freddy Fit | Session Roadmap',
+  transformations: 'Freddy Fit | Transformation Portfolio',
+  about: 'Freddy Fit | About Us'
+};
+function showPage(name, pushState) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + name).classList.add('active');
   document.querySelectorAll('.nav-links a[data-page]').forEach(a => { a.classList.toggle('active', a.dataset.page === name); });
   window.scrollTo({ top: 0, behavior: 'smooth' });
   document.getElementById('navLinks').classList.remove('open');
+  document.title = pageTitles[name] || 'Freddy Fit';
+  if (pushState !== false) {
+    var hash = (name === 'home') ? '' : '#' + name;
+    history.pushState(null, '', window.location.pathname + hash);
+  }
 }
+window.addEventListener('popstate', function() {
+  var page = window.location.hash.replace('#', '') || 'home';
+  if (document.getElementById('page-' + page)) showPage(page, false);
+});
+(function() {
+  var page = window.location.hash.replace('#', '') || 'home';
+  if (document.getElementById('page-' + page)) showPage(page, false);
+})();
 function toggleMenu() { document.getElementById('navLinks').classList.toggle('open'); }
 function scrollToConsultation() { document.getElementById('consultation').scrollIntoView({ behavior: 'smooth' }); }
 function scrollToServices() { document.getElementById('services').scrollIntoView({ behavior: 'smooth' }); }
