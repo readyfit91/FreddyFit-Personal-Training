@@ -1211,42 +1211,173 @@
 
   /* ===== TRANSFORMATIONS PAGE ===== */
   .tf-hero {
-    padding: 5rem 2rem 3rem;
+    padding: 6rem 2rem 3.5rem;
     background: var(--dark-bg); color: var(--text-on-dark); text-align: center;
+    position: relative; overflow: hidden;
   }
+  .tf-hero::before {
+    content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle at 30% 50%, rgba(46,163,213,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(46,163,213,0.05) 0%, transparent 40%);
+    animation: tfHeroPulse 8s ease-in-out infinite alternate;
+  }
+  @keyframes tfHeroPulse {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(-2%, 2%) rotate(1deg); }
+  }
+  .tf-hero .section-header { position: relative; z-index: 1; }
   .tf-hero .section-title { color: var(--text-on-dark); }
-  .tf-hero .section-subtitle { color: var(--text-muted-dark); }
+  .tf-hero .section-subtitle { color: var(--text-muted-dark); max-width: 600px; margin: 0 auto; }
+
+  /* Stats banner */
+  .tf-stats-banner {
+    display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;
+    padding: 2.5rem 2rem; background: var(--dark-surface);
+    border-bottom: 1px solid var(--dark-border);
+  }
+  .tf-stat { text-align: center; }
+  .tf-stat-number {
+    font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem;
+    color: var(--blue-bright); line-height: 1; letter-spacing: 1px;
+  }
+  .tf-stat-label {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.78rem;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--text-muted-dark); margin-top: 0.3rem;
+  }
 
   .tf-gallery-section {
     padding: 4rem 2rem 3rem;
     background: var(--light-bg);
   }
   .tf-grid {
-    max-width: 1000px; margin: 0 auto;
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem;
   }
+
+  /* Card with reveal animation */
   .tf-card {
-    background: var(--light-surface); border-radius: 12px;
+    background: var(--light-surface); border-radius: 16px;
     overflow: hidden; border: 1px solid var(--light-border);
     box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-    transition: all 0.4s ease;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    opacity: 0; transform: translateY(40px);
+    position: relative;
+  }
+  .tf-card.tf-visible {
+    opacity: 1; transform: translateY(0);
   }
   .tf-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 16px 48px rgba(0,0,0,0.12);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.14);
+    border-color: rgba(46,163,213,0.2);
   }
+  .tf-card.tf-visible:hover {
+    transform: translateY(-8px);
+  }
+
+  /* Image wrapper */
   .tf-img-wrap {
-    overflow: hidden; position: relative;
+    overflow: hidden; position: relative; cursor: pointer;
   }
   .tf-img-wrap img {
     width: 100%; display: block;
     object-fit: contain;
-    transition: transform 0.5s ease;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
   }
-  .tf-card:hover .tf-img-wrap img { transform: scale(1.03); }
-  
+  .tf-card:hover .tf-img-wrap img { transform: scale(1.04); }
+
+  /* Overlay that reveals on hover */
+  .tf-overlay {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(to top, rgba(14,19,24,0.92) 0%, rgba(14,19,24,0.6) 50%, transparent 100%);
+    padding: 2.5rem 1.5rem 1.5rem; transform: translateY(100%);
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  .tf-card:hover .tf-overlay { transform: translateY(0); }
+  .tf-client-name {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem;
+    color: #fff; letter-spacing: 2px; line-height: 1.1;
+  }
+  .tf-client-tag {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 0.78rem;
+    letter-spacing: 2px; text-transform: uppercase; color: var(--blue-bright);
+    margin-top: 0.25rem;
+  }
+
+  /* View detail indicator */
+  .tf-view-badge {
+    position: absolute; top: 1rem; right: 1rem;
+    background: rgba(14,19,24,0.7); backdrop-filter: blur(8px);
+    color: var(--blue-bright); font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+    padding: 0.4rem 0.8rem; border-radius: 20px;
+    border: 1px solid rgba(46,163,213,0.2);
+    opacity: 0; transition: opacity 0.4s ease, transform 0.4s ease;
+    transform: translateY(-5px);
+  }
+  .tf-card:hover .tf-view-badge {
+    opacity: 1; transform: translateY(0);
+  }
+
+  /* Lightbox modal */
+  .tf-lightbox {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.92); z-index: 10000;
+    justify-content: center; align-items: center;
+    animation: fadeIn 0.3s ease;
+  }
+  .tf-lightbox.active { display: flex; }
+  .tf-lightbox-inner {
+    position: relative; max-width: 900px; width: 92%;
+    animation: tfLightboxIn 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  @keyframes tfLightboxIn {
+    from { opacity: 0; transform: scale(0.92) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .tf-lightbox-inner img {
+    width: 100%; border-radius: 12px; display: block;
+    box-shadow: 0 25px 80px rgba(0,0,0,0.5);
+  }
+  .tf-lightbox-close {
+    position: absolute; top: -3rem; right: 0;
+    background: none; border: none; color: #fff;
+    font-size: 1.8rem; cursor: pointer; opacity: 0.7;
+    transition: opacity 0.2s; font-family: 'Barlow', sans-serif;
+  }
+  .tf-lightbox-close:hover { opacity: 1; }
+  .tf-lightbox-info {
+    text-align: center; margin-top: 1.2rem;
+  }
+  .tf-lightbox-info .tf-client-name { font-size: 2rem; }
+  .tf-lightbox-info .tf-client-tag { font-size: 0.85rem; color: var(--blue-bright); }
+
+  /* Navigation arrows */
+  .tf-lightbox-nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    color: #fff; width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 1.2rem; transition: all 0.2s;
+    backdrop-filter: blur(4px);
+  }
+  .tf-lightbox-nav:hover { background: rgba(46,163,213,0.3); border-color: var(--blue); }
+  .tf-lightbox-prev { left: -60px; }
+  .tf-lightbox-next { right: -60px; }
+
   @media (max-width: 700px) {
     .tf-grid { grid-template-columns: 1fr; max-width: 520px; }
+    .tf-stats-banner { gap: 1.5rem; padding: 2rem 1rem; }
+    .tf-stat-number { font-size: 2.2rem; }
+    .tf-overlay { transform: translateY(0); }
+    .tf-view-badge { opacity: 1; transform: translateY(0); }
+    .tf-lightbox-prev { left: 0.5rem; }
+    .tf-lightbox-next { right: 0.5rem; }
+  }
+  @media (max-width: 480px) {
+    .tf-stats-banner { gap: 1rem; }
   }
 
   /* Featured Carousel */
@@ -1412,19 +1543,24 @@
   }
 
   .tf-cta-section {
-    padding: 4rem 2rem 5rem;
+    padding: 5rem 2rem 6rem;
     background: var(--dark-bg); text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .tf-cta-section::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, rgba(46,163,213,0.06) 0%, transparent 70%);
   }
   .tf-cta-inner {
-    max-width: 600px; margin: 0 auto;
+    max-width: 650px; margin: 0 auto; position: relative; z-index: 1;
   }
   .tf-cta-inner h3 {
-    font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem;
+    font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem;
     letter-spacing: 3px; color: var(--text-on-dark); margin-bottom: 0.6rem;
   }
   .tf-cta-inner p {
     color: var(--text-muted-dark); font-weight: 300; line-height: 1.7;
-    font-size: 0.95rem; margin-bottom: 1.5rem;
+    font-size: 1rem; margin-bottom: 2rem;
   }
 
   /* FOOTER (DARK) */
@@ -2506,10 +2642,24 @@
     </div>
   </div>
 
+  <!-- Lightbox -->
+  <div class="tf-lightbox" id="tfLightbox">
+    <div class="tf-lightbox-inner" id="tfLightboxInner">
+      <button class="tf-lightbox-close" onclick="closeTfLightbox()">&times;</button>
+      <button class="tf-lightbox-nav tf-lightbox-prev" onclick="navTfLightbox(-1)">&#8249;</button>
+      <button class="tf-lightbox-nav tf-lightbox-next" onclick="navTfLightbox(1)">&#8250;</button>
+      <img id="tfLightboxImg" src="" alt="">
+      <div class="tf-lightbox-info">
+        <div class="tf-client-name" id="tfLightboxName"></div>
+        <div class="tf-client-tag" id="tfLightboxTag"></div>
+      </div>
+    </div>
+  </div>
+
   <div class="tf-cta-section">
     <div class="tf-cta-inner">
       <h3>READY TO START YOUR TRANSFORMATION?</h3>
-      <p>Every one of these clients started exactly where you are now &mdash; with a single decision.</p>
+      <p>Every one of these clients started exactly where you are now &mdash; with a single decision. Your story could be next.</p>
       <a href="#" class="btn-primary" onclick="showPage('home'); setTimeout(scrollToConsultation, 400);" style="display:inline-flex;">Book Your Complimentary Consultation</a>
     </div>
   </div>
