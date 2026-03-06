@@ -1587,9 +1587,10 @@
         <p>Let's find your best path forward</p>
       </div>
 
-      <form id="quizForm" action="https://formsubmit.co/readyfit91@gmail.com" method="POST">
+      <form id="quizForm" action="https://formsubmit.co/admin@getfreddyfit.com" method="POST">
         <input type="hidden" name="_subject" value="New Performance Assessment Quiz Response">
         <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_cc" value="myfitpro@getfreddyfit.com">
         <input type="hidden" name="_next" value="javascript:void(0);">
         <input type="hidden" name="Timestamp" value="">
         
@@ -1600,6 +1601,10 @@
             <div>
               <label style="display: block; font-weight: 600; font-size: 0.9rem; color: var(--text-on-light); margin-bottom: 0.4rem;">First Name</label>
               <input type="text" name="First Name" placeholder="Your first name" required style="width: 100%; padding: 0.7rem 0.9rem; border-radius: 6px; border: 1.5px solid rgba(0,0,0,0.1); background: var(--light-card-alt); color: var(--text-on-light); font-family: 'Barlow', sans-serif; font-size: 0.92rem;">
+            </div>
+            <div>
+              <label style="display: block; font-weight: 600; font-size: 0.9rem; color: var(--text-on-light); margin-bottom: 0.4rem;">Last Name</label>
+              <input type="text" name="Last Name" placeholder="Your last name" required style="width: 100%; padding: 0.7rem 0.9rem; border-radius: 6px; border: 1.5px solid rgba(0,0,0,0.1); background: var(--light-card-alt); color: var(--text-on-light); font-family: 'Barlow', sans-serif; font-size: 0.92rem;">
             </div>
             <div>
               <label style="display: block; font-weight: 600; font-size: 0.9rem; color: var(--text-on-light); margin-bottom: 0.4rem;">Email</label>
@@ -2518,6 +2523,7 @@ function closeQuiz() {
 function submitQuiz() {
   // Get contact info
   const firstName = document.querySelector('input[name="First Name"]')?.value;
+  const lastName = document.querySelector('input[name="Last Name"]')?.value;
   const email = document.querySelector('input[name="Email"]')?.value;
   const phone = document.querySelector('input[name="Phone Number"]')?.value;
   
@@ -2529,7 +2535,7 @@ function submitQuiz() {
   const commitment = document.querySelector('input[name="Commitment Level"]:checked')?.value;
 
   // Validate all fields are filled
-  if (!firstName || !email || !phone || !goal || !barrier || !days || !need || !commitment) {
+  if (!firstName || !lastName || !email || !phone || !goal || !barrier || !days || !need || !commitment) {
     alert('Please fill in all required fields before submitting.');
     return;
   }
