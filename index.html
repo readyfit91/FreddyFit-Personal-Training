@@ -2868,7 +2868,24 @@ function submitQuiz() {
   // Set timestamp
   document.querySelector('input[name="Timestamp"]').value = new Date().toLocaleString();
 
-  // Submit the form immediately
+  // If "ready to start" (commit1) is selected, submit form then redirect to Stripe checkout
+  const commitChoice = document.querySelector('input[name="Commitment Level"]:checked');
+  if (commitChoice && commitChoice.id === 'commit1') {
+    // Submit form via fetch so we can redirect afterward
+    const formData = new FormData(document.getElementById('quizForm'));
+    fetch(document.getElementById('quizForm').action, {
+      method: 'POST',
+      body: formData
+    }).catch(function() {}); // fire-and-forget
+    window.open('https://buy.stripe.com/5kQ14nawL8Ft4l6fnh3Ru05', '_blank');
+    // Show result message
+    document.getElementById('quizContent').style.display = 'none';
+    document.getElementById('resultMessage').textContent = 'Thank you! You are being redirected to checkout.';
+    document.getElementById('quizResult').style.display = 'flex';
+    return;
+  }
+
+  // For all other options, submit the form normally
   document.getElementById('quizForm').submit();
 }
 
