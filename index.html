@@ -2847,7 +2847,7 @@
 
     <!-- Card 2: Lower Body Mastery -->
     <div class="newsfeed-card" onclick="openNewsPost('lower-body')">
-      <img src="10.jpg" alt="Lower Body Mastery Certification - Tucson, AZ" class="newsfeed-card-img">
+      <img src="photo%2010.jpg" alt="Lower Body Mastery Certification - Tucson, AZ" class="newsfeed-card-img" style="object-position: center 20%;">
       <div class="newsfeed-card-overlay">
         <span class="newsfeed-card-badge">Certification Spotlight</span>
         <div class="newsfeed-card-title">LOWER BODY MASTERY CERTIFICATION</div>
@@ -2878,7 +2878,7 @@
 
     <!-- Hero Banner -->
     <div class="news-hero">
-      <img src="10.jpg" alt="Lower Body Mastery Certification - Group Photo in Tucson" class="news-hero-img" style="object-position: center 45%;">
+      <img src="photo%2010.jpg" alt="Lower Body Mastery Certification - Freddy with Dr. Sean and Jeff" class="news-hero-img" style="object-position: center 20%;">
       <div class="news-hero-overlay">
         <span class="news-hero-badge">Latest News</span>
         <h1 class="news-hero-title">LOWER BODY MASTERY<br>CERTIFICATION</h1>
@@ -2934,45 +2934,25 @@
       <h2>INSIDE THE CERTIFICATION</h2>
       <p>Hands-on training, live assessments, and collaborative learning</p>
     </div>
-    <div class="news-gallery-grid">
+    <div class="news-gallery-grid" id="lower-body-gallery-grid">
       <div class="news-gallery-item news-wide" onclick="openNewsLightbox(0)">
-        <img src="10.jpg" alt="Full certification group photo outside the training facility" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">The Full Certification Class</span></div>
-      </div>
-      <div class="news-gallery-item" onclick="openNewsLightbox(1)">
-        <img src="photo%2010.jpg" alt="Freddy posing with Dr. Sean and Jeff after certification" loading="lazy">
+        <img src="photo%2010.jpg" alt="Freddy with Dr. Sean and Jeff after Lower Body Mastery certification" loading="lazy" style="object-position: center 20%;">
         <div class="news-gallery-overlay"><span class="news-gallery-caption">With Dr. Sean &amp; Jeff</span></div>
       </div>
+      <div class="news-gallery-item" onclick="openNewsLightbox(1)">
+        <img src="10.jpg" alt="Full certification group photo outside the training facility in Tucson" loading="lazy" style="object-position: center 40%;">
+        <div class="news-gallery-overlay"><span class="news-gallery-caption">The Full Certification Class</span></div>
+      </div>
       <div class="news-gallery-item" onclick="openNewsLightbox(2)">
-        <img src="9.jpg" alt="Overhead squat assessment during live case study" loading="lazy">
+        <img src="9.jpg" alt="Overhead squat assessment during live case study" loading="lazy" style="object-position: center 30%;">
         <div class="news-gallery-overlay"><span class="news-gallery-caption">Overhead Squat Assessment</span></div>
       </div>
       <div class="news-gallery-item news-tall" onclick="openNewsLightbox(3)">
-        <img src="3.jpg" alt="Practitioner assessing hip alignment on standing subject" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">Hip Alignment Assessment</span></div>
+        <img src="photo%207.jpg" alt="Lower body floor assessment with practitioner evaluation" loading="lazy" style="object-position: center 30%;">
+        <div class="news-gallery-overlay"><span class="news-gallery-caption">Lower Body Assessment</span></div>
       </div>
-      <div class="news-gallery-item" onclick="openNewsLightbox(4)">
-        <img src="1.jpg" alt="Prone assessment - evaluating spinal positioning" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">Prone Spinal Evaluation</span></div>
-      </div>
-      <div class="news-gallery-item" onclick="openNewsLightbox(5)">
-        <img src="2.jpg" alt="Functional movement screen - deep squat pattern" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">Deep Squat Pattern Screen</span></div>
-      </div>
-      <div class="news-gallery-item" onclick="openNewsLightbox(6)">
-        <img src="5.jpg" alt="Push-up position assessment with clipboard evaluation" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">Push-Up Pattern Check</span></div>
-      </div>
-      <div class="news-gallery-item news-wide" onclick="openNewsLightbox(7)">
-        <img src="6.jpg" alt="Prone leg assessment - identifying pelvic rotation" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">Pelvic Rotation Screening</span></div>
-      </div>
-      <div class="news-gallery-item" onclick="openNewsLightbox(8)">
-        <img src="photo%207.jpg" alt="Lower body assessment with practitioner evaluation" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">Lower Body Evaluation</span></div>
-      </div>
-      <div class="news-gallery-item" onclick="openNewsLightbox(9)">
-        <img src="8.jpg" alt="Supine hip flexion assessment on mat" loading="lazy">
+      <div class="news-gallery-item news-wide" onclick="openNewsLightbox(4)">
+        <img src="8.jpg" alt="Supine hip flexion assessment on mat" loading="lazy" style="object-position: center 40%;">
         <div class="news-gallery-overlay"><span class="news-gallery-caption">Supine Hip Assessment</span></div>
       </div>
     </div>
@@ -3374,7 +3354,7 @@ var newsGalleryImages = [];
 
 function initNewsGallery() {
   newsGalleryImages = [];
-  document.querySelectorAll('#page-news .news-gallery-grid:not(#cali-gallery-grid) .news-gallery-item img').forEach(function(img) {
+  document.querySelectorAll('#lower-body-gallery-grid .news-gallery-item img').forEach(function(img) {
     newsGalleryImages.push({ src: img.src, alt: img.alt });
   });
 }
