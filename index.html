@@ -1813,28 +1813,152 @@
     .news-article { padding: 3rem 1.25rem; }
   }
 
-  /* ===== SECOND NEWS POST DIVIDER ===== */
-  .news-post-divider {
-    display: flex;
+  /* ===== NEWS FEED CARDS ===== */
+  .newsfeed-header {
+    background: #0a0a0a;
+    color: #fff;
+    padding: 5rem 2rem 3.5rem;
+    text-align: center;
+  }
+  .newsfeed-header h1 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.6rem;
+  }
+  .newsfeed-header p {
+    color: #aaa;
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+  }
+  .newsfeed-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    padding: 3rem 2rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .newsfeed-card {
+    position: relative;
+    cursor: pointer;
+    border-radius: 10px;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.14);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .newsfeed-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.22);
+  }
+  .newsfeed-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.45s ease;
+    display: block;
+  }
+  .newsfeed-card:hover .newsfeed-card-img { transform: scale(1.06); }
+  .newsfeed-card-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent 0%, rgba(0,0,0,0.5) 30%, rgba(0,0,0,0.92) 100%);
+    padding: 3.5rem 1.5rem 1.75rem;
+    color: #fff;
+  }
+  .newsfeed-card-badge {
+    display: inline-block;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    background: #e8b84b;
+    color: #111;
+    padding: 3px 10px;
+    border-radius: 2px;
+    margin-bottom: 0.65rem;
+  }
+  .newsfeed-card-title {
+    font-size: 1.2rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    margin-bottom: 0.35rem;
+  }
+  .newsfeed-card-meta {
+    font-size: 0.78rem;
+    color: #ccc;
+    margin-bottom: 1.1rem;
+  }
+  .newsfeed-card-cta {
+    display: inline-flex;
     align-items: center;
-    gap: 1.5rem;
-    max-width: 900px;
-    margin: 5rem auto 0;
-    padding: 0 2rem;
-  }
-  .news-post-divider::before,
-  .news-post-divider::after {
-    content: '';
-    flex: 1;
-    height: 2px;
-    background: #e0e0e0;
-  }
-  .news-post-divider-label {
+    gap: 0.35rem;
     font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.2em;
-    color: #999;
-    white-space: nowrap;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #e8b84b;
+    border: 1px solid rgba(232,184,75,0.45);
+    padding: 0.45rem 1rem;
+    border-radius: 30px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .newsfeed-card:hover .newsfeed-card-cta {
+    background: #e8b84b;
+    color: #111;
+  }
+
+  /* ===== NEWS POST MODAL ===== */
+  .news-post-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: #fff;
+    z-index: 1500;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .news-post-modal.active { display: block; }
+  .news-modal-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(10,10,10,0.82);
+    backdrop-filter: blur(10px);
+    padding: 0.85rem 1.5rem;
+    display: flex;
+    align-items: center;
+  }
+  .news-modal-back-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0;
+    transition: color 0.2s;
+  }
+  .news-modal-back-btn:hover { color: #e8b84b; }
+  .news-modal-back-arrow {
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+
+  @media (max-width: 700px) {
+    .newsfeed-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      padding: 2rem 1.25rem 3rem;
+    }
+    .newsfeed-card { aspect-ratio: 4 / 3; }
   }
 </style>
 </head>
@@ -2665,15 +2789,53 @@
 <!-- ===== LATEST NEWS PAGE ===== -->
 <section class="page" id="page-news">
 
-  <!-- Hero Banner -->
-  <div class="news-hero">
-    <img src="10.jpg" alt="Lower Body Mastery Certification - Group Photo in Tucson" class="news-hero-img">
-    <div class="news-hero-overlay">
-      <span class="news-hero-badge">Latest News</span>
-      <h1 class="news-hero-title">LOWER BODY MASTERY<br>CERTIFICATION</h1>
-      <p class="news-hero-sub">Tucson, AZ &mdash; Advanced Functional Assessment Training</p>
+  <!-- ===== NEWS FEED (Landing View) ===== -->
+  <div class="newsfeed-header">
+    <h1>LATEST NEWS</h1>
+    <p>Certifications, achievements &amp; updates from FreddyFit</p>
+  </div>
+
+  <div class="newsfeed-grid">
+    <!-- Card 1: Lower Body Mastery -->
+    <div class="newsfeed-card" onclick="openNewsPost('lower-body')">
+      <img src="10.jpg" alt="Lower Body Mastery Certification - Tucson, AZ" class="newsfeed-card-img">
+      <div class="newsfeed-card-overlay">
+        <span class="newsfeed-card-badge">Latest News</span>
+        <div class="newsfeed-card-title">LOWER BODY MASTERY CERTIFICATION</div>
+        <div class="newsfeed-card-meta">Tucson, AZ &bull; Advanced Functional Assessment</div>
+        <span class="newsfeed-card-cta">Read More &#8594;</span>
+      </div>
+    </div>
+
+    <!-- Card 2: Upper Body Mastery -->
+    <div class="newsfeed-card" onclick="openNewsPost('upper-body')">
+      <img src="cali1.jpg" alt="Upper Body Mastery Certification - Sacramento, CA" class="newsfeed-card-img">
+      <div class="newsfeed-card-overlay">
+        <span class="newsfeed-card-badge">Certification Spotlight</span>
+        <div class="newsfeed-card-title">UPPER BODY MASTERY CERTIFICATION</div>
+        <div class="newsfeed-card-meta">Sacramento, CA &bull; October 2025</div>
+        <span class="newsfeed-card-cta">Read More &#8594;</span>
+      </div>
     </div>
   </div>
+
+  <!-- ===== POST MODAL: LOWER BODY MASTERY ===== -->
+  <div class="news-post-modal" id="post-lower-body">
+    <div class="news-modal-topbar">
+      <button class="news-modal-back-btn" onclick="closeNewsPost('lower-body')">
+        <span class="news-modal-back-arrow">&#8592;</span> Back to News
+      </button>
+    </div>
+
+    <!-- Hero Banner -->
+    <div class="news-hero">
+      <img src="10.jpg" alt="Lower Body Mastery Certification - Group Photo in Tucson" class="news-hero-img">
+      <div class="news-hero-overlay">
+        <span class="news-hero-badge">Latest News</span>
+        <h1 class="news-hero-title">LOWER BODY MASTERY<br>CERTIFICATION</h1>
+        <p class="news-hero-sub">Tucson, AZ &mdash; Advanced Functional Assessment Training</p>
+      </div>
+    </div>
 
   <!-- Article Content -->
   <div class="news-article">
@@ -2779,120 +2941,128 @@
   </div>
 
   <!-- CTA -->
+  <!-- CTA -->
   <div class="news-cta">
     <h3>EXPERIENCE ADVANCED FUNCTIONAL ASSESSMENT</h3>
     <p>Freddy is now offering these cutting-edge assessment techniques to all clients. Find the root cause &mdash; not just the symptoms.</p>
     <a href="#" class="news-cta-btn" onclick="showPage('home'); setTimeout(scrollToConsultation, 400);">Book Your Assessment</a>
   </div>
 
-  <!-- ===== SECOND POST: UPPER BODY MASTERY ===== -->
-  <div class="news-post-divider">
-    <span class="news-post-divider-label">EARLIER THIS YEAR</span>
-  </div>
+  </div><!-- /post-lower-body modal -->
 
-  <!-- Hero Banner -->
-  <div class="news-hero">
-    <img src="cali1.jpg" alt="Upper Body Mastery Certification - Sacramento, California" class="news-hero-img">
-    <div class="news-hero-overlay">
-      <span class="news-hero-badge">Certification Spotlight</span>
-      <h1 class="news-hero-title">UPPER BODY MASTERY<br>CERTIFICATION</h1>
-      <p class="news-hero-sub">Sacramento, CA &mdash; 24-Hour Live Immersion</p>
+  <!-- ===== POST MODAL: UPPER BODY MASTERY ===== -->
+  <div class="news-post-modal" id="post-upper-body">
+    <div class="news-modal-topbar">
+      <button class="news-modal-back-btn" onclick="closeNewsPost('upper-body')">
+        <span class="news-modal-back-arrow">&#8592;</span> Back to News
+      </button>
     </div>
-  </div>
 
-  <!-- Article Content -->
-  <div class="news-article">
-    <p class="news-date">October 2025 &bull; Sacramento, California</p>
-    <h2 class="news-article-title">UPPER BODY MASTERY: A 24-HOUR LIVE IMMERSION IN ASSESSMENT &amp; CORRECTIVE EXERCISE</h2>
-
-    <div class="news-article-body">
-      <p>A recent three-day, 24-hour live immersion led by Kinesiologist Brandon Fox and Dr. Sean delivered an intensive experience focused on practical case studies and professional development.</p>
-
-      <p>During the Upper Body Mastery Certification, participants explored personal injuries and movement limitations while developing structured roadmaps to assess, identify, and modify dysfunctional patterns for long-term restoration. The program emphasized shoulder and neck function, targeting upper body pain and limitations linked to postural discrepancies such as upper crossed syndrome, while isolating and removing unrelated lower body factors.</p>
-
-      <div class="news-highlight">
-        "Through this process, attendees gained the ability to more accurately trace shoulder pain to its root cause &mdash; designing highly personalized prehabilitation and corrective exercise programs aimed at reducing pain and preventing injury caused by chronic imbalances."
-      </div>
-
-      <p>Both instructors bring extensive experience working with NFL athletes and former Olympians, offering a high level of expertise throughout the training. Additional thanks were extended to Greg at Varimax Fitness in Sacramento for supporting training needs during the stay.</p>
-
-      <p>This certification represents the first in a planned series of three, with Lower Body Mastery and Core Mastery certifications to follow. Completion of the full series will lead to recognition as an Exercise Therapy Personal Trainer through the Exercise Therapy Association. The experience concluded with renewed inspiration, enhanced knowledge, and a comprehensive collection of protocols, assessments, and case studies &mdash; further supporting the mission to help clients move pain-free while understanding the root causes of their challenges.</p>
-    </div>
-  </div>
-
-  <!-- Case Study Highlights -->
-  <div class="news-case-studies">
-    <h3 class="news-case-title">KEY PROGRAM HIGHLIGHTS</h3>
-    <div class="news-case-grid">
-      <div class="news-case-card" data-news-index="0">
-        <div class="news-case-icon">&#9883;</div>
-        <h4>Upper Crossed Syndrome</h4>
-        <p>Targeted postural discrepancies driving shoulder and neck pain, with protocols to isolate and correct dysfunctional upper body movement patterns.</p>
-      </div>
-      <div class="news-case-card" data-news-index="1">
-        <div class="news-case-icon">&#127942;</div>
-        <h4>NFL &amp; Olympian-Level Expertise</h4>
-        <p>Instructors Brandon Fox and Dr. Sean bring real-world experience training elite NFL athletes and former Olympians, raising the caliber of every case study.</p>
-      </div>
-      <div class="news-case-card" data-news-index="2">
-        <div class="news-case-icon">&#9998;</div>
-        <h4>Prehab &amp; Corrective Programming</h4>
-        <p>Built structured roadmaps to design personalized prehabilitation programs that address chronic imbalances and prevent future injury at the root cause.</p>
+    <!-- Hero Banner -->
+    <div class="news-hero">
+      <img src="cali1.jpg" alt="Upper Body Mastery Certification - Sacramento, California" class="news-hero-img">
+      <div class="news-hero-overlay">
+        <span class="news-hero-badge">Certification Spotlight</span>
+        <h1 class="news-hero-title">UPPER BODY MASTERY<br>CERTIFICATION</h1>
+        <p class="news-hero-sub">Sacramento, CA &mdash; 24-Hour Live Immersion</p>
       </div>
     </div>
-  </div>
 
-  <!-- Photo Gallery -->
-  <div class="news-gallery-section">
-    <div class="news-gallery-header">
-      <h2>INSIDE THE CERTIFICATION</h2>
-      <p>Three days of live assessments, case studies, and hands-on learning in Sacramento</p>
-    </div>
-    <div class="news-gallery-grid" id="cali-gallery-grid">
-      <div class="news-gallery-item news-wide" onclick="openCaliLightbox(0)">
-        <img src="cali1.jpg" alt="Upper Body Mastery certification group photo in Sacramento" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">The Certification Class</span></div>
-      </div>
-      <div class="news-gallery-item" onclick="openCaliLightbox(1)">
-        <img src="cali2.jpg" alt="With Brandon Fox and Dr. Sean at Upper Body Mastery" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">With Brandon Fox &amp; Dr. Sean</span></div>
-      </div>
-      <div class="news-gallery-item" onclick="openCaliLightbox(2)">
-        <img src="cali3.jpg" alt="Live upper body assessment during certification" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">Live Case Study Assessment</span></div>
-      </div>
-      <div class="news-gallery-item news-tall" onclick="openCaliLightbox(3)">
-        <img src="cali4.jpg" alt="Shoulder and cervical evaluation during immersion" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">Shoulder &amp; Cervical Evaluation</span></div>
-      </div>
-      <div class="news-gallery-item" onclick="openCaliLightbox(4)">
-        <img src="cali5.jpg" alt="Corrective exercise demonstration at Varimax Fitness" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">Corrective Exercise Demo</span></div>
-      </div>
-      <div class="news-gallery-item news-wide" onclick="openCaliLightbox(5)">
-        <img src="cali6.jpg" alt="Group learning and professional development at certification" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">Professional Development</span></div>
+    <!-- Article Content -->
+    <div class="news-article">
+      <p class="news-date">October 2025 &bull; Sacramento, California</p>
+      <h2 class="news-article-title">UPPER BODY MASTERY: A 24-HOUR LIVE IMMERSION IN ASSESSMENT &amp; CORRECTIVE EXERCISE</h2>
+
+      <div class="news-article-body">
+        <p>A recent three-day, 24-hour live immersion led by Kinesiologist Brandon Fox and Dr. Sean delivered an intensive experience focused on practical case studies and professional development.</p>
+
+        <p>During the Upper Body Mastery Certification, participants explored personal injuries and movement limitations while developing structured roadmaps to assess, identify, and modify dysfunctional patterns for long-term restoration. The program emphasized shoulder and neck function, targeting upper body pain and limitations linked to postural discrepancies such as upper crossed syndrome, while isolating and removing unrelated lower body factors.</p>
+
+        <div class="news-highlight">
+          "Through this process, attendees gained the ability to more accurately trace shoulder pain to its root cause &mdash; designing highly personalized prehabilitation and corrective exercise programs aimed at reducing pain and preventing injury caused by chronic imbalances."
+        </div>
+
+        <p>Both instructors bring extensive experience working with NFL athletes and former Olympians, offering a high level of expertise throughout the training. Additional thanks were extended to Greg at Varimax Fitness in Sacramento for supporting training needs during the stay.</p>
+
+        <p>This certification represents the first in a planned series of three, with Lower Body Mastery and Core Mastery certifications to follow. Completion of the full series will lead to recognition as an Exercise Therapy Personal Trainer through the Exercise Therapy Association. The experience concluded with renewed inspiration, enhanced knowledge, and a comprehensive collection of protocols, assessments, and case studies &mdash; further supporting the mission to help clients move pain-free while understanding the root causes of their challenges.</p>
       </div>
     </div>
-  </div>
 
-  <!-- Cali Lightbox -->
-  <div class="news-lightbox" id="caliLightbox">
-    <div class="news-lightbox-inner">
-      <button class="news-lightbox-close" onclick="closeCaliLightbox()">&times;</button>
-      <button class="news-lightbox-nav news-lb-prev" onclick="navCaliLightbox(-1)">&#8249;</button>
-      <img class="news-lightbox-img" id="caliLightboxImg" src="" alt="">
-      <button class="news-lightbox-nav news-lb-next" onclick="navCaliLightbox(1)">&#8250;</button>
-      <div class="news-lightbox-counter" id="caliLightboxCounter"></div>
+    <!-- Key Highlights -->
+    <div class="news-case-studies">
+      <h3 class="news-case-title">KEY PROGRAM HIGHLIGHTS</h3>
+      <div class="news-case-grid">
+        <div class="news-case-card" data-news-index="0">
+          <div class="news-case-icon">&#9883;</div>
+          <h4>Upper Crossed Syndrome</h4>
+          <p>Targeted postural discrepancies driving shoulder and neck pain, with protocols to isolate and correct dysfunctional upper body movement patterns.</p>
+        </div>
+        <div class="news-case-card" data-news-index="1">
+          <div class="news-case-icon">&#127942;</div>
+          <h4>NFL &amp; Olympian-Level Expertise</h4>
+          <p>Instructors Brandon Fox and Dr. Sean bring real-world experience training elite NFL athletes and former Olympians, raising the caliber of every case study.</p>
+        </div>
+        <div class="news-case-card" data-news-index="2">
+          <div class="news-case-icon">&#9998;</div>
+          <h4>Prehab &amp; Corrective Programming</h4>
+          <p>Built structured roadmaps to design personalized prehabilitation programs that address chronic imbalances and prevent future injury at the root cause.</p>
+        </div>
+      </div>
     </div>
-  </div>
 
-  <!-- CTA -->
-  <div class="news-cta">
-    <h3>TRAIN WITH PURPOSE. MOVE WITHOUT PAIN.</h3>
-    <p>These advanced assessment certifications are put to work for every client. Book a session and experience the difference.</p>
-    <a href="#" class="news-cta-btn" onclick="showPage('home'); setTimeout(scrollToConsultation, 400);">Book Your Session</a>
-  </div>
+    <!-- Photo Gallery -->
+    <div class="news-gallery-section">
+      <div class="news-gallery-header">
+        <h2>INSIDE THE CERTIFICATION</h2>
+        <p>Three days of live assessments, case studies, and hands-on learning in Sacramento</p>
+      </div>
+      <div class="news-gallery-grid" id="cali-gallery-grid">
+        <div class="news-gallery-item news-wide" onclick="openCaliLightbox(0)">
+          <img src="cali1.jpg" alt="Upper Body Mastery certification group photo in Sacramento" loading="lazy">
+          <div class="news-gallery-overlay"><span class="news-gallery-caption">The Certification Class</span></div>
+        </div>
+        <div class="news-gallery-item" onclick="openCaliLightbox(1)">
+          <img src="cali2.jpg" alt="With Brandon Fox and Dr. Sean at Upper Body Mastery" loading="lazy">
+          <div class="news-gallery-overlay"><span class="news-gallery-caption">With Brandon Fox &amp; Dr. Sean</span></div>
+        </div>
+        <div class="news-gallery-item" onclick="openCaliLightbox(2)">
+          <img src="cali3.jpg" alt="Live upper body assessment during certification" loading="lazy">
+          <div class="news-gallery-overlay"><span class="news-gallery-caption">Live Case Study Assessment</span></div>
+        </div>
+        <div class="news-gallery-item news-tall" onclick="openCaliLightbox(3)">
+          <img src="cali4.jpg" alt="Shoulder and cervical evaluation during immersion" loading="lazy">
+          <div class="news-gallery-overlay"><span class="news-gallery-caption">Shoulder &amp; Cervical Evaluation</span></div>
+        </div>
+        <div class="news-gallery-item" onclick="openCaliLightbox(4)">
+          <img src="cali5.jpg" alt="Corrective exercise demonstration at Varimax Fitness" loading="lazy">
+          <div class="news-gallery-overlay"><span class="news-gallery-caption">Corrective Exercise Demo</span></div>
+        </div>
+        <div class="news-gallery-item news-wide" onclick="openCaliLightbox(5)">
+          <img src="cali6.jpg" alt="Group learning and professional development at certification" loading="lazy">
+          <div class="news-gallery-overlay"><span class="news-gallery-caption">Professional Development</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cali Lightbox -->
+    <div class="news-lightbox" id="caliLightbox">
+      <div class="news-lightbox-inner">
+        <button class="news-lightbox-close" onclick="closeCaliLightbox()">&times;</button>
+        <button class="news-lightbox-nav news-lb-prev" onclick="navCaliLightbox(-1)">&#8249;</button>
+        <img class="news-lightbox-img" id="caliLightboxImg" src="" alt="">
+        <button class="news-lightbox-nav news-lb-next" onclick="navCaliLightbox(1)">&#8250;</button>
+        <div class="news-lightbox-counter" id="caliLightboxCounter"></div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="news-cta">
+      <h3>TRAIN WITH PURPOSE. MOVE WITHOUT PAIN.</h3>
+      <p>These advanced assessment certifications are put to work for every client. Book a session and experience the difference.</p>
+      <a href="#" class="news-cta-btn" onclick="showPage('home'); setTimeout(scrollToConsultation, 400);">Book Your Session</a>
+    </div>
+
+  </div><!-- /post-upper-body modal -->
 
 </section>
 
@@ -3136,7 +3306,30 @@ function updateCaliLightbox() {
     (caliLightboxIdx + 1) + ' / ' + caliGalleryImages.length;
 }
 
-// Scroll-reveal for news case study cards
+// Open / close news post modals
+function openNewsPost(id) {
+  var modal = document.getElementById('post-' + id);
+  if (!modal) return;
+  modal.classList.add('active');
+  modal.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+  // Stagger-reveal the case cards after the modal opens
+  setTimeout(function() {
+    modal.querySelectorAll('.news-case-card').forEach(function(card, i) {
+      card.classList.remove('news-visible');
+      setTimeout(function() { card.classList.add('news-visible'); }, i * 200);
+    });
+  }, 200);
+}
+
+function closeNewsPost(id) {
+  var modal = document.getElementById('post-' + id);
+  if (!modal) return;
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Scroll-reveal for news case study cards (feed view / fallback)
 function initNewsReveal() {
   var cards = document.querySelectorAll('.news-case-card');
   if (!cards.length) return;
