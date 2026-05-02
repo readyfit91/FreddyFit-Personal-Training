@@ -1814,6 +1814,7 @@
   }
 
   /* ===== NEWS TIMELINE ===== */
+  /* ===== TIMELINE ===== */
   .news-timeline-section {
     background: var(--dark-bg);
     padding: 5rem 2rem;
@@ -1837,136 +1838,217 @@
   }
   .news-timeline {
     position: relative;
-    max-width: 860px;
+    max-width: 700px;
     margin: 0 auto;
   }
   .news-timeline::before {
     content: '';
     position: absolute;
-    left: 50%;
+    left: 20px;
     top: 0;
     bottom: 0;
     width: 2px;
-    background: linear-gradient(to bottom, var(--blue) 0%, rgba(46,163,213,0.15) 100%);
-    transform: translateX(-50%);
+    background: linear-gradient(to bottom, var(--blue) 0%, rgba(46,163,213,0.1) 100%);
   }
   .tl-entry {
     display: flex;
     align-items: flex-start;
-    gap: 2.5rem;
-    margin-bottom: 4rem;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding-left: 52px;
     position: relative;
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
   }
-  .tl-entry.tl-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .tl-entry:nth-child(even) { flex-direction: row-reverse; }
+  .tl-entry.tl-visible { opacity: 1; transform: translateY(0); }
   .tl-dot {
     position: absolute;
-    left: 50%;
-    top: 1.5rem;
-    transform: translateX(-50%);
-    width: 16px;
-    height: 16px;
+    left: 12px;
+    top: 1.2rem;
+    width: 18px;
+    height: 18px;
     background: var(--blue);
     border-radius: 50%;
     border: 3px solid var(--dark-bg);
     box-shadow: 0 0 0 2px var(--blue);
     z-index: 1;
-    flex-shrink: 0;
-  }
-  .tl-side {
-    width: calc(50% - 2.5rem);
-    display: flex;
-    flex-direction: column;
-  }
-  .tl-entry:nth-child(odd) .tl-side { align-items: flex-end; text-align: right; }
-  .tl-entry:nth-child(even) .tl-side { align-items: flex-start; text-align: left; }
-  .tl-date {
-    display: inline-block;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--blue);
-    background: rgba(46,163,213,0.12);
-    padding: 0.3rem 0.85rem;
-    border-radius: 20px;
-    margin-bottom: 0.75rem;
   }
   .tl-card {
     background: var(--dark-card);
     border-radius: 12px;
     overflow: hidden;
     border: 1px solid rgba(46,163,213,0.12);
-    width: calc(50% - 2.5rem);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    display: flex;
+    align-items: stretch;
   }
   .tl-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    transform: translateX(6px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    border-color: rgba(46,163,213,0.4);
   }
-  .tl-card-img {
-    width: 100%;
-    height: 200px;
+  .tl-card-thumb {
+    width: 110px;
+    min-height: 110px;
+    flex-shrink: 0;
     object-fit: cover;
     display: block;
   }
   .tl-card-body {
-    padding: 1.4rem 1.6rem;
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.3rem;
+    flex: 1;
   }
-  .tl-card-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.3rem;
-    color: var(--text-on-dark);
-    letter-spacing: 1.5px;
-    margin-bottom: 0.6rem;
-    line-height: 1.2;
-  }
-  .tl-card-text {
-    color: var(--text-muted-dark);
-    font-size: 0.93rem;
-    line-height: 1.6;
-  }
-  .tl-card-photo-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 3px;
-  }
-  .tl-card-photo-grid img {
-    width: 100%;
-    height: 80px;
-    object-fit: cover;
-    display: block;
-    transition: opacity 0.2s ease;
-    cursor: pointer;
-  }
-  .tl-card-photo-grid img:hover { opacity: 0.85; }
-  .tl-card-tag {
-    display: inline-block;
-    margin-top: 1rem;
+  .tl-date {
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.75rem;
-    letter-spacing: 1.5px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--blue);
   }
-  @media (max-width: 700px) {
-    .news-timeline::before { left: 8px; }
-    .news-timeline { padding-left: 1.5rem; }
-    .tl-entry, .tl-entry:nth-child(even) {
-      flex-direction: column;
-      gap: 1rem;
-      padding-left: 1.5rem;
-    }
-    .tl-dot { left: -1.9rem; top: 1.4rem; transform: none; }
-    .tl-side { width: 100%; align-items: flex-start !important; text-align: left !important; }
-    .tl-card { width: 100%; }
+  .tl-card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.15rem;
+    color: var(--text-on-dark);
+    letter-spacing: 1.5px;
+    line-height: 1.2;
+  }
+  .tl-card-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted-dark);
+  }
+  .tl-card-cta {
+    margin-top: 0.4rem;
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.75rem;
+    color: var(--blue);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  .tl-card-cta::after { content: '→'; }
+
+  /* ===== TIMELINE MODAL ===== */
+  .tl-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9000;
+    background: rgba(0,0,0,0.85);
+    overflow-y: auto;
+    padding: 2rem 1rem;
+  }
+  .tl-modal.active { display: flex; align-items: flex-start; justify-content: center; }
+  .tl-modal-inner {
+    background: var(--dark-surface);
+    border-radius: 16px;
+    max-width: 760px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin: auto;
+    animation: tlModalIn 0.3s ease;
+  }
+  @keyframes tlModalIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .tl-modal-hero {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    display: block;
+  }
+  .tl-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.6);
+    border: none;
+    color: white;
+    font-size: 1.3rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+  .tl-modal-close:hover { background: rgba(0,0,0,0.9); }
+  .tl-modal-body {
+    padding: 2rem 2.5rem 2.5rem;
+  }
+  .tl-modal-date {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 0.5rem;
+  }
+  .tl-modal-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    color: var(--text-on-dark);
+    letter-spacing: 2px;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+  .tl-modal-location {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted-dark);
+    margin-bottom: 1.75rem;
+  }
+  .tl-modal-text {
+    color: var(--text-on-dark);
+    font-size: 0.97rem;
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+  .tl-modal-text strong { color: white; }
+  .tl-modal-text ul {
+    padding-left: 1.4rem;
+    margin: 0.5rem 0 1rem;
+  }
+  .tl-modal-text li { margin-bottom: 0.35rem; }
+  .tl-modal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin-top: 2rem;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .tl-modal-grid img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.2s;
+    cursor: pointer;
+  }
+  .tl-modal-grid img:hover { opacity: 0.85; }
+  @media (max-width: 600px) {
+    .tl-modal-body { padding: 1.5rem; }
+    .tl-modal-hero { height: 200px; }
+    .tl-modal-grid { grid-template-columns: repeat(2, 1fr); }
+    .tl-card-thumb { width: 80px; min-height: 80px; }
   }
 </style>
 </head>
@@ -2913,52 +2995,56 @@
   <!-- ===== NEWS TIMELINE ===== -->
   <div class="news-timeline-section">
     <div class="news-timeline-header">
-      <h2>ALL UPDATES</h2>
-      <p>A running record of certifications, events &amp; milestones</p>
+      <h2>FOLLOW THE JOURNEY</h2>
+      <p>Select an update to read the full story</p>
     </div>
     <div class="news-timeline" id="newsTimeline">
 
-      <!-- ENTRY 1 — Lower Body Mastery Certification -->
+      <!-- ENTRY 2 — Core Mastery, London (newest first) -->
       <div class="tl-entry">
         <div class="tl-dot"></div>
-        <div class="tl-side">
-          <span class="tl-date">November 2025</span>
-        </div>
-        <div class="tl-card">
-          <img src="10.jpg" alt="Lower Body Mastery Certification group photo in Tucson" class="tl-card-img" loading="lazy">
+        <div class="tl-card" onclick="openTlModal('london')" role="button" tabindex="0" aria-label="Read Core Mastery Certification update">
+          <img src="4.jpg" alt="Core Mastery Certification — London" class="tl-card-thumb" loading="lazy">
           <div class="tl-card-body">
-            <div class="tl-card-title">LOWER BODY MASTERY CERTIFICATION</div>
-            <p class="tl-card-text">Earned the Lower Body Mastery certification in Tucson, AZ under Dr. Sean, Brendan, and Jeff. A deep dive into functional assessments and kinetic chain analysis — from ankle to shoulder — to identify the true root causes of pain and movement dysfunction.</p>
-            <span class="tl-card-tag">&#9670; Tucson, AZ &bull; Certification</span>
+            <div class="tl-date">April 2026</div>
+            <div class="tl-card-title">CORE MASTERY CERTIFICATION</div>
+            <div class="tl-card-tag">London, England &bull; Exercise Therapy Association</div>
+            <div class="tl-card-cta">Read full story</div>
           </div>
         </div>
       </div>
-      <!-- ENTRY 2 — Core Mastery Certification, London -->
+
+      <!-- ENTRY 1 — Lower Body Mastery, Tucson -->
       <div class="tl-entry">
         <div class="tl-dot"></div>
-        <div class="tl-side">
-          <span class="tl-date">April 2026</span>
-        </div>
-        <div class="tl-card">
-          <img src="4.jpg" alt="Core Mastery Certification — London, England" class="tl-card-img" loading="lazy">
-          <div class="tl-card-photo-grid">
-            <img src="1.jpg" alt="London certification photo 1" loading="lazy">
-            <img src="2.jpg" alt="London certification photo 2" loading="lazy">
-            <img src="3.jpg" alt="London certification photo 3" loading="lazy">
-            <img src="5.jpg" alt="London certification photo 4" loading="lazy">
-            <img src="6.jpg" alt="London certification photo 5" loading="lazy">
-          </div>
+        <div class="tl-card" onclick="openTlModal('tucson')" role="button" tabindex="0" aria-label="Read Lower Body Mastery Certification update">
+          <img src="10.jpg" alt="Lower Body Mastery Certification — Tucson" class="tl-card-thumb" loading="lazy">
           <div class="tl-card-body">
-            <div class="tl-card-title">CORE MASTERY CERTIFICATION — LONDON</div>
-            <p class="tl-card-text">Completed the Core Mastery Certification through the Exercise Therapy Association — advanced training focused on identifying and correcting the root causes of pain and movement dysfunction. This phase deepened assessment of the spine, trunk, and hips as a unified system, with hands-on case studies involving full-body compensation patterns in London.</p>
-            <p class="tl-card-text" style="margin-top:0.75rem;">Key finding: where you feel pain is often not where the problem starts — dysfunction frequently traces back to the lumbopelvic–hip complex. This marks the third certification in the ETA system, continuing toward graduate status and recognition as a Midwest regional pain specialist.</p>
-            <span class="tl-card-tag">&#9670; London, England &bull; Certification</span>
+            <div class="tl-date">November 2025</div>
+            <div class="tl-card-title">LOWER BODY MASTERY CERTIFICATION</div>
+            <div class="tl-card-tag">Tucson, AZ &bull; Exercise Therapy Association</div>
+            <div class="tl-card-cta">Read full story</div>
           </div>
         </div>
       </div>
 
       <!-- ADD NEW ENTRIES ABOVE THIS LINE -->
 
+    </div>
+  </div>
+
+  <!-- ===== TIMELINE MODAL ===== -->
+  <div class="tl-modal" id="tlModal" onclick="closeTlModalOutside(event)">
+    <div class="tl-modal-inner" id="tlModalInner">
+      <button class="tl-modal-close" onclick="closeTlModal()" aria-label="Close">&times;</button>
+      <img class="tl-modal-hero" id="tlModalHero" src="" alt="">
+      <div class="tl-modal-body">
+        <div class="tl-modal-date" id="tlModalDate"></div>
+        <div class="tl-modal-title" id="tlModalTitle"></div>
+        <div class="tl-modal-location" id="tlModalLocation"></div>
+        <div class="tl-modal-text" id="tlModalText"></div>
+        <div class="tl-modal-grid" id="tlModalGrid"></div>
+      </div>
     </div>
   </div>
 
@@ -3181,7 +3267,7 @@ function initNewsReveal() {
   var tlEntries = document.querySelectorAll('.tl-entry');
   if (tlEntries.length) {
     var tlObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry, i) {
+      entries.forEach(function(entry) {
         if (entry.isIntersecting) {
           setTimeout(function() { entry.target.classList.add('tl-visible'); }, 120);
           tlObserver.unobserve(entry.target);
@@ -3190,7 +3276,64 @@ function initNewsReveal() {
     }, { threshold: 0.12 });
     tlEntries.forEach(function(el) { tlObserver.observe(el); });
   }
+
+  // keyboard support for timeline cards
+  document.querySelectorAll('.tl-card[tabindex]').forEach(function(card) {
+    card.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
+    });
+  });
 }
+
+// ===== Timeline Modal =====
+var tlModalData = {
+  london: {
+    hero: '4.jpg',
+    date: 'April 2026',
+    title: 'CORE MASTERY CERTIFICATION',
+    location: '&#9670; London, England &bull; Exercise Therapy Association',
+    text: '<p><strong>Certified. Refined. Recalibrated.</strong></p><p>Completed the Core Mastery Certification through the Exercise Therapy Association — advanced training focused on identifying and correcting the root causes of pain and movement dysfunction.</p><p>This phase deepened the ability to assess how the body works as a system, especially through the spine, trunk, and hips. Rather than chasing symptoms, the process focuses on identifying the true driver of dysfunction and applying precise, targeted corrections.</p><p><strong>What this means for you:</strong></p><ul><li>More accurate assessments</li><li>Clearer treatment strategies</li><li>Better long-term results</li></ul><p>During hands-on case studies in London, complex cases involving full-body compensation patterns were examined. One key takeaway: where you feel pain is often not where the problem starts. In many cases, dysfunction traced back to the lumbopelvic–hip complex.</p><p>This marks the third certification in this system, continuing to refine how movement issues are assessed and treated. Next: completing final case study requirements toward graduate status and recognition as a Midwest regional pain specialist.</p><p>Committed to raising the standard of care at FreddyFit — delivering results through precision, not guesswork.</p>',
+    photos: ['1.jpg','2.jpg','3.jpg','5.jpg','6.jpg']
+  },
+  tucson: {
+    hero: '10.jpg',
+    date: 'November 2025',
+    title: 'LOWER BODY MASTERY CERTIFICATION',
+    location: '&#9670; Tucson, AZ &bull; Exercise Therapy Association',
+    text: '<p>What a phenomenal experience in Tucson! Freddy had the opportunity to earn his Lower Body Mastery certification under the expert guidance of Dr. Sean, Brendan, and Jeff. This intensive program took a deep dive into functional assessments, equipping practitioners with the tools to identify the true root causes of pain and movement limitations — starting from the ankle and working up through the entire kinetic chain.</p><p><em>"Assessing the body at every joint is vital for optimal movement. Pain rarely originates where you feel it — the source is often far from the symptom."</em></p><p>The certification featured live case studies that powerfully demonstrated the interconnected nature of the human body. In one session, a participant\'s neck misalignment was revealed to be the underlying cause of chronic knee pain. Another case showed shoulder pain that originated from hip misalignment, while a third uncovered how a twisted pelvis was contributing to weakness in the shoulder.</p><p>Freddy is now bringing these advanced assessment techniques to all clients — offering a deeper, more comprehensive approach to identifying and resolving pain, improving mobility, and optimizing performance.</p>',
+    photos: ['photo%2010.jpg','9.jpg','3.jpg','1.jpg','2.jpg','5.jpg','6.jpg','photo%207.jpg','8.jpg']
+  }
+};
+
+function openTlModal(id) {
+  var data = tlModalData[id];
+  if (!data) return;
+  document.getElementById('tlModalHero').src = data.hero;
+  document.getElementById('tlModalHero').alt = data.title;
+  document.getElementById('tlModalDate').textContent = data.date;
+  document.getElementById('tlModalTitle').textContent = data.title;
+  document.getElementById('tlModalLocation').innerHTML = data.location;
+  document.getElementById('tlModalText').innerHTML = data.text;
+  var grid = document.getElementById('tlModalGrid');
+  grid.innerHTML = data.photos.map(function(p) {
+    return '<img src="' + p + '" alt="' + data.title + ' photo" loading="lazy">';
+  }).join('');
+  document.getElementById('tlModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeTlModal() {
+  document.getElementById('tlModal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function closeTlModalOutside(e) {
+  if (e.target === document.getElementById('tlModal')) closeTlModal();
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeTlModal();
+});
 </script>
 </body>
 </html>
