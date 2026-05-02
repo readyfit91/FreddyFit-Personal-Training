@@ -1938,123 +1938,122 @@
   }
   .tl-card-cta::after { content: '→'; }
 
-  /* ===== TIMELINE MODAL ===== */
-  .tl-modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 9000;
-    background: rgba(0,0,0,0.85);
-    overflow-y: auto;
-    padding: 2rem 1rem;
+  /* ===== TIMELINE ACCORDION ===== */
+  .news-tl-page-header {
+    background: var(--dark-bg);
+    text-align: center;
+    padding: 4rem 2rem 0;
   }
-  .tl-modal.active { display: flex; align-items: flex-start; justify-content: center; }
-  .tl-modal-inner {
-    background: var(--dark-surface);
-    border-radius: 16px;
-    max-width: 760px;
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-    margin: auto;
-    animation: tlModalIn 0.3s ease;
-  }
-  @keyframes tlModalIn {
-    from { opacity: 0; transform: translateY(30px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  .tl-modal-hero {
-    width: 100%;
-    height: 280px;
-    object-fit: cover;
-    display: block;
-  }
-  .tl-modal-close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: rgba(0,0,0,0.6);
-    border: none;
-    color: white;
-    font-size: 1.3rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1;
-  }
-  .tl-modal-close:hover { background: rgba(0,0,0,0.9); }
-  .tl-modal-body {
-    padding: 2rem 2.5rem 2.5rem;
-  }
-  .tl-modal-date {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--blue);
-    margin-bottom: 0.5rem;
-  }
-  .tl-modal-title {
+  .news-tl-page-header h1 {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-size: clamp(2.5rem, 6vw, 4rem);
     color: var(--text-on-dark);
-    letter-spacing: 2px;
-    line-height: 1.1;
+    letter-spacing: 4px;
     margin-bottom: 0.5rem;
   }
-  .tl-modal-location {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.8rem;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
+  .news-tl-page-header p {
     color: var(--text-muted-dark);
-    margin-bottom: 1.75rem;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
   }
-  .tl-modal-text {
+  .tl-entry { display: block; }
+  .tl-chevron {
+    margin-left: auto;
+    padding-right: 1.25rem;
+    font-size: 1.4rem;
+    color: var(--blue);
+    transition: transform 0.35s ease;
+    flex-shrink: 0;
+    align-self: center;
+  }
+  .tl-entry.tl-open .tl-chevron { transform: rotate(180deg); }
+  .tl-entry.tl-open .tl-card { border-color: rgba(46,163,213,0.4); border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+  .tl-expand {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.55s ease;
+  }
+  .tl-expand.open { max-height: 5000px; }
+  .tl-expand-inner {
+    background: var(--dark-card);
+    border: 1px solid rgba(46,163,213,0.4);
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    padding: 2rem;
+  }
+  .tl-expand-text {
     color: var(--text-on-dark);
     font-size: 0.97rem;
     line-height: 1.75;
-    margin-bottom: 1rem;
   }
-  .tl-modal-text strong { color: white; }
-  .tl-modal-text ul {
-    padding-left: 1.4rem;
-    margin: 0.5rem 0 1rem;
+  .tl-expand-text p { margin-bottom: 1rem; }
+  .tl-expand-text strong { color: white; }
+  .tl-expand-text ul { padding-left: 1.4rem; margin: 0.5rem 0 1rem; }
+  .tl-expand-text li { margin-bottom: 0.35rem; }
+  .tl-expand-highlight {
+    background: rgba(46,163,213,0.08);
+    border-left: 3px solid var(--blue);
+    padding: 1rem 1.25rem;
+    color: var(--text-on-dark);
+    font-style: italic;
+    border-radius: 0 8px 8px 0;
+    margin: 1.25rem 0;
+    font-size: 0.97rem;
+    line-height: 1.6;
   }
-  .tl-modal-text li { margin-bottom: 0.35rem; }
-  .tl-modal-grid {
+  .tl-expand-divider {
+    border: none;
+    border-top: 1px solid rgba(46,163,213,0.12);
+    margin: 1.75rem 0;
+  }
+  .tl-case-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+  }
+  .tl-case-card {
+    background: var(--dark-bg);
+    border-radius: 10px;
+    padding: 1.25rem;
+    border: 1px solid rgba(46,163,213,0.1);
+  }
+  .tl-case-icon { font-size: 1.4rem; color: var(--blue); margin-bottom: 0.6rem; }
+  .tl-case-card h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    color: var(--text-on-dark);
+    letter-spacing: 1px;
+    margin-bottom: 0.4rem;
+  }
+  .tl-case-card p { color: var(--text-muted-dark); font-size: 0.83rem; line-height: 1.5; }
+  .tl-expand-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 6px;
-    margin-top: 2rem;
     border-radius: 8px;
     overflow: hidden;
   }
-  .tl-modal-grid-item {
+  .tl-expand-grid-item {
     aspect-ratio: 1 / 1;
     overflow: hidden;
     background: #000;
   }
-  .tl-modal-grid img {
+  .tl-expand-grid-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
     display: block;
     transition: opacity 0.2s;
-    cursor: pointer;
   }
-  .tl-modal-grid img:hover { opacity: 0.85; }
+  .tl-expand-grid-item img:hover { opacity: 0.85; }
   @media (max-width: 600px) {
-    .tl-modal-body { padding: 1.5rem; }
-    .tl-modal-hero { height: 200px; }
-    .tl-modal-grid { grid-template-columns: repeat(2, 1fr); }
     .tl-card-thumb { width: 80px; min-height: 80px; }
+    .tl-expand-grid { grid-template-columns: repeat(2, 1fr); }
+    .tl-case-grid { grid-template-columns: 1fr; }
+    .tl-expand-inner { padding: 1.25rem; }
   }
 </style>
 </head>
@@ -2885,172 +2884,109 @@
 <!-- ===== LATEST NEWS PAGE ===== -->
 <section class="page" id="page-news">
 
-  <!-- Hero Banner -->
-  <div class="news-hero">
-    <img src="10.jpg" alt="Lower Body Mastery Certification - Group Photo in Tucson" class="news-hero-img">
-    <div class="news-hero-overlay">
-      <span class="news-hero-badge">Latest News</span>
-      <h1 class="news-hero-title">LOWER BODY MASTERY<br>CERTIFICATION</h1>
-      <p class="news-hero-sub">Tucson, AZ &mdash; Advanced Functional Assessment Training</p>
-    </div>
+  <!-- Page Header -->
+  <div class="news-tl-page-header">
+    <h1>LATEST NEWS</h1>
+    <p>Select an update to follow the journey</p>
   </div>
 
-  <!-- Article Content -->
-  <div class="news-article">
-    <p class="news-date">Certification Spotlight &bull; Tucson, Arizona</p>
-    <h2 class="news-article-title">ADVANCING THE SCIENCE OF MOVEMENT: FREDDY EARNS LOWER BODY MASTERY CERTIFICATION</h2>
-
-    <div class="news-article-body">
-      <p>What a phenomenal experience in Tucson! Freddy had the opportunity to earn his Lower Body Mastery certification under the expert guidance of Dr. Sean, Brendan, and Jeff. This intensive program took a deep dive into functional assessments, equipping practitioners with the tools to identify the true root causes of pain and movement limitations &mdash; starting from the ankle and working up through the entire kinetic chain.</p>
-
-      <div class="news-highlight">
-        "Assessing the body at every joint is vital for optimal movement. Pain rarely originates where you feel it &mdash; the source is often far from the symptom."
-      </div>
-
-      <p>The certification featured live case studies that powerfully demonstrated the interconnected nature of the human body. In one session, a participant's neck misalignment was revealed to be the underlying cause of chronic knee pain due to poor alignment and tracking throughout the chain. Another case showed shoulder pain that actually originated from hip misalignment, while a third study uncovered how a twisted pelvis was contributing to weakness and instability in the shoulder.</p>
-
-      <p>These real-world demonstrations reinforced a fundamental principle: the body operates as a unified system. Addressing symptoms in isolation often misses the bigger picture. By assessing every joint and understanding how movement compensations cascade through the kinetic chain, practitioners can deliver more effective, lasting results for their clients.</p>
-
-      <p>Freddy is now bringing these advanced assessment techniques to all current and future clients &mdash; offering a deeper, more comprehensive approach to identifying and resolving pain, improving mobility, and optimizing performance.</p>
-    </div>
-  </div>
-
-  <!-- Case Study Highlights -->
-  <div class="news-case-studies">
-    <h3 class="news-case-title">KEY CASE STUDY FINDINGS</h3>
-    <div class="news-case-grid">
-      <div class="news-case-card" data-news-index="0">
-        <div class="news-case-icon">&#9939;</div>
-        <h4>Neck &rarr; Knee Connection</h4>
-        <p>A cervical misalignment was causing chronic knee pain through poor tracking and compensatory movement patterns down the kinetic chain.</p>
-      </div>
-      <div class="news-case-card" data-news-index="1">
-        <div class="news-case-icon">&#9883;</div>
-        <h4>Hip &rarr; Shoulder Link</h4>
-        <p>Shoulder pain traced back to a hip misalignment, demonstrating how lower body dysfunction can manifest as upper body symptoms.</p>
-      </div>
-      <div class="news-case-card" data-news-index="2">
-        <div class="news-case-icon">&#10023;</div>
-        <h4>Pelvis &rarr; Shoulder Weakness</h4>
-        <p>A twisted pelvis was identified as the root cause of shoulder weakness, proving the importance of full-body kinetic chain assessment.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Interactive Photo Gallery -->
-  <div class="news-gallery-section">
-    <div class="news-gallery-header">
-      <h2>INSIDE THE CERTIFICATION</h2>
-      <p>Hands-on training, live assessments, and collaborative learning</p>
-    </div>
-    <div class="news-gallery-grid">
-      <div class="news-gallery-item news-wide" onclick="openNewsLightbox(0)">
-        <img src="10.jpg" alt="Full certification group photo outside the training facility" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">The Full Certification Class</span></div>
-      </div>
-      <div class="news-gallery-item" onclick="openNewsLightbox(1)">
-        <img src="photo%2010.jpg" alt="Freddy posing with Dr. Sean and Jeff after certification" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">With Dr. Sean &amp; Jeff</span></div>
-      </div>
-      <div class="news-gallery-item" onclick="openNewsLightbox(2)">
-        <img src="9.jpg" alt="Overhead squat assessment during live case study" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">Overhead Squat Assessment</span></div>
-      </div>
-      <div class="news-gallery-item news-tall" onclick="openNewsLightbox(3)">
-        <img src="3.jpg" alt="Practitioner assessing hip alignment on standing subject" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">Hip Alignment Assessment</span></div>
-      </div>
-      <div class="news-gallery-item" onclick="openNewsLightbox(4)">
-        <img src="1.jpg" alt="Prone assessment - evaluating spinal positioning" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">Prone Spinal Evaluation</span></div>
-      </div>
-      <div class="news-gallery-item" onclick="openNewsLightbox(5)">
-        <img src="2.jpg" alt="Functional movement screen - deep squat pattern" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">Deep Squat Pattern Screen</span></div>
-      </div>
-      <div class="news-gallery-item" onclick="openNewsLightbox(6)">
-        <img src="5.jpg" alt="Push-up position assessment with clipboard evaluation" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">Push-Up Pattern Check</span></div>
-      </div>
-      <div class="news-gallery-item news-wide" onclick="openNewsLightbox(7)">
-        <img src="6.jpg" alt="Prone leg assessment - identifying pelvic rotation" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">Pelvic Rotation Screening</span></div>
-      </div>
-      <div class="news-gallery-item" onclick="openNewsLightbox(8)">
-        <img src="photo%207.jpg" alt="Lower body assessment with practitioner evaluation" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">Lower Body Evaluation</span></div>
-      </div>
-      <div class="news-gallery-item" onclick="openNewsLightbox(9)">
-        <img src="8.jpg" alt="Supine hip flexion assessment on mat" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">Supine Hip Assessment</span></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- News Lightbox -->
-  <div class="news-lightbox" id="newsLightbox">
-    <div class="news-lightbox-inner">
-      <button class="news-lightbox-close" onclick="closeNewsLightbox()">&times;</button>
-      <button class="news-lightbox-nav news-lb-prev" onclick="navNewsLightbox(-1)">&#8249;</button>
-      <img class="news-lightbox-img" id="newsLightboxImg" src="" alt="">
-      <button class="news-lightbox-nav news-lb-next" onclick="navNewsLightbox(1)">&#8250;</button>
-      <div class="news-lightbox-counter" id="newsLightboxCounter"></div>
-    </div>
-  </div>
-
-  <!-- ===== NEWS TIMELINE ===== -->
+  <!-- Timeline with expandable entries -->
   <div class="news-timeline-section">
-    <div class="news-timeline-header">
-      <h2>FOLLOW THE JOURNEY</h2>
-      <p>Select an update to read the full story</p>
-    </div>
     <div class="news-timeline" id="newsTimeline">
 
-      <!-- ENTRY 2 — Core Mastery, London (newest first) -->
-      <div class="tl-entry">
+      <!-- ENTRY: London (newest first) -->
+      <div class="tl-entry tl-visible" id="tl-entry-london">
         <div class="tl-dot"></div>
-        <div class="tl-card" onclick="openTlModal('london')" role="button" tabindex="0" aria-label="Read Core Mastery Certification update">
+        <div class="tl-card" onclick="toggleTlEntry('london')" role="button" tabindex="0" aria-expanded="false" aria-controls="tl-expand-london">
           <img src="london1.jpg" alt="Core Mastery Certification — London" class="tl-card-thumb" loading="lazy">
           <div class="tl-card-body">
             <div class="tl-date">April 2026</div>
             <div class="tl-card-title">CORE MASTERY CERTIFICATION</div>
             <div class="tl-card-tag">London, England &bull; Exercise Therapy Association</div>
-            <div class="tl-card-cta">Read full story</div>
+          </div>
+          <div class="tl-chevron">&#8964;</div>
+        </div>
+        <div class="tl-expand" id="tl-expand-london">
+          <div class="tl-expand-inner">
+            <div class="tl-expand-text">
+              <p><strong>Certified. Refined. Recalibrated.</strong></p>
+              <p>Completed the Core Mastery Certification through the Exercise Therapy Association — advanced training focused on identifying and correcting the root causes of pain and movement dysfunction.</p>
+              <p>This phase deepened the ability to assess how the body works as a system, especially through the spine, trunk, and hips. Rather than chasing symptoms, the process focuses on identifying the true driver of dysfunction and applying precise, targeted corrections.</p>
+              <p><strong>What this means for you:</strong></p>
+              <ul>
+                <li>More accurate assessments</li>
+                <li>Clearer treatment strategies</li>
+                <li>Better long-term results</li>
+              </ul>
+              <p>During hands-on case studies in London, complex cases involving full-body compensation patterns were examined. One key takeaway: where you feel pain is often not where the problem starts. In many cases, dysfunction traced back to the lumbopelvic&ndash;hip complex.</p>
+              <p>This marks the third certification in this system, continuing to refine how movement issues are assessed and treated. Next: completing final case study requirements toward graduate status and recognition as a Midwest regional pain specialist.</p>
+              <p>Committed to raising the standard of care at FreddyFit &mdash; delivering results through precision, not guesswork.</p>
+            </div>
+            <hr class="tl-expand-divider">
+            <div class="tl-expand-grid">
+              <div class="tl-expand-grid-item"><img src="london1.jpg" alt="London certification photo 1" loading="lazy"></div>
+              <div class="tl-expand-grid-item"><img src="london2.jpg" alt="London certification photo 2" loading="lazy"></div>
+              <div class="tl-expand-grid-item"><img src="london 3.jpg" alt="London certification photo 3" loading="lazy"></div>
+              <div class="tl-expand-grid-item"><img src="london4.jpg" alt="London certification photo 4" loading="lazy"></div>
+              <div class="tl-expand-grid-item"><img src="london5.jpg" alt="London certification photo 5" loading="lazy"></div>
+              <div class="tl-expand-grid-item"><img src="london6.jpg" alt="London certification photo 6" loading="lazy"></div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- ENTRY 1 — Lower Body Mastery, Tucson -->
-      <div class="tl-entry">
+      <!-- ENTRY: Tucson -->
+      <div class="tl-entry tl-visible" id="tl-entry-tucson">
         <div class="tl-dot"></div>
-        <div class="tl-card" onclick="openTlModal('tucson')" role="button" tabindex="0" aria-label="Read Lower Body Mastery Certification update">
+        <div class="tl-card" onclick="toggleTlEntry('tucson')" role="button" tabindex="0" aria-expanded="false" aria-controls="tl-expand-tucson">
           <img src="10.jpg" alt="Lower Body Mastery Certification — Tucson" class="tl-card-thumb" loading="lazy">
           <div class="tl-card-body">
             <div class="tl-date">November 2025</div>
             <div class="tl-card-title">LOWER BODY MASTERY CERTIFICATION</div>
             <div class="tl-card-tag">Tucson, AZ &bull; Exercise Therapy Association</div>
-            <div class="tl-card-cta">Read full story</div>
+          </div>
+          <div class="tl-chevron">&#8964;</div>
+        </div>
+        <div class="tl-expand" id="tl-expand-tucson">
+          <div class="tl-expand-inner">
+            <div class="tl-expand-text">
+              <p>What a phenomenal experience in Tucson! Freddy had the opportunity to earn his Lower Body Mastery certification under the expert guidance of Dr. Sean, Brendan, and Jeff. This intensive program took a deep dive into functional assessments, equipping practitioners with the tools to identify the true root causes of pain and movement limitations &mdash; starting from the ankle and working up through the entire kinetic chain.</p>
+              <div class="tl-expand-highlight">"Assessing the body at every joint is vital for optimal movement. Pain rarely originates where you feel it &mdash; the source is often far from the symptom."</div>
+              <p>The certification featured live case studies that powerfully demonstrated the interconnected nature of the human body. In one session, a participant's neck misalignment was revealed to be the underlying cause of chronic knee pain. Another case showed shoulder pain that originated from hip misalignment, while a third uncovered how a twisted pelvis was contributing to weakness in the shoulder.</p>
+              <p>Freddy is now bringing these advanced assessment techniques to all clients &mdash; offering a deeper, more comprehensive approach to identifying and resolving pain, improving mobility, and optimizing performance.</p>
+            </div>
+            <hr class="tl-expand-divider">
+            <div class="tl-case-grid">
+              <div class="tl-case-card">
+                <div class="tl-case-icon">&#9939;</div>
+                <h4>Neck &rarr; Knee Connection</h4>
+                <p>A cervical misalignment was causing chronic knee pain through poor tracking and compensatory movement patterns down the kinetic chain.</p>
+              </div>
+              <div class="tl-case-card">
+                <div class="tl-case-icon">&#9883;</div>
+                <h4>Hip &rarr; Shoulder Link</h4>
+                <p>Shoulder pain traced back to a hip misalignment, demonstrating how lower body dysfunction can manifest as upper body symptoms.</p>
+              </div>
+              <div class="tl-case-card">
+                <div class="tl-case-icon">&#10023;</div>
+                <h4>Pelvis &rarr; Shoulder Weakness</h4>
+                <p>A twisted pelvis was identified as the root cause of shoulder weakness, proving the importance of full-body kinetic chain assessment.</p>
+              </div>
+            </div>
+            <hr class="tl-expand-divider">
+            <div class="tl-expand-grid">
+              <div class="tl-expand-grid-item"><img src="10.jpg" alt="The full certification class" loading="lazy"></div>
+              <div class="tl-expand-grid-item"><img src="photo%2010.jpg" alt="With Dr. Sean and Jeff" loading="lazy"></div>
+              <div class="tl-expand-grid-item"><img src="9.jpg" alt="Overhead squat assessment" loading="lazy"></div>
+              <div class="tl-expand-grid-item"><img src="photo%207.jpg" alt="Lower body evaluation" loading="lazy"></div>
+              <div class="tl-expand-grid-item"><img src="8.jpg" alt="Supine hip assessment" loading="lazy"></div>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- ADD NEW ENTRIES ABOVE THIS LINE -->
 
-    </div>
-  </div>
-
-  <!-- ===== TIMELINE MODAL ===== -->
-  <div class="tl-modal" id="tlModal" onclick="closeTlModalOutside(event)">
-    <div class="tl-modal-inner" id="tlModalInner">
-      <button class="tl-modal-close" onclick="closeTlModal()" aria-label="Close">&times;</button>
-      <img class="tl-modal-hero" id="tlModalHero" src="" alt="">
-      <div class="tl-modal-body">
-        <div class="tl-modal-date" id="tlModalDate"></div>
-        <div class="tl-modal-title" id="tlModalTitle"></div>
-        <div class="tl-modal-location" id="tlModalLocation"></div>
-        <div class="tl-modal-text" id="tlModalText"></div>
-        <div class="tl-modal-grid" id="tlModalGrid"></div>
-      </div>
     </div>
   </div>
 
@@ -3291,55 +3227,25 @@ function initNewsReveal() {
   });
 }
 
-// ===== Timeline Modal =====
-var tlModalData = {
-  london: {
-    hero: 'london1.jpg',
-    date: 'April 2026',
-    title: 'CORE MASTERY CERTIFICATION',
-    location: '&#9670; London, England &bull; Exercise Therapy Association',
-    text: '<p><strong>Certified. Refined. Recalibrated.</strong></p><p>Completed the Core Mastery Certification through the Exercise Therapy Association — advanced training focused on identifying and correcting the root causes of pain and movement dysfunction.</p><p>This phase deepened the ability to assess how the body works as a system, especially through the spine, trunk, and hips. Rather than chasing symptoms, the process focuses on identifying the true driver of dysfunction and applying precise, targeted corrections.</p><p><strong>What this means for you:</strong></p><ul><li>More accurate assessments</li><li>Clearer treatment strategies</li><li>Better long-term results</li></ul><p>During hands-on case studies in London, complex cases involving full-body compensation patterns were examined. One key takeaway: where you feel pain is often not where the problem starts. In many cases, dysfunction traced back to the lumbopelvic–hip complex.</p><p>This marks the third certification in this system, continuing to refine how movement issues are assessed and treated. Next: completing final case study requirements toward graduate status and recognition as a Midwest regional pain specialist.</p><p>Committed to raising the standard of care at FreddyFit — delivering results through precision, not guesswork.</p>',
-    photos: ['london1.jpg','london2.jpg','london 3.jpg','london4.jpg','london5.jpg','london6.jpg']
-  },
-  tucson: {
-    hero: '10.jpg',
-    date: 'November 2025',
-    title: 'LOWER BODY MASTERY CERTIFICATION',
-    location: '&#9670; Tucson, AZ &bull; Exercise Therapy Association',
-    text: '<p>What a phenomenal experience in Tucson! Freddy had the opportunity to earn his Lower Body Mastery certification under the expert guidance of Dr. Sean, Brendan, and Jeff. This intensive program took a deep dive into functional assessments, equipping practitioners with the tools to identify the true root causes of pain and movement limitations — starting from the ankle and working up through the entire kinetic chain.</p><p><em>"Assessing the body at every joint is vital for optimal movement. Pain rarely originates where you feel it — the source is often far from the symptom."</em></p><p>The certification featured live case studies that powerfully demonstrated the interconnected nature of the human body. In one session, a participant\'s neck misalignment was revealed to be the underlying cause of chronic knee pain. Another case showed shoulder pain that originated from hip misalignment, while a third uncovered how a twisted pelvis was contributing to weakness in the shoulder.</p><p>Freddy is now bringing these advanced assessment techniques to all clients — offering a deeper, more comprehensive approach to identifying and resolving pain, improving mobility, and optimizing performance.</p>',
-    photos: ['photo%2010.jpg','9.jpg','photo%207.jpg','8.jpg']
+// ===== Timeline Accordion =====
+function toggleTlEntry(id) {
+  var entry  = document.getElementById('tl-entry-' + id);
+  var expand = document.getElementById('tl-expand-' + id);
+  var card   = entry ? entry.querySelector('.tl-card') : null;
+  var isOpen = expand && expand.classList.contains('open');
+
+  // Close all entries
+  document.querySelectorAll('.tl-entry').forEach(function(el) { el.classList.remove('tl-open'); });
+  document.querySelectorAll('.tl-expand').forEach(function(el) { el.classList.remove('open'); });
+  document.querySelectorAll('.tl-card[aria-expanded]').forEach(function(el) { el.setAttribute('aria-expanded', 'false'); });
+
+  // Open clicked entry if it was closed
+  if (!isOpen && entry && expand) {
+    entry.classList.add('tl-open');
+    expand.classList.add('open');
+    if (card) card.setAttribute('aria-expanded', 'true');
   }
-};
-
-function openTlModal(id) {
-  var data = tlModalData[id];
-  if (!data) return;
-  document.getElementById('tlModalHero').src = data.hero;
-  document.getElementById('tlModalHero').alt = data.title;
-  document.getElementById('tlModalDate').textContent = data.date;
-  document.getElementById('tlModalTitle').textContent = data.title;
-  document.getElementById('tlModalLocation').innerHTML = data.location;
-  document.getElementById('tlModalText').innerHTML = data.text;
-  var grid = document.getElementById('tlModalGrid');
-  grid.innerHTML = data.photos.map(function(p) {
-    return '<div class="tl-modal-grid-item"><img src="' + p + '" alt="' + data.title + ' photo" loading="lazy"></div>';
-  }).join('');
-  document.getElementById('tlModal').classList.add('active');
-  document.body.style.overflow = 'hidden';
 }
-
-function closeTlModal() {
-  document.getElementById('tlModal').classList.remove('active');
-  document.body.style.overflow = '';
-}
-
-function closeTlModalOutside(e) {
-  if (e.target === document.getElementById('tlModal')) closeTlModal();
-}
-
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeTlModal();
-});
 </script>
 </body>
 </html>
