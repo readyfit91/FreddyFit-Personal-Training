@@ -1677,6 +1677,20 @@
   .news-gallery-item.news-wide { grid-column: span 2; }
   .news-gallery-item.news-tall { grid-row: span 2; }
 
+  /* London gallery — identical behaviour to news-gallery-item */
+  .london-gallery-item {
+    position: relative; overflow: hidden; border-radius: 12px; cursor: pointer;
+  }
+  .london-gallery-item img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.4s ease;
+  }
+  .london-gallery-item:hover img { transform: scale(1.12); filter: brightness(1.1); }
+  .london-gallery-item:hover .news-gallery-overlay { opacity: 1; }
+  .london-gallery-item:hover .news-gallery-caption { transform: translateY(0); }
+  .london-gallery-item.news-wide { grid-column: span 2; }
+  .london-gallery-item.news-tall { grid-row: span 2; }
+
   /* News Lightbox */
   .news-lightbox {
     position: fixed;
@@ -1807,10 +1821,21 @@
       grid-template-columns: 1fr;
       grid-auto-rows: 250px;
     }
-    .news-gallery-item.news-wide { grid-column: span 1; }
-    .news-gallery-item.news-tall { grid-row: span 1; }
+    .news-gallery-item.news-wide, .london-gallery-item.news-wide { grid-column: span 1; }
+    .news-gallery-item.news-tall, .london-gallery-item.news-tall { grid-row: span 1; }
     .news-hero { height: 50vh; min-height: 300px; }
     .news-article { padding: 3rem 1.25rem; }
+  }
+  .news-post-divider {
+    display: flex; align-items: center; gap: 1.5rem;
+    padding: 2.5rem 3rem; max-width: 900px; margin: 0 auto;
+  }
+  .news-post-divider::before, .news-post-divider::after {
+    content: ''; flex: 1; height: 1px; background: var(--light-border);
+  }
+  .news-post-divider span {
+    font-family: 'Bebas Neue', sans-serif; letter-spacing: 3px;
+    font-size: 0.85rem; color: var(--text-muted-light); white-space: nowrap;
   }
 </style>
 </head>
@@ -2761,6 +2786,90 @@
     <a href="#" class="news-cta-btn" onclick="showPage('home'); setTimeout(scrollToConsultation, 400);">Book Your Assessment</a>
   </div>
 
+  <!-- Post Divider -->
+  <div class="news-post-divider"><span>MORE FROM FREDDY</span></div>
+
+  <!-- Post 2: Hero Banner -->
+  <div class="news-hero">
+    <img src="london1.jpg" alt="Freddy in London" class="news-hero-img">
+    <div class="news-hero-overlay">
+      <span class="news-hero-badge">Training Update</span>
+      <h1 class="news-hero-title">LONDON TRAINING<br>TRIP</h1>
+      <p class="news-hero-sub">London, UK &mdash; International Fitness &amp; Training</p>
+    </div>
+  </div>
+
+  <!-- Post 2: Article Content -->
+  <div class="news-article">
+    <p class="news-date">Training Update &bull; London, United Kingdom</p>
+    <h2 class="news-article-title">TAKING IT GLOBAL: FREDDY TRAINS IN THE HEART OF LONDON</h2>
+    <div class="news-article-body">
+      <p>London offered an incredible opportunity to connect with world-class coaches, athletes, and fitness professionals from across the globe. From hands-on training sessions to collaborative workshops, this trip reinforced the universal language of movement and the shared passion for helping people reach their highest potential.</p>
+
+      <div class="news-highlight">
+        "Surrounding yourself with excellence pushes you to raise your own standards. Every conversation, every session in London made me a better coach."
+      </div>
+
+      <p>The trip included visits to some of London&rsquo;s most respected training facilities, where Freddy observed and participated in advanced strength and conditioning methods. Exchanging ideas with coaches from different backgrounds highlighted how fundamental principles &mdash; progressive overload, sound mechanics, and individualized programming &mdash; remain constant no matter where in the world you train.</p>
+
+      <p>Beyond the gym floor, London&rsquo;s energy and culture provided fresh perspective and renewed motivation. Immersing himself in a new environment is something Freddy believes every coach should experience &mdash; it broadens your thinking and reminds you why you fell in love with the craft in the first place.</p>
+
+      <p>Freddy is bringing back the insights, techniques, and inspiration from this trip directly to his clients &mdash; new ideas for programming, fresh energy on the training floor, and a global perspective on what it means to move and perform at your best.</p>
+    </div>
+  </div>
+
+  <!-- Post 2: Photo Gallery -->
+  <div class="news-gallery-section">
+    <div class="news-gallery-header">
+      <h2>LONDON HIGHLIGHTS</h2>
+      <p>Training, exploring, and connecting with the global fitness community</p>
+    </div>
+    <div class="news-gallery-grid">
+      <div class="london-gallery-item news-wide" onclick="openLondonLightbox(0)">
+        <img src="london1.jpg" alt="Freddy arriving in London" loading="lazy">
+        <div class="news-gallery-overlay"><span class="news-gallery-caption">Arriving in London</span></div>
+      </div>
+      <div class="london-gallery-item" onclick="openLondonLightbox(1)">
+        <img src="london2.jpg" alt="Training session in London" loading="lazy">
+        <div class="news-gallery-overlay"><span class="news-gallery-caption">Training Session</span></div>
+      </div>
+      <div class="london-gallery-item" onclick="openLondonLightbox(2)">
+        <img src="london 3.jpg" alt="Exploring London" loading="lazy">
+        <div class="news-gallery-overlay"><span class="news-gallery-caption">Exploring the City</span></div>
+      </div>
+      <div class="london-gallery-item news-tall" onclick="openLondonLightbox(3)">
+        <img src="london4.jpg" alt="London fitness facility" loading="lazy">
+        <div class="news-gallery-overlay"><span class="news-gallery-caption">World-Class Facilities</span></div>
+      </div>
+      <div class="london-gallery-item" onclick="openLondonLightbox(4)">
+        <img src="london5.jpg" alt="Coaching discussion in London" loading="lazy">
+        <div class="news-gallery-overlay"><span class="news-gallery-caption">Coaching Discussions</span></div>
+      </div>
+      <div class="london-gallery-item" onclick="openLondonLightbox(5)">
+        <img src="london6.jpg" alt="London landmarks" loading="lazy">
+        <div class="news-gallery-overlay"><span class="news-gallery-caption">London Landmarks</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- London Lightbox -->
+  <div class="news-lightbox" id="londonLightbox">
+    <div class="news-lightbox-inner">
+      <button class="news-lightbox-close" onclick="closeLondonLightbox()">&times;</button>
+      <button class="news-lightbox-nav news-lb-prev" onclick="navLondonLightbox(-1)">&#8249;</button>
+      <img class="news-lightbox-img" id="londonLightboxImg" src="" alt="">
+      <button class="news-lightbox-nav news-lb-next" onclick="navLondonLightbox(1)">&#8250;</button>
+      <div class="news-lightbox-counter" id="londonLightboxCounter"></div>
+    </div>
+  </div>
+
+  <!-- Post 2: CTA -->
+  <div class="news-cta">
+    <h3>READY TO TRAIN WITH A WORLD-CLASS PERSPECTIVE?</h3>
+    <p>Freddy brings global expertise and hands-on experience to every session. Start your journey today.</p>
+    <a href="#" class="news-cta-btn" onclick="showPage('home'); setTimeout(scrollToConsultation, 400);">Book a Session</a>
+  </div>
+
 </section>
 
 <footer>
@@ -2969,6 +3078,56 @@ function initNewsReveal() {
   }, { threshold: 0.15 });
   cards.forEach(function(c) { observer.observe(c); });
 }
+
+// ===== London Post: Gallery Lightbox =====
+var londonLightboxIdx = 0;
+var londonGalleryImages = [];
+
+function initLondonGallery() {
+  londonGalleryImages = [];
+  document.querySelectorAll('.london-gallery-item img').forEach(function(img) {
+    londonGalleryImages.push({ src: img.src, alt: img.alt });
+  });
+}
+
+function openLondonLightbox(idx) {
+  initLondonGallery();
+  londonLightboxIdx = idx;
+  updateLondonLightbox();
+  document.getElementById('londonLightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLondonLightbox() {
+  document.getElementById('londonLightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function navLondonLightbox(dir) {
+  if (event) event.stopPropagation();
+  londonLightboxIdx = (londonLightboxIdx + dir + londonGalleryImages.length) % londonGalleryImages.length;
+  updateLondonLightbox();
+}
+
+function updateLondonLightbox() {
+  var img = londonGalleryImages[londonLightboxIdx];
+  var lbImg = document.getElementById('londonLightboxImg');
+  lbImg.src = img.src;
+  lbImg.alt = img.alt;
+  document.getElementById('londonLightboxCounter').textContent =
+    (londonLightboxIdx + 1) + ' / ' + londonGalleryImages.length;
+}
+
+document.addEventListener('click', function(e) {
+  if (e.target.id === 'londonLightbox' || e.target.classList.contains('news-lightbox') && e.target.id === 'londonLightbox') closeLondonLightbox();
+});
+document.addEventListener('keydown', function(e) {
+  var lb = document.getElementById('londonLightbox');
+  if (!lb || !lb.classList.contains('active')) return;
+  if (e.key === 'Escape') closeLondonLightbox();
+  if (e.key === 'ArrowLeft') navLondonLightbox(-1);
+  if (e.key === 'ArrowRight') navLondonLightbox(1);
+});
 </script>
 </body>
 </html>
