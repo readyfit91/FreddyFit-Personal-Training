@@ -2036,19 +2036,18 @@
     overflow: hidden;
   }
   .tl-expand-grid-item {
-    aspect-ratio: 1 / 1;
     overflow: hidden;
     background: #000;
   }
   .tl-expand-grid-item img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
+    height: auto;
     display: block;
+    image-orientation: from-image;
     transition: opacity 0.2s;
   }
   .tl-expand-grid-item img:hover { opacity: 0.85; }
+  .tl-img-rotate90 { transform: rotate(90deg) scale(0.75); transform-origin: center; }
   @media (max-width: 600px) {
     .tl-card-thumb { width: 80px; min-height: 80px; }
     .tl-expand-grid { grid-template-columns: repeat(2, 1fr); }
@@ -2926,7 +2925,7 @@
             <div class="tl-expand-grid">
               <div class="tl-expand-grid-item"><img src="london1.jpg" alt="London certification photo 1" loading="lazy"></div>
               <div class="tl-expand-grid-item"><img src="london2.jpg" alt="London certification photo 2" loading="lazy"></div>
-              <div class="tl-expand-grid-item"><img src="london 3.jpg" alt="London certification photo 3" loading="lazy"></div>
+              <div class="tl-expand-grid-item"><img src="london 3.jpg" alt="London certification photo 3" loading="lazy" class="tl-img-rotate90"></div>
               <div class="tl-expand-grid-item"><img src="london4.jpg" alt="London certification photo 4" loading="lazy"></div>
               <div class="tl-expand-grid-item"><img src="london5.jpg" alt="London certification photo 5" loading="lazy"></div>
               <div class="tl-expand-grid-item"><img src="london6.jpg" alt="London certification photo 6" loading="lazy"></div>
