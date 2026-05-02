@@ -1933,6 +1933,20 @@
     font-size: 0.93rem;
     line-height: 1.6;
   }
+  .tl-card-photo-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 3px;
+  }
+  .tl-card-photo-grid img {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.2s ease;
+    cursor: pointer;
+  }
+  .tl-card-photo-grid img:hover { opacity: 0.85; }
   .tl-card-tag {
     display: inline-block;
     margin-top: 1rem;
@@ -2927,6 +2941,13 @@
         </div>
         <div class="tl-card">
           <img src="4.jpg" alt="Core Mastery Certification — London, England" class="tl-card-img" loading="lazy">
+          <div class="tl-card-photo-grid">
+            <img src="1.jpg" alt="London certification photo 1" loading="lazy">
+            <img src="2.jpg" alt="London certification photo 2" loading="lazy">
+            <img src="3.jpg" alt="London certification photo 3" loading="lazy">
+            <img src="5.jpg" alt="London certification photo 4" loading="lazy">
+            <img src="6.jpg" alt="London certification photo 5" loading="lazy">
+          </div>
           <div class="tl-card-body">
             <div class="tl-card-title">CORE MASTERY CERTIFICATION — LONDON</div>
             <p class="tl-card-text">Completed the Core Mastery Certification through the Exercise Therapy Association — advanced training focused on identifying and correcting the root causes of pain and movement dysfunction. This phase deepened assessment of the spine, trunk, and hips as a unified system, with hands-on case studies involving full-body compensation patterns in London.</p>
