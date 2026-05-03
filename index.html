@@ -3315,6 +3315,10 @@ function submitQuiz() {
 var origShowPage = window.showPage;
 if (origShowPage) {
   window.showPage = function(name) {
+    document.querySelectorAll('.news-post-modal.active').forEach(function(m) {
+      m.classList.remove('active');
+    });
+    document.body.style.overflow = '';
     origShowPage(name);
     if (name === 'news') {
       setTimeout(function() { initNewsReveal(); }, 100);
