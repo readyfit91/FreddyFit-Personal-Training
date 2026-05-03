@@ -1812,6 +1812,163 @@
     .news-hero { height: 50vh; min-height: 300px; }
     .news-article { padding: 3rem 1.25rem; }
   }
+
+  /* ===== LATEST NEWS FEED ===== */
+  .newsfeed-header {
+    background: #0a0a0a;
+    color: #fff;
+    padding: 5rem 2rem 3.5rem;
+    text-align: center;
+  }
+  .newsfeed-header h1 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.6rem;
+  }
+  .newsfeed-header p {
+    color: #aaa;
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+  }
+  .newsfeed-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    padding: 3rem 2rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .newsfeed-card {
+    position: relative;
+    cursor: pointer;
+    border-radius: 10px;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.14);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .newsfeed-card.newsfeed-featured {
+    grid-column: span 2;
+    aspect-ratio: 16 / 7;
+  }
+  .newsfeed-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.22);
+  }
+  .newsfeed-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transition: transform 0.45s ease;
+    display: block;
+  }
+  .newsfeed-card:hover .newsfeed-card-img { transform: scale(1.06); }
+  .newsfeed-card-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent 0%, rgba(0,0,0,0.5) 30%, rgba(0,0,0,0.92) 100%);
+    padding: 3.5rem 1.5rem 1.75rem;
+    color: #fff;
+  }
+  .newsfeed-card-badge {
+    display: inline-block;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    background: #e8b84b;
+    color: #111;
+    padding: 3px 10px;
+    border-radius: 2px;
+    margin-bottom: 0.65rem;
+  }
+  .newsfeed-card-title {
+    font-size: 1.2rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    margin-bottom: 0.35rem;
+  }
+  .newsfeed-card-meta {
+    font-size: 0.78rem;
+    color: #ccc;
+    margin-bottom: 1.1rem;
+  }
+  .newsfeed-card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #e8b84b;
+    border: 1px solid rgba(232,184,75,0.45);
+    padding: 0.45rem 1rem;
+    border-radius: 30px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .newsfeed-card:hover .newsfeed-card-cta {
+    background: #e8b84b;
+    color: #111;
+  }
+
+  /* ===== NEWS POST MODAL ===== */
+  .news-post-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: #fff;
+    z-index: 1500;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .news-post-modal.active { display: block; }
+  .news-modal-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(10,10,10,0.82);
+    backdrop-filter: blur(10px);
+    padding: 0.85rem 1.5rem;
+    display: flex;
+    align-items: center;
+  }
+  .news-modal-back-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0;
+    transition: color 0.2s;
+  }
+  .news-modal-back-btn:hover { color: #e8b84b; }
+  .news-modal-back-arrow {
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+
+  @media (max-width: 700px) {
+    .newsfeed-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      padding: 2rem 1.25rem 3rem;
+    }
+    .newsfeed-card,
+    .newsfeed-card.newsfeed-featured {
+      grid-column: span 1;
+      aspect-ratio: 4 / 3;
+    }
+  }
 </style>
 </head>
 <body>
@@ -2641,125 +2798,384 @@
 <!-- ===== LATEST NEWS PAGE ===== -->
 <section class="page" id="page-news">
 
-  <!-- Hero Banner -->
-  <div class="news-hero">
-    <img src="10.jpg" alt="Lower Body Mastery Certification - Group Photo in Tucson" class="news-hero-img">
-    <div class="news-hero-overlay">
-      <span class="news-hero-badge">Latest News</span>
-      <h1 class="news-hero-title">LOWER BODY MASTERY<br>CERTIFICATION</h1>
-      <p class="news-hero-sub">Tucson, AZ &mdash; Advanced Functional Assessment Training</p>
-    </div>
+  <!-- ===== NEWS FEED (Landing View) ===== -->
+  <div class="newsfeed-header">
+    <h1>LATEST NEWS</h1>
+    <p>Certifications, achievements &amp; updates from FreddyFit</p>
   </div>
 
-  <!-- Article Content -->
-  <div class="news-article">
-    <p class="news-date">Certification Spotlight &bull; Tucson, Arizona</p>
-    <h2 class="news-article-title">ADVANCING THE SCIENCE OF MOVEMENT: FREDDY EARNS LOWER BODY MASTERY CERTIFICATION</h2>
-
-    <div class="news-article-body">
-      <p>What a phenomenal experience in Tucson! Freddy had the opportunity to earn his Lower Body Mastery certification under the expert guidance of Dr. Sean, Brendan, and Jeff. This intensive program took a deep dive into functional assessments, equipping practitioners with the tools to identify the true root causes of pain and movement limitations &mdash; starting from the ankle and working up through the entire kinetic chain.</p>
-
-      <div class="news-highlight">
-        "Assessing the body at every joint is vital for optimal movement. Pain rarely originates where you feel it &mdash; the source is often far from the symptom."
+  <div class="newsfeed-grid">
+    <!-- Card 1: Core Mastery (Featured — most recent) -->
+    <div class="newsfeed-card newsfeed-featured" onclick="openNewsPost('core-mastery')">
+      <img src="london6.jpg" alt="Core Mastery Certification - London, England" class="newsfeed-card-img" style="object-position: center 25%;">
+      <div class="newsfeed-card-overlay">
+        <span class="newsfeed-card-badge">Latest</span>
+        <div class="newsfeed-card-title">CORE MASTERY CERTIFICATION</div>
+        <div class="newsfeed-card-meta">London, England &bull; April 2026</div>
+        <span class="newsfeed-card-cta">Read More &#8594;</span>
       </div>
-
-      <p>The certification featured live case studies that powerfully demonstrated the interconnected nature of the human body. In one session, a participant's neck misalignment was revealed to be the underlying cause of chronic knee pain due to poor alignment and tracking throughout the chain. Another case showed shoulder pain that actually originated from hip misalignment, while a third study uncovered how a twisted pelvis was contributing to weakness and instability in the shoulder.</p>
-
-      <p>These real-world demonstrations reinforced a fundamental principle: the body operates as a unified system. Addressing symptoms in isolation often misses the bigger picture. By assessing every joint and understanding how movement compensations cascade through the kinetic chain, practitioners can deliver more effective, lasting results for their clients.</p>
-
-      <p>Freddy is now bringing these advanced assessment techniques to all current and future clients &mdash; offering a deeper, more comprehensive approach to identifying and resolving pain, improving mobility, and optimizing performance.</p>
     </div>
-  </div>
 
-  <!-- Case Study Highlights -->
-  <div class="news-case-studies">
-    <h3 class="news-case-title">KEY CASE STUDY FINDINGS</h3>
-    <div class="news-case-grid">
-      <div class="news-case-card" data-news-index="0">
-        <div class="news-case-icon">&#9939;</div>
-        <h4>Neck &rarr; Knee Connection</h4>
-        <p>A cervical misalignment was causing chronic knee pain through poor tracking and compensatory movement patterns down the kinetic chain.</p>
+    <!-- Card 2: Lower Body Mastery -->
+    <div class="newsfeed-card" onclick="openNewsPost('lower-body')">
+      <img src="photo%2010.jpg" alt="Lower Body Mastery Certification - Tucson, AZ" class="newsfeed-card-img" style="object-position: center 20%;">
+      <div class="newsfeed-card-overlay">
+        <span class="newsfeed-card-badge">Certification Spotlight</span>
+        <div class="newsfeed-card-title">LOWER BODY MASTERY CERTIFICATION</div>
+        <div class="newsfeed-card-meta">Tucson, AZ &bull; November 2025</div>
+        <span class="newsfeed-card-cta">Read More &#8594;</span>
       </div>
-      <div class="news-case-card" data-news-index="1">
-        <div class="news-case-icon">&#9883;</div>
-        <h4>Hip &rarr; Shoulder Link</h4>
-        <p>Shoulder pain traced back to a hip misalignment, demonstrating how lower body dysfunction can manifest as upper body symptoms.</p>
-      </div>
-      <div class="news-case-card" data-news-index="2">
-        <div class="news-case-icon">&#10023;</div>
-        <h4>Pelvis &rarr; Shoulder Weakness</h4>
-        <p>A twisted pelvis was identified as the root cause of shoulder weakness, proving the importance of full-body kinetic chain assessment.</p>
+    </div>
+
+    <!-- Card 3: Upper Body Mastery -->
+    <div class="newsfeed-card" onclick="openNewsPost('upper-body')">
+      <img src="cali1.jpg" alt="Upper Body Mastery Certification - Sacramento, CA" class="newsfeed-card-img">
+      <div class="newsfeed-card-overlay">
+        <span class="newsfeed-card-badge">Certification Spotlight</span>
+        <div class="newsfeed-card-title">UPPER BODY MASTERY CERTIFICATION</div>
+        <div class="newsfeed-card-meta">Sacramento, CA &bull; October 2025</div>
+        <span class="newsfeed-card-cta">Read More &#8594;</span>
       </div>
     </div>
   </div>
 
-  <!-- Interactive Photo Gallery -->
-  <div class="news-gallery-section">
-    <div class="news-gallery-header">
-      <h2>INSIDE THE CERTIFICATION</h2>
-      <p>Hands-on training, live assessments, and collaborative learning</p>
+  <!-- ===== POST MODAL: LOWER BODY MASTERY ===== -->
+  <div class="news-post-modal" id="post-lower-body">
+    <div class="news-modal-topbar">
+      <button class="news-modal-back-btn" onclick="closeNewsPost('lower-body')">
+        <span class="news-modal-back-arrow">&#8592;</span> Back to News
+      </button>
     </div>
-    <div class="news-gallery-grid">
-      <div class="news-gallery-item news-wide" onclick="openNewsLightbox(0)">
-        <img src="10.jpg" alt="Full certification group photo outside the training facility" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">The Full Certification Class</span></div>
-      </div>
-      <div class="news-gallery-item" onclick="openNewsLightbox(1)">
-        <img src="photo%2010.jpg" alt="Freddy posing with Dr. Sean and Jeff after certification" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">With Dr. Sean &amp; Jeff</span></div>
-      </div>
-      <div class="news-gallery-item" onclick="openNewsLightbox(2)">
-        <img src="9.jpg" alt="Overhead squat assessment during live case study" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">Overhead Squat Assessment</span></div>
-      </div>
-      <div class="news-gallery-item news-tall" onclick="openNewsLightbox(3)">
-        <img src="3.jpg" alt="Practitioner assessing hip alignment on standing subject" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">Hip Alignment Assessment</span></div>
-      </div>
-      <div class="news-gallery-item" onclick="openNewsLightbox(4)">
-        <img src="1.jpg" alt="Prone assessment - evaluating spinal positioning" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">Prone Spinal Evaluation</span></div>
-      </div>
-      <div class="news-gallery-item" onclick="openNewsLightbox(5)">
-        <img src="2.jpg" alt="Functional movement screen - deep squat pattern" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">Deep Squat Pattern Screen</span></div>
-      </div>
-      <div class="news-gallery-item" onclick="openNewsLightbox(6)">
-        <img src="5.jpg" alt="Push-up position assessment with clipboard evaluation" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">Push-Up Pattern Check</span></div>
-      </div>
-      <div class="news-gallery-item news-wide" onclick="openNewsLightbox(7)">
-        <img src="6.jpg" alt="Prone leg assessment - identifying pelvic rotation" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">Pelvic Rotation Screening</span></div>
-      </div>
-      <div class="news-gallery-item" onclick="openNewsLightbox(8)">
-        <img src="photo%207.jpg" alt="Lower body assessment with practitioner evaluation" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">Lower Body Evaluation</span></div>
-      </div>
-      <div class="news-gallery-item" onclick="openNewsLightbox(9)">
-        <img src="8.jpg" alt="Supine hip flexion assessment on mat" loading="lazy">
-        <div class="news-gallery-overlay"><span class="news-gallery-caption">Supine Hip Assessment</span></div>
-      </div>
-    </div>
-  </div>
 
-  <!-- News Lightbox -->
-  <div class="news-lightbox" id="newsLightbox">
-    <div class="news-lightbox-inner">
-      <button class="news-lightbox-close" onclick="closeNewsLightbox()">&times;</button>
-      <button class="news-lightbox-nav news-lb-prev" onclick="navNewsLightbox(-1)">&#8249;</button>
-      <img class="news-lightbox-img" id="newsLightboxImg" src="" alt="">
-      <button class="news-lightbox-nav news-lb-next" onclick="navNewsLightbox(1)">&#8250;</button>
-      <div class="news-lightbox-counter" id="newsLightboxCounter"></div>
+    <!-- Hero Banner -->
+    <div class="news-hero">
+      <img src="photo%2010.jpg" alt="Lower Body Mastery Certification - Freddy with Dr. Sean and Jeff" class="news-hero-img" style="object-position: center 20%;">
+      <div class="news-hero-overlay">
+        <span class="news-hero-badge">Latest News</span>
+        <h1 class="news-hero-title">LOWER BODY MASTERY<br>CERTIFICATION</h1>
+        <p class="news-hero-sub">Tucson, AZ &mdash; Advanced Functional Assessment Training</p>
+      </div>
     </div>
-  </div>
 
-  <!-- CTA -->
-  <div class="news-cta">
-    <h3>EXPERIENCE ADVANCED FUNCTIONAL ASSESSMENT</h3>
-    <p>Freddy is now offering these cutting-edge assessment techniques to all clients. Find the root cause &mdash; not just the symptoms.</p>
-    <a href="#" class="news-cta-btn" onclick="showPage('home'); setTimeout(scrollToConsultation, 400);">Book Your Assessment</a>
-  </div>
+    <!-- Article Content -->
+    <div class="news-article">
+      <p class="news-date">November 2025 &bull; Tucson, Arizona</p>
+      <h2 class="news-article-title">ADVANCING THE SCIENCE OF MOVEMENT: FREDDY EARNS LOWER BODY MASTERY CERTIFICATION</h2>
+
+      <div class="news-article-body">
+        <p>What a phenomenal experience in Tucson! Freddy had the opportunity to earn his Lower Body Mastery certification under the expert guidance of Dr. Sean, Brendan, and Jeff. This intensive program took a deep dive into functional assessments, equipping practitioners with the tools to identify the true root causes of pain and movement limitations &mdash; starting from the ankle and working up through the entire kinetic chain.</p>
+
+        <div class="news-highlight">
+          "Assessing the body at every joint is vital for optimal movement. Pain rarely originates where you feel it &mdash; the source is often far from the symptom."
+        </div>
+
+        <p>The certification featured live case studies that powerfully demonstrated the interconnected nature of the human body. In one session, a participant's neck misalignment was revealed to be the underlying cause of chronic knee pain due to poor alignment and tracking throughout the chain. Another case showed shoulder pain that actually originated from hip misalignment, while a third study uncovered how a twisted pelvis was contributing to weakness and instability in the shoulder.</p>
+
+        <p>These real-world demonstrations reinforced a fundamental principle: the body operates as a unified system. Addressing symptoms in isolation often misses the bigger picture. By assessing every joint and understanding how movement compensations cascade through the kinetic chain, practitioners can deliver more effective, lasting results for their clients.</p>
+
+        <p>Freddy is now bringing these advanced assessment techniques to all current and future clients &mdash; offering a deeper, more comprehensive approach to identifying and resolving pain, improving mobility, and optimizing performance.</p>
+      </div>
+    </div>
+
+    <!-- Case Study Highlights -->
+    <div class="news-case-studies">
+      <h3 class="news-case-title">KEY CASE STUDY FINDINGS</h3>
+      <div class="news-case-grid">
+        <div class="news-case-card" data-news-index="0">
+          <div class="news-case-icon">&#9939;</div>
+          <h4>Neck &rarr; Knee Connection</h4>
+          <p>A cervical misalignment was causing chronic knee pain through poor tracking and compensatory movement patterns down the kinetic chain.</p>
+        </div>
+        <div class="news-case-card" data-news-index="1">
+          <div class="news-case-icon">&#9883;</div>
+          <h4>Hip &rarr; Shoulder Link</h4>
+          <p>Shoulder pain traced back to a hip misalignment, demonstrating how lower body dysfunction can manifest as upper body symptoms.</p>
+        </div>
+        <div class="news-case-card" data-news-index="2">
+          <div class="news-case-icon">&#10023;</div>
+          <h4>Pelvis &rarr; Shoulder Weakness</h4>
+          <p>A twisted pelvis was identified as the root cause of shoulder weakness, proving the importance of full-body kinetic chain assessment.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Photo Gallery -->
+    <div class="news-gallery-section">
+      <div class="news-gallery-header">
+        <h2>INSIDE THE CERTIFICATION</h2>
+        <p>Hands-on training, live assessments, and collaborative learning</p>
+      </div>
+      <div class="news-gallery-grid" id="lower-body-gallery-grid">
+        <div class="news-gallery-item news-wide" onclick="openNewsLightbox(0)">
+          <img src="photo%2010.jpg" alt="Freddy with Dr. Sean and Jeff after Lower Body Mastery certification" loading="lazy" style="object-position: center 20%;">
+          <div class="news-gallery-overlay"><span class="news-gallery-caption">With Dr. Sean &amp; Jeff</span></div>
+        </div>
+        <div class="news-gallery-item" onclick="openNewsLightbox(1)">
+          <img src="10.jpg" alt="Full certification group photo outside the training facility in Tucson" loading="lazy" style="object-position: center 40%;">
+          <div class="news-gallery-overlay"><span class="news-gallery-caption">The Full Certification Class</span></div>
+        </div>
+        <div class="news-gallery-item" onclick="openNewsLightbox(2)">
+          <img src="9.jpg" alt="Overhead squat assessment during live case study" loading="lazy" style="object-position: center 30%;">
+          <div class="news-gallery-overlay"><span class="news-gallery-caption">Overhead Squat Assessment</span></div>
+        </div>
+        <div class="news-gallery-item news-tall" onclick="openNewsLightbox(3)">
+          <img src="photo%207.jpg" alt="Lower body floor assessment with practitioner evaluation" loading="lazy" style="object-position: center 30%;">
+          <div class="news-gallery-overlay"><span class="news-gallery-caption">Lower Body Assessment</span></div>
+        </div>
+        <div class="news-gallery-item news-wide" onclick="openNewsLightbox(4)">
+          <img src="8.jpg" alt="Supine hip flexion assessment on mat" loading="lazy" style="object-position: center 40%;">
+          <div class="news-gallery-overlay"><span class="news-gallery-caption">Supine Hip Assessment</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- News Lightbox -->
+    <div class="news-lightbox" id="newsLightbox">
+      <div class="news-lightbox-inner">
+        <button class="news-lightbox-close" onclick="closeNewsLightbox()">&times;</button>
+        <button class="news-lightbox-nav news-lb-prev" onclick="navNewsLightbox(-1)">&#8249;</button>
+        <img class="news-lightbox-img" id="newsLightboxImg" src="" alt="">
+        <button class="news-lightbox-nav news-lb-next" onclick="navNewsLightbox(1)">&#8250;</button>
+        <div class="news-lightbox-counter" id="newsLightboxCounter"></div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="news-cta">
+      <h3>EXPERIENCE ADVANCED FUNCTIONAL ASSESSMENT</h3>
+      <p>Freddy is now offering these cutting-edge assessment techniques to all clients. Find the root cause &mdash; not just the symptoms.</p>
+      <a href="#" class="news-cta-btn" onclick="showPage('home'); setTimeout(scrollToConsultation, 400);">Book Your Assessment</a>
+    </div>
+
+  </div><!-- /post-lower-body modal -->
+
+  <!-- ===== POST MODAL: UPPER BODY MASTERY ===== -->
+  <div class="news-post-modal" id="post-upper-body">
+    <div class="news-modal-topbar">
+      <button class="news-modal-back-btn" onclick="closeNewsPost('upper-body')">
+        <span class="news-modal-back-arrow">&#8592;</span> Back to News
+      </button>
+    </div>
+
+    <!-- Hero Banner -->
+    <div class="news-hero">
+      <img src="cali1.jpg" alt="Upper Body Mastery Certification - Sacramento, California" class="news-hero-img" style="object-position: center 15%;">
+      <div class="news-hero-overlay">
+        <span class="news-hero-badge">Certification Spotlight</span>
+        <h1 class="news-hero-title">UPPER BODY MASTERY<br>CERTIFICATION</h1>
+        <p class="news-hero-sub">Sacramento, CA &mdash; 24-Hour Live Immersion</p>
+      </div>
+    </div>
+
+    <!-- Article Content -->
+    <div class="news-article">
+      <p class="news-date">October 2025 &bull; Sacramento, California</p>
+      <h2 class="news-article-title">UPPER BODY MASTERY: A 24-HOUR LIVE IMMERSION IN ASSESSMENT &amp; CORRECTIVE EXERCISE</h2>
+
+      <div class="news-article-body">
+        <p>A recent three-day, 24-hour live immersion led by Kinesiologist Brandon Fox and Dr. Sean delivered an intensive experience focused on practical case studies and professional development.</p>
+
+        <p>During the Upper Body Mastery Certification, participants explored personal injuries and movement limitations while developing structured roadmaps to assess, identify, and modify dysfunctional patterns for long-term restoration. The program emphasized shoulder and neck function, targeting upper body pain and limitations linked to postural discrepancies such as upper crossed syndrome, while isolating and removing unrelated lower body factors.</p>
+
+        <div class="news-highlight">
+          "Through this process, attendees gained the ability to more accurately trace shoulder pain to its root cause &mdash; designing highly personalized prehabilitation and corrective exercise programs aimed at reducing pain and preventing injury caused by chronic imbalances."
+        </div>
+
+        <p>Both instructors bring extensive experience working with NFL athletes and former Olympians, offering a high level of expertise throughout the training. Additional thanks were extended to Greg at Varimax Fitness in Sacramento for supporting training needs during the stay.</p>
+
+        <p>This certification represents the first in a planned series of three, with Lower Body Mastery and Core Mastery certifications to follow. Completion of the full series will lead to recognition as an Exercise Therapy Personal Trainer through the Exercise Therapy Association. The experience concluded with renewed inspiration, enhanced knowledge, and a comprehensive collection of protocols, assessments, and case studies &mdash; further supporting the mission to help clients move pain-free while understanding the root causes of their challenges.</p>
+      </div>
+    </div>
+
+    <!-- Key Highlights -->
+    <div class="news-case-studies">
+      <h3 class="news-case-title">KEY PROGRAM HIGHLIGHTS</h3>
+      <div class="news-case-grid">
+        <div class="news-case-card" data-news-index="0">
+          <div class="news-case-icon">&#9883;</div>
+          <h4>Upper Crossed Syndrome</h4>
+          <p>Targeted postural discrepancies driving shoulder and neck pain, with protocols to isolate and correct dysfunctional upper body movement patterns.</p>
+        </div>
+        <div class="news-case-card" data-news-index="1">
+          <div class="news-case-icon">&#127942;</div>
+          <h4>NFL &amp; Olympian-Level Expertise</h4>
+          <p>Instructors Brandon Fox and Dr. Sean bring real-world experience training elite NFL athletes and former Olympians, raising the caliber of every case study.</p>
+        </div>
+        <div class="news-case-card" data-news-index="2">
+          <div class="news-case-icon">&#9998;</div>
+          <h4>Prehab &amp; Corrective Programming</h4>
+          <p>Built structured roadmaps to design personalized prehabilitation programs that address chronic imbalances and prevent future injury at the root cause.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Photo Gallery -->
+    <div class="news-gallery-section">
+      <div class="news-gallery-header">
+        <h2>INSIDE THE CERTIFICATION</h2>
+        <p>Three days of live assessments, case studies, and hands-on learning in Sacramento</p>
+      </div>
+      <div class="news-gallery-grid" id="cali-gallery-grid">
+        <div class="news-gallery-item news-wide" onclick="openCaliLightbox(0)">
+          <img src="cali1.jpg" alt="Upper Body Mastery certification group photo in Sacramento" loading="lazy">
+          <div class="news-gallery-overlay"><span class="news-gallery-caption">The Certification Class</span></div>
+        </div>
+        <div class="news-gallery-item" onclick="openCaliLightbox(1)">
+          <img src="cali2.jpg" alt="With Brandon Fox and Dr. Sean at Upper Body Mastery" loading="lazy">
+          <div class="news-gallery-overlay"><span class="news-gallery-caption">With Brandon Fox &amp; Dr. Sean</span></div>
+        </div>
+        <div class="news-gallery-item" onclick="openCaliLightbox(2)">
+          <img src="cali3.jpg" alt="Live upper body assessment during certification" loading="lazy">
+          <div class="news-gallery-overlay"><span class="news-gallery-caption">Live Case Study Assessment</span></div>
+        </div>
+        <div class="news-gallery-item news-tall" onclick="openCaliLightbox(3)">
+          <img src="cali4.jpg" alt="Shoulder and cervical evaluation during immersion" loading="lazy">
+          <div class="news-gallery-overlay"><span class="news-gallery-caption">Shoulder &amp; Cervical Evaluation</span></div>
+        </div>
+        <div class="news-gallery-item" onclick="openCaliLightbox(4)">
+          <img src="cali5.jpg" alt="Corrective exercise demonstration at Varimax Fitness" loading="lazy">
+          <div class="news-gallery-overlay"><span class="news-gallery-caption">Corrective Exercise Demo</span></div>
+        </div>
+        <div class="news-gallery-item news-wide" onclick="openCaliLightbox(5)">
+          <img src="cali6.jpg" alt="Group learning and professional development at certification" loading="lazy">
+          <div class="news-gallery-overlay"><span class="news-gallery-caption">Professional Development</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cali Lightbox -->
+    <div class="news-lightbox" id="caliLightbox">
+      <div class="news-lightbox-inner">
+        <button class="news-lightbox-close" onclick="closeCaliLightbox()">&times;</button>
+        <button class="news-lightbox-nav news-lb-prev" onclick="navCaliLightbox(-1)">&#8249;</button>
+        <img class="news-lightbox-img" id="caliLightboxImg" src="" alt="">
+        <button class="news-lightbox-nav news-lb-next" onclick="navCaliLightbox(1)">&#8250;</button>
+        <div class="news-lightbox-counter" id="caliLightboxCounter"></div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="news-cta">
+      <h3>TRAIN WITH PURPOSE. MOVE WITHOUT PAIN.</h3>
+      <p>These advanced assessment certifications are put to work for every client. Book a session and experience the difference.</p>
+      <a href="#" class="news-cta-btn" onclick="showPage('home'); setTimeout(scrollToConsultation, 400);">Book Your Session</a>
+    </div>
+
+  </div><!-- /post-upper-body modal -->
+
+  <!-- ===== POST MODAL: CORE MASTERY ===== -->
+  <div class="news-post-modal" id="post-core-mastery">
+    <div class="news-modal-topbar">
+      <button class="news-modal-back-btn" onclick="closeNewsPost('core-mastery')">
+        <span class="news-modal-back-arrow">&#8592;</span> Back to News
+      </button>
+    </div>
+
+    <!-- Hero Banner -->
+    <div class="news-hero">
+      <img src="london6.jpg" alt="Core Mastery Certification - London, England" class="news-hero-img" style="object-position: center 25%;">
+      <div class="news-hero-overlay">
+        <span class="news-hero-badge">Latest News</span>
+        <h1 class="news-hero-title">CORE MASTERY<br>CERTIFICATION</h1>
+        <p class="news-hero-sub">London, England &mdash; Advanced Core &amp; Spinal Assessment</p>
+      </div>
+    </div>
+
+    <!-- Article Content -->
+    <div class="news-article">
+      <p class="news-date">April 2026 &bull; London, England</p>
+      <h2 class="news-article-title">COMPLETING THE TRILOGY: FREDDY EARNS CORE MASTERY CERTIFICATION IN LONDON</h2>
+
+      <div class="news-article-body">
+        <p>The journey came full circle in London. Freddy completed the final certification in the Exercise Therapy Association's three-part mastery series, earning his Core Mastery Certification under the guidance of Kinesiologist Brandon Fox and Dr. Sean. This intensive program took a deep dive into the mechanics of the core, breathing, and spinal function &mdash; equipping practitioners with the tools to assess and restore the body's most fundamental stabilization system.</p>
+
+        <div class="news-highlight">
+          "The core is the foundation of every movement pattern. Without understanding how the spine, diaphragm, and deep stabilizers interact, you can only treat symptoms &mdash; never the source."
+        </div>
+
+        <p>The certification explored how intra-abdominal pressure, breathing mechanics, and deep stabilizer activation contribute to pain-free movement. Participants worked through live case studies exposing how a dysfunctional core can be the hidden driver behind chronic shoulder, hip, and lower back pain &mdash; reinforcing that addressing the core is not just about strength, but about restoring proper sequencing and coordination throughout the entire system.</p>
+
+        <p>With Upper Body Mastery and Lower Body Mastery already completed, this final certification rounds out a comprehensive understanding of the kinetic chain from the ground up. Freddy is now fully equipped to assess and address the root cause of movement dysfunction at every region of the body &mdash; bringing the complete Exercise Therapy Association framework to every client session.</p>
+
+        <p>Completing all three certifications formally qualifies Freddy as an Exercise Therapy Personal Trainer through the Exercise Therapy Association &mdash; a designation that reflects a commitment to evidence-based, root-cause approaches to pain relief, performance, and long-term movement health.</p>
+      </div>
+    </div>
+
+    <!-- Key Highlights -->
+    <div class="news-case-studies">
+      <h3 class="news-case-title">KEY PROGRAM HIGHLIGHTS</h3>
+      <div class="news-case-grid">
+        <div class="news-case-card" data-news-index="0">
+          <div class="news-case-icon">&#9651;</div>
+          <h4>Breathing &amp; Intra-Abdominal Pressure</h4>
+          <p>Explored how diaphragm function and proper breathing mechanics create the pressure needed to stabilize the spine under load and during dynamic movement.</p>
+        </div>
+        <div class="news-case-card" data-news-index="1">
+          <div class="news-case-icon">&#9881;</div>
+          <h4>Deep Stabilizer Sequencing</h4>
+          <p>Learned to assess and restore coordination of the deep core muscles &mdash; the foundation of pain-free movement and the missing piece in most traditional training programs.</p>
+        </div>
+        <div class="news-case-card" data-news-index="2">
+          <div class="news-case-icon">&#127942;</div>
+          <h4>Exercise Therapy Personal Trainer</h4>
+          <p>Completing all three certifications (Upper Body, Lower Body, and Core Mastery) earns recognition as an Exercise Therapy Personal Trainer through the Exercise Therapy Association.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Photo Gallery -->
+    <div class="news-gallery-section">
+      <div class="news-gallery-header">
+        <h2>INSIDE THE CERTIFICATION</h2>
+        <p>Live assessments, case studies, and hands-on learning in London</p>
+      </div>
+      <div class="news-gallery-grid" id="london-gallery-grid">
+        <div class="news-gallery-item news-wide" onclick="openLondonLightbox(0)">
+          <img src="london1.jpg" alt="Freddy performing hands-on shoulder assessment in London" loading="lazy" style="object-position: center 35%;">
+          <div class="news-gallery-overlay"><span class="news-gallery-caption">Hands-On Assessment</span></div>
+        </div>
+        <div class="news-gallery-item" onclick="openLondonLightbox(1)">
+          <img src="london2.jpg" alt="Close-up back assessment during Core Mastery certification" loading="lazy" style="object-position: center 40%;">
+          <div class="news-gallery-overlay"><span class="news-gallery-caption">Back Assessment</span></div>
+        </div>
+        <div class="news-gallery-item" onclick="openLondonLightbox(2)">
+          <img src="london%203.jpg" alt="Reviewing protocols and case studies on laptop in London gym" loading="lazy" style="object-position: center center;">
+          <div class="news-gallery-overlay"><span class="news-gallery-caption">Protocol Review</span></div>
+        </div>
+        <div class="news-gallery-item news-tall" onclick="openLondonLightbox(3)">
+          <img src="london4.jpg" alt="Scoliosis meter being used for spinal assessment" loading="lazy" style="object-position: center 20%;">
+          <div class="news-gallery-overlay"><span class="news-gallery-caption">Scoliosis Assessment</span></div>
+        </div>
+        <div class="news-gallery-item" onclick="openLondonLightbox(4)">
+          <img src="london5.jpg" alt="Freddy performing supine core assessment on client" loading="lazy" style="object-position: center 40%;">
+          <div class="news-gallery-overlay"><span class="news-gallery-caption">Supine Core Assessment</span></div>
+        </div>
+        <div class="news-gallery-item news-wide" onclick="openLondonLightbox(5)">
+          <img src="london6.jpg" alt="Movement screen assessment during Core Mastery certification" loading="lazy" style="object-position: center center;">
+          <div class="news-gallery-overlay"><span class="news-gallery-caption">Movement Screen</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- London Lightbox -->
+    <div class="news-lightbox" id="londonLightbox">
+      <div class="news-lightbox-inner">
+        <button class="news-lightbox-close" onclick="closeLondonLightbox()">&times;</button>
+        <button class="news-lightbox-nav news-lb-prev" onclick="navLondonLightbox(-1)">&#8249;</button>
+        <img class="news-lightbox-img" id="londonLightboxImg" src="" alt="">
+        <button class="news-lightbox-nav news-lb-next" onclick="navLondonLightbox(1)">&#8250;</button>
+        <div class="news-lightbox-counter" id="londonLightboxCounter"></div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="news-cta">
+      <h3>CERTIFIED. EXPERT. RESULTS-DRIVEN.</h3>
+      <p>All three mastery certifications are now in practice for every client. Book your session and experience the full system.</p>
+      <a href="#" class="news-cta-btn" onclick="showPage('home'); setTimeout(scrollToConsultation, 400);">Book Your Session</a>
+    </div>
+
+  </div><!-- /post-core-mastery modal -->
 
 </section>
 
@@ -2908,7 +3324,7 @@ var newsGalleryImages = [];
 
 function initNewsGallery() {
   newsGalleryImages = [];
-  document.querySelectorAll('.news-gallery-item img').forEach(function(img) {
+  document.querySelectorAll('#lower-body-gallery-grid .news-gallery-item img').forEach(function(img) {
     newsGalleryImages.push({ src: img.src, alt: img.alt });
   });
 }
@@ -2941,17 +3357,136 @@ function updateNewsLightbox() {
     (newsLightboxIdx + 1) + ' / ' + newsGalleryImages.length;
 }
 
-// Close news lightbox on background click
+// Close any open lightbox on background click
 document.addEventListener('click', function(e) {
-  if (e.target.classList.contains('news-lightbox')) closeNewsLightbox();
+  if (e.target.classList.contains('news-lightbox')) {
+    closeNewsLightbox();
+    closeCaliLightbox();
+    closeLondonLightbox();
+  }
 });
 document.addEventListener('keydown', function(e) {
   var lb = document.getElementById('newsLightbox');
-  if (!lb || !lb.classList.contains('active')) return;
-  if (e.key === 'Escape') closeNewsLightbox();
-  if (e.key === 'ArrowLeft') navNewsLightbox(-1);
-  if (e.key === 'ArrowRight') navNewsLightbox(1);
+  if (lb && lb.classList.contains('active')) {
+    if (e.key === 'Escape') closeNewsLightbox();
+    if (e.key === 'ArrowLeft') navNewsLightbox(-1);
+    if (e.key === 'ArrowRight') navNewsLightbox(1);
+    return;
+  }
+  var caliLb = document.getElementById('caliLightbox');
+  if (caliLb && caliLb.classList.contains('active')) {
+    if (e.key === 'Escape') closeCaliLightbox();
+    if (e.key === 'ArrowLeft') navCaliLightbox(-1);
+    if (e.key === 'ArrowRight') navCaliLightbox(1);
+    return;
+  }
+  var londonLb = document.getElementById('londonLightbox');
+  if (londonLb && londonLb.classList.contains('active')) {
+    if (e.key === 'Escape') closeLondonLightbox();
+    if (e.key === 'ArrowLeft') navLondonLightbox(-1);
+    if (e.key === 'ArrowRight') navLondonLightbox(1);
+  }
 });
+
+// ===== Cali (Upper Body) Gallery Lightbox =====
+var caliLightboxIdx = 0;
+var caliGalleryImages = [];
+
+function initCaliGallery() {
+  caliGalleryImages = [];
+  document.querySelectorAll('#cali-gallery-grid .news-gallery-item img').forEach(function(img) {
+    caliGalleryImages.push({ src: img.src, alt: img.alt });
+  });
+}
+
+function openCaliLightbox(idx) {
+  initCaliGallery();
+  caliLightboxIdx = idx;
+  updateCaliLightbox();
+  document.getElementById('caliLightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCaliLightbox() {
+  document.getElementById('caliLightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function navCaliLightbox(dir) {
+  if (event) event.stopPropagation();
+  caliLightboxIdx = (caliLightboxIdx + dir + caliGalleryImages.length) % caliGalleryImages.length;
+  updateCaliLightbox();
+}
+
+function updateCaliLightbox() {
+  var img = caliGalleryImages[caliLightboxIdx];
+  var lbImg = document.getElementById('caliLightboxImg');
+  lbImg.src = img.src;
+  lbImg.alt = img.alt;
+  document.getElementById('caliLightboxCounter').textContent =
+    (caliLightboxIdx + 1) + ' / ' + caliGalleryImages.length;
+}
+
+// ===== London (Core Mastery) Gallery Lightbox =====
+var londonLightboxIdx = 0;
+var londonGalleryImages = [];
+
+function initLondonGallery() {
+  londonGalleryImages = [];
+  document.querySelectorAll('#london-gallery-grid .news-gallery-item img').forEach(function(img) {
+    londonGalleryImages.push({ src: img.src, alt: img.alt });
+  });
+}
+
+function openLondonLightbox(idx) {
+  initLondonGallery();
+  londonLightboxIdx = idx;
+  updateLondonLightbox();
+  document.getElementById('londonLightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLondonLightbox() {
+  document.getElementById('londonLightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function navLondonLightbox(dir) {
+  if (event) event.stopPropagation();
+  londonLightboxIdx = (londonLightboxIdx + dir + londonGalleryImages.length) % londonGalleryImages.length;
+  updateLondonLightbox();
+}
+
+function updateLondonLightbox() {
+  var img = londonGalleryImages[londonLightboxIdx];
+  var lbImg = document.getElementById('londonLightboxImg');
+  lbImg.src = img.src;
+  lbImg.alt = img.alt;
+  document.getElementById('londonLightboxCounter').textContent =
+    (londonLightboxIdx + 1) + ' / ' + londonGalleryImages.length;
+}
+
+// Open / close news post modals
+function openNewsPost(id) {
+  var modal = document.getElementById('post-' + id);
+  if (!modal) return;
+  modal.classList.add('active');
+  modal.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+  setTimeout(function() {
+    modal.querySelectorAll('.news-case-card').forEach(function(card, i) {
+      card.classList.remove('news-visible');
+      setTimeout(function() { card.classList.add('news-visible'); }, i * 200);
+    });
+  }, 200);
+}
+
+function closeNewsPost(id) {
+  var modal = document.getElementById('post-' + id);
+  if (!modal) return;
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+}
 
 // Scroll-reveal for news case study cards
 function initNewsReveal() {
