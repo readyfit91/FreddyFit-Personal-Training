@@ -3288,6 +3288,23 @@ function submitQuiz() {
   // Set timestamp
   document.querySelector('input[name="Timestamp"]').value = new Date().toLocaleString();
 
+  // Send to FreddyFit CRM
+  const crmData = {
+    name: (document.querySelector('[name="First Name"]')?.value || '') + ' ' + (document.querySelector('[name="Last Name"]')?.value || ''),
+    email: document.querySelector('[name="Email"]')?.value || '',
+    phone: document.querySelector('[name="Phone Number"]')?.value || '',
+    goal: document.querySelector('input[name="Primary Goal"]:checked')?.value || '',
+    barrier: document.querySelector('input[name="Current Barriers"]:checked')?.value || '',
+    days_per_week: document.querySelector('input[name="Training Days Per Week"]:checked')?.value || '',
+    need: document.querySelector('input[name="Biggest Need"]:checked')?.value || '',
+    commitment: document.querySelector('input[name="Commitment Level"]:checked')?.value || ''
+  }
+  fetch('https://myfitpro.vercel.app/api/webhook', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(crmData)
+  }).catch(() => {})
+
   // If "ready to start" (commit1) is selected, submit form then redirect to Stripe checkout
   const commitChoice = document.querySelector('input[name="Commitment Level"]:checked');
   if (commitChoice && commitChoice.id === 'commit1') {
