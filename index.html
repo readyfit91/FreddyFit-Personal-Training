@@ -2311,7 +2311,7 @@
       <div class="section-line"></div>
     </div>
     <div class="form-container">
-      <form action="https://api.web3forms.com/submit" method="POST">
+      <form action="https://api.web3forms.com/submit" method="POST" onsubmit="submitConsultation(event)">
         <input type="hidden" name="access_key" value="c1129fa5-d2cd-4d67-a690-234ae35b33ce">
         <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name" required></div>
         <div class="form-row">
@@ -3264,6 +3264,30 @@ function skipQuiz() {
 
 function closeQuiz() {
   document.getElementById('quizModal').classList.remove('active');
+}
+
+function submitConsultation(e) {
+  e.preventDefault()
+  const form = e.target
+  const crmData = {
+    name: form.querySelector('[name="name"]')?.value || '',
+    email: form.querySelector('[name="email"]')?.value || '',
+    phone: form.querySelector('[name="phone"]')?.value || '',
+    source: form.querySelector('[name="referral_source"]')?.value || '',
+    current_weight: form.querySelector('[name="current_weight"]')?.value || '',
+    goal: form.querySelector('[name="fitness_goal"]')?.value || '',
+    motivation: form.querySelector('[name="goal_importance"]')?.value || '',
+    medical_history: form.querySelector('[name="injuries"]')?.value || '',
+    medications: form.querySelector('[name="medication"]')?.value || '',
+    preferred_contact_time: form.querySelector('[name="contact_availability"]')?.value || '',
+    additional_info: form.querySelector('[name="message"]')?.value || ''
+  }
+  fetch('https://myfitpro.vercel.app/api/webhook', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(crmData)
+  }).catch(() => {})
+  form.submit()
 }
 
 function submitQuiz() {
