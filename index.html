@@ -2309,7 +2309,7 @@
       <div class="section-line"></div>
     </div>
     <div class="form-container">
-      <form action="https://myfitpro.vercel.app/api/webhook" method="POST">
+      <form id="consultationForm" action="https://myfitpro.vercel.app/api/webhook" method="POST" onsubmit="return submitConsultation(event)">
         <input type="hidden" name="_form" value="Consultation Form">
         <input type="hidden" name="_next" value="https://getfreddyfit.com/thank-you">
         <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name" required></div>
@@ -2327,6 +2327,7 @@
         <div class="form-group"><label>Additional Information</label><textarea name="message" placeholder="Anything else you'd like us to know..." rows="3"></textarea></div>
         <button type="submit" class="btn-submit">Request Consultation</button>
       </form>
+      <div class="quiz-message" id="consultationResult" style="display: none;"></div>
     </div>
   </div>
 </section>
@@ -3251,6 +3252,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 1000);
 });
 
+// Reserve enough space at the bottom of the page for the sticky contact bar
+// so it never overlaps and blocks taps on content underneath it (the bar's
+// real height varies by viewport width and text wrapping).
+function adjustStickyBarSpacing() {
+  const bar = document.querySelector('.sticky-contact-bar');
+  if (!bar) return;
+  document.body.style.paddingBottom = (bar.offsetHeight + 24) + 'px';
+}
+adjustStickyBarSpacing();
+window.addEventListener('load', adjustStickyBarSpacing);
+window.addEventListener('resize', adjustStickyBarSpacing);
+
 function startQuiz() {
   document.getElementById('quizPrompt').style.display = 'none';
   document.getElementById('quizContent').style.display = 'block';
@@ -3263,6 +3276,34 @@ function skipQuiz() {
 
 function closeQuiz() {
   document.getElementById('quizModal').classList.remove('active');
+}
+
+function submitConsultation(event) {
+  event.preventDefault();
+  const form = document.getElementById('consultationForm');
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const payload = Object.fromEntries(new FormData(form).entries());
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Sending...';
+
+  fetch(form.action, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(function(res) {
+    if (!res.ok) throw new Error('Request failed');
+    form.style.display = 'none';
+    const result = document.getElementById('consultationResult');
+    result.textContent = "Thank you! Your consultation request has been submitted. We'll be in touch soon.";
+    result.style.display = 'block';
+  }).catch(function() {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Request Consultation';
+    alert('Something went wrong submitting your request. Please try again or call us directly at 314-584-9389.');
+  });
+
+  return false;
 }
 
 function submitQuiz() {
@@ -3291,10 +3332,12 @@ function submitQuiz() {
   const commitChoice = document.querySelector('input[name="Commitment Level"]:checked');
   if (commitChoice && commitChoice.id === 'commit1') {
     // Submit form via fetch so we can redirect afterward
-    const formData = new FormData(document.getElementById('quizForm'));
-    fetch(document.getElementById('quizForm').action, {
+    const quizForm = document.getElementById('quizForm');
+    const payload = Object.fromEntries(new FormData(quizForm).entries());
+    fetch(quizForm.action, {
       method: 'POST',
-      body: formData
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
     }).catch(function() {}); // fire-and-forget
     window.open('https://buy.stripe.com/5kQ14nawL8Ft4l6fnh3Ru05', '_blank');
     // Show result message
@@ -3304,8 +3347,20 @@ function submitQuiz() {
     return;
   }
 
-  // For all other options, submit the form normally
-  document.getElementById('quizForm').submit();
+  // For all other options, submit the form as JSON to the webhook
+  const quizForm = document.getElementById('quizForm');
+  const payload = Object.fromEntries(new FormData(quizForm).entries());
+  fetch(quizForm.action, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(function() {
+    document.getElementById('quizContent').style.display = 'none';
+    document.getElementById('resultMessage').textContent = 'Thank you! Your assessment has been submitted. We will be in touch soon.';
+    document.getElementById('quizResult').style.display = 'flex';
+  }).catch(function() {
+    alert('Something went wrong submitting your assessment. Please try again or call us directly at 314-584-9389.');
+  });
 }
 
 
