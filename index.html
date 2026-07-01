@@ -1995,11 +1995,11 @@
         <p>Let's find your best path forward</p>
       </div>
 
-      <form id="quizForm" action="https://formsubmit.co/admin@getfreddyfit.com" method="POST">
+      <form id="quizForm" action="https://myfitpro.vercel.app/api/webhook" method="POST">
         <input type="hidden" name="_cc" value="myfitpro@getfreddyfit.com">
         <input type="hidden" name="_subject" value="New Performance Assessment Quiz Response">
         <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="javascript:void(0);">
+        <input type="hidden" name="_next" value="https://getfreddyfit.com">
         <input type="hidden" name="Timestamp" value="">
         
         <!-- Contact Information -->
@@ -2312,7 +2312,7 @@
       <div class="section-line"></div>
     </div>
     <div class="form-container">
-      <form action="https://formsubmit.co/readyfit91@gmail.com" method="POST">
+      <form action="https://myfitpro.vercel.app/api/webhook" method="POST">
         <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name" required></div>
         <div class="form-row">
           <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="you@example.com" required></div>
@@ -2326,9 +2326,9 @@
         <div class="form-group"><label>Current Medications</label><textarea name="medication" placeholder="List any medications you are currently taking..." rows="3"></textarea></div>
         <div class="form-group"><label>Preferred Days &amp; Time for Contact</label><input type="text" name="contact_availability" placeholder="e.g. Mon-Fri, 9am-12pm" required></div>
         <div class="form-group"><label>Additional Information</label><textarea name="message" placeholder="Anything else you'd like us to know..." rows="3"></textarea></div>
+        <input type="hidden" name="_next" value="https://getfreddyfit.com">
         <input type="hidden" name="_subject" value="New FreddyFit Consultation Request">
         <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_webhook" value="https://myfitpro.vercel.app/api/webhook">
         <button type="submit" class="btn-submit">Request Consultation</button>
       </form>
     </div>
@@ -3291,24 +3291,7 @@ function submitQuiz() {
   // Set timestamp
   document.querySelector('input[name="Timestamp"]').value = new Date().toLocaleString();
 
-  // If "ready to start" (commit1) is selected, submit form then redirect to Stripe checkout
-  const commitChoice = document.querySelector('input[name="Commitment Level"]:checked');
-  if (commitChoice && commitChoice.id === 'commit1') {
-    // Submit form via fetch so we can redirect afterward
-    const formData = new FormData(document.getElementById('quizForm'));
-    fetch(document.getElementById('quizForm').action, {
-      method: 'POST',
-      body: formData
-    }).catch(function() {}); // fire-and-forget
-    window.open('https://buy.stripe.com/5kQ14nawL8Ft4l6fnh3Ru05', '_blank');
-    // Show result message
-    document.getElementById('quizContent').style.display = 'none';
-    document.getElementById('resultMessage').textContent = 'Thank you! You are being redirected to checkout.';
-    document.getElementById('quizResult').style.display = 'flex';
-    return;
-  }
-
-  // For all other options, submit the form normally
+  // Submit the form as a plain HTML POST
   document.getElementById('quizForm').submit();
 }
 
