@@ -2312,7 +2312,7 @@
       <div class="section-line"></div>
     </div>
     <div class="form-container">
-      <form action="https://formsubmit.co/readyfit91@gmail.com" method="POST">
+      <form id="consultationForm">
         <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your full name" required></div>
         <div class="form-row">
           <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="you@example.com" required></div>
@@ -2326,11 +2326,12 @@
         <div class="form-group"><label>Current Medications</label><textarea name="medication" placeholder="List any medications you are currently taking..." rows="3"></textarea></div>
         <div class="form-group"><label>Preferred Days &amp; Time for Contact</label><input type="text" name="contact_availability" placeholder="e.g. Mon-Fri, 9am-12pm" required></div>
         <div class="form-group"><label>Additional Information</label><textarea name="message" placeholder="Anything else you'd like us to know..." rows="3"></textarea></div>
-        <input type="hidden" name="_subject" value="New FreddyFit Consultation Request">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_webhook" value="https://myfitpro.vercel.app/api/webhook">
         <button type="submit" class="btn-submit">Request Consultation</button>
       </form>
+      <div id="consultationSuccess" style="display:none;text-align:center;padding:32px 16px">
+        <h3 style="color:#2BAADF;margin-bottom:8px">Thank you!</h3>
+        <p>Your consultation request has been received. Freddy will be in touch with you soon.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -3201,6 +3202,39 @@ function showPage(name) {
 }
 function toggleMenu() { document.getElementById('navLinks').classList.toggle('open'); }
 function scrollToConsultation() { document.getElementById('consultation').scrollIntoView({ behavior: 'smooth' }); }
+
+document.addEventListener('DOMContentLoaded', function() {
+  var form = document.getElementById('consultationForm');
+  if (!form) return;
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    var data = {
+      name:                form.querySelector('[name="name"]').value.trim(),
+      email:               form.querySelector('[name="email"]').value.trim(),
+      phone:               form.querySelector('[name="phone"]').value.trim(),
+      source:              form.querySelector('[name="referral_source"]').value,
+      current_weight:      form.querySelector('[name="current_weight"]').value.trim(),
+      goal:                form.querySelector('[name="fitness_goal"]').value.trim(),
+      goal_importance:     form.querySelector('[name="goal_importance"]').value.trim(),
+      medical_history:     [form.querySelector('[name="injuries"]').value.trim(), form.querySelector('[name="medication"]').value.trim()].filter(Boolean).join(' | '),
+      preferred_contact_time: form.querySelector('[name="contact_availability"]').value.trim(),
+      message:             form.querySelector('[name="message"]').value.trim(),
+      timestamp:           new Date().toLocaleString(),
+      _form:               'consultation'
+    };
+    fetch('https://myfitpro.vercel.app/api/webhook', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }).finally(function() {
+      form.style.display = 'none';
+      document.getElementById('consultationSuccess').style.display = 'block';
+    });
+  });
+});
 function scrollToServices() { document.getElementById('services').scrollIntoView({ behavior: 'smooth' }); }
 window.addEventListener('scroll', () => { document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20); });
 
