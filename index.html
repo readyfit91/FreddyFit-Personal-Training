@@ -3238,7 +3238,7 @@ function nextSlide() {
     currentSlide++; 
     updateSlideshow(); 
   } else if (currentSlide === totalSlides - 1) {
-    window.open('https://buy.stripe.com/5kQ14nawL8Ft4l6fnh3Ru05', '_blank');
+    window.location.href = 'https://buy.stripe.com/5kQ14nawL8Ft4l6fnh3Ru05';
   }
 }
 
@@ -3300,7 +3300,7 @@ function submitQuiz() {
       method: 'POST',
       body: formData
     }).catch(function() {}); // fire-and-forget
-    window.open('https://buy.stripe.com/5kQ14nawL8Ft4l6fnh3Ru05', '_blank');
+    window.location.href = 'https://buy.stripe.com/5kQ14nawL8Ft4l6fnh3Ru05';
     // Show result message
     document.getElementById('quizContent').style.display = 'none';
     document.getElementById('resultMessage').textContent = 'Thank you! You are being redirected to checkout.';
