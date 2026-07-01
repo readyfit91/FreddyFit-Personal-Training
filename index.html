@@ -3270,46 +3270,51 @@ function closeQuiz() {
 }
 
 function submitQuiz() {
-  // Get contact info
-  const firstName = document.querySelector('input[name="First Name"]')?.value;
-  const email = document.querySelector('input[name="Email"]')?.value;
-  const phone = document.querySelector('input[name="Phone Number"]')?.value;
-  
-  // Get form values
-  const goal = document.querySelector('input[name="Primary Goal"]:checked')?.value;
-  const barrier = document.querySelector('input[name="Current Barriers"]:checked')?.value;
-  const days = document.querySelector('input[name="Training Days Per Week"]:checked')?.value;
-  const need = document.querySelector('input[name="Biggest Need"]:checked')?.value;
+  const firstName  = document.querySelector('input[name="First Name"]')?.value?.trim();
+  const lastName   = document.querySelector('input[name="Last Name"]')?.value?.trim();
+  const email      = document.querySelector('input[name="Email"]')?.value?.trim();
+  const phone      = document.querySelector('input[name="Phone Number"]')?.value?.trim();
+  const goal       = document.querySelector('input[name="Primary Goal"]:checked')?.value;
+  const barrier    = document.querySelector('input[name="Current Barriers"]:checked')?.value;
+  const days       = document.querySelector('input[name="Training Days Per Week"]:checked')?.value;
+  const need       = document.querySelector('input[name="Biggest Need"]:checked')?.value;
   const commitment = document.querySelector('input[name="Commitment Level"]:checked')?.value;
 
-  // Validate all fields are filled
   if (!firstName || !email || !phone || !goal || !barrier || !days || !need || !commitment) {
     alert('Please fill in all required fields before submitting.');
     return;
   }
 
-  // Set timestamp
-  document.querySelector('input[name="Timestamp"]').value = new Date().toLocaleString();
+  const payload = {
+    name: (firstName + ' ' + (lastName || '')).trim(),
+    email: email,
+    phone: phone,
+    goal: goal,
+    barrier: barrier,
+    days_per_week: days,
+    need: need,
+    commitment: commitment,
+    timestamp: new Date().toLocaleString(),
+    _form: 'assessment'
+  };
 
-  // If "ready to start" (commit1) is selected, submit form then redirect to Stripe checkout
   const commitChoice = document.querySelector('input[name="Commitment Level"]:checked');
-  if (commitChoice && commitChoice.id === 'commit1') {
-    // Submit form via fetch so we can redirect afterward
-    const formData = new FormData(document.getElementById('quizForm'));
-    fetch(document.getElementById('quizForm').action, {
-      method: 'POST',
-      body: formData
-    }).catch(function() {}); // fire-and-forget
+  const goToStripe = commitChoice && commitChoice.id === 'commit1';
+
+  fetch('https://myfitpro.vercel.app/api/webhook', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(function() {});
+
+  if (goToStripe) {
     window.location.href = 'https://buy.stripe.com/5kQ14nawL8Ft4l6fnh3Ru05';
-    // Show result message
-    document.getElementById('quizContent').style.display = 'none';
-    document.getElementById('resultMessage').textContent = 'Thank you! You are being redirected to checkout.';
-    document.getElementById('quizResult').style.display = 'flex';
     return;
   }
 
-  // For all other options, submit the form normally
-  document.getElementById('quizForm').submit();
+  document.getElementById('quizContent').style.display = 'none';
+  document.getElementById('resultMessage').textContent = 'Thank you! We will be in touch soon.';
+  document.getElementById('quizResult').style.display = 'flex';
 }
 
 
