@@ -1275,6 +1275,46 @@
     font-size: 1rem; margin-bottom: 2rem;
   }
 
+  /* ===== BEFORE & AFTER STORY ===== */
+  .tf-story-section {
+    padding: 4rem 2rem; background: var(--light-surface);
+    border-top: 1px solid var(--light-border); border-bottom: 1px solid var(--light-border);
+  }
+  .tf-story-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
+  }
+  .tf-story-img-wrap {
+    border-radius: 12px; overflow: hidden;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.12);
+  }
+  .tf-story-img-wrap img { width: 100%; display: block; }
+  .tf-story-name {
+    font-family: 'Bebas Neue', sans-serif; letter-spacing: 2px;
+    font-size: 1.9rem; color: var(--text-on-light); margin-bottom: 0.25rem;
+  }
+  .tf-story-stats {
+    display: flex; flex-wrap: wrap; gap: 1.5rem;
+    margin: 1.25rem 0 1.5rem;
+  }
+  .tf-story-stat { min-width: 90px; }
+  .tf-story-stat-num {
+    font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--blue);
+    letter-spacing: 1px; line-height: 1;
+  }
+  .tf-story-stat-label {
+    font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;
+    color: var(--text-muted-light); margin-top: 0.35rem;
+  }
+  .tf-story-text p {
+    color: var(--text-muted-light); font-weight: 300; line-height: 1.8;
+    font-size: 0.98rem; margin-bottom: 1rem;
+  }
+  .tf-story-text p:last-child { margin-bottom: 0; }
+  @media (max-width: 800px) {
+    .tf-story-inner { grid-template-columns: 1fr; gap: 2rem; }
+  }
+
   /* FOOTER (DARK) */
   footer {
     background: #FFFFFF; border-top: 1px solid var(--light-border);
@@ -2746,6 +2786,42 @@
     </div>
   </div>
 
+  <div class="tf-story-section">
+    <div class="tf-story-inner">
+      <div class="tf-story-img-wrap">
+        <img src="transformation_collage.jpg" alt="Before and after body transformation photos" loading="lazy">
+      </div>
+      <div class="tf-story-content">
+        <div class="section-label">Client Story</div>
+        <h3 class="tf-story-name">From Intimidated to Unstoppable</h3>
+        <div class="tf-story-stats">
+          <div class="tf-story-stat">
+            <div class="tf-story-stat-num">-78 lbs</div>
+            <div class="tf-story-stat-label">230 &rarr; 152 lbs</div>
+          </div>
+          <div class="tf-story-stat">
+            <div class="tf-story-stat-num">185 lbs</div>
+            <div class="tf-story-stat-label">Deadlift PR</div>
+          </div>
+          <div class="tf-story-stat">
+            <div class="tf-story-stat-num">1 Year</div>
+            <div class="tf-story-stat-label">Off GLP-1, Zero Regain</div>
+          </div>
+        </div>
+        <div class="tf-story-text">
+          <p>Today I'm the strongest and leanest I've ever been in my life &mdash; 152 lbs, down from 230. But the biggest transformation wasn't the number on the scale. It was what training built in me that made it last.</p>
+          <p>Committing to work with a trainer meant stepping way outside my comfort zone. The thought of being in a gym was intimidating &mdash; I never thought weight training was something for me. If I lifted anything, it maxed out around 15 lbs for legs, 3&ndash;5 lbs for arms. Cardio was where I felt safe.</p>
+          <p>What made it possible was the environment: a small, private 24/7 facility available only to clients, where most of the time I was the only one there. Freddy built my program around real assessments, not guesswork, and gave me nutrition guidance that actually fit my life &mdash; not just a generic plan.</p>
+          <p>Eight weeks in, I stepped up onto the retaining wall to reach the patio &mdash; something I used to walk all the way around to avoid. These days, walking into that gym feels nothing like it did that first session &mdash; it's just part of my routine now.</p>
+          <p>Then I deadlifted 185 lbs. I never thought I'd lift anything close to that. I remember being frustrated in a session, convinced I couldn't finish an exercise, and Freddy just said: "This is why we call it training &mdash; just show up and keep working at it." That stuck with me more than almost anything else.</p>
+          <p>I started this journey on a GLP-1 in December 2024, and it helped me lose the initial weight. I've been off it for almost a year now &mdash; a point where I was told many people start regaining &mdash; and I haven't gained back a pound. Strength training is why it stuck.</p>
+          <p>I can climb stairs without losing my breath, keep up with my family on the pickleball court instead of struggling to move around it, and join outings without feeling winded and tired. I'm no longer classified as obese or pre-diabetic.</p>
+          <p>I can look at myself in the mirror without the embarrassment I used to carry &mdash; the feeling of having let myself get so overweight, not knowing where to even start.</p>
+          <p>Training is why I kept it off. It's the best investment I've ever made in myself. Worth every penny.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="tf-gallery-section">
     <div class="tf-grid">
