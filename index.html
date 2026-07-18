@@ -593,6 +593,19 @@
     cursor: pointer; transition: all 0.3s ease; margin-top: 0.5rem;
   }
   .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 28px var(--blue-glow); }
+  .sms-consent {
+    display: flex; align-items: flex-start; gap: 0.65rem;
+    margin: 0.25rem 0 1rem;
+  }
+  .sms-consent input[type="checkbox"] {
+    margin-top: 0.2rem; width: 18px; height: 18px; flex-shrink: 0;
+    accent-color: var(--blue); cursor: pointer;
+  }
+  .sms-consent label {
+    cursor: pointer; font-size: 0.78rem; line-height: 1.5;
+    color: var(--text-muted-light); font-weight: 400;
+    text-transform: none; letter-spacing: normal;
+  }
 
   /* ===== SESSION ROADMAP (LIGHT) ===== */
   .roadmap-section { padding: 5rem 2rem 6rem; background: var(--light-bg); }
@@ -2155,6 +2168,11 @@
           </div>
         </div>
 
+        <div class="sms-consent">
+          <input type="checkbox" id="quizSmsConsent" name="SMS Consent" required>
+          <label for="quizSmsConsent">I agree to receive SMS messages from Freddy Fit regarding my consultation, appointments, coaching updates, and customer support. Message frequency varies. Message and data rates may apply. Reply STOP to unsubscribe and HELP for help. Privacy Policy | Terms of Service</label>
+        </div>
+
         <div class="quiz-buttons">
           <button type="button" class="quiz-btn-skip" onclick="skipQuiz()">Close</button>
           <button type="button" class="quiz-btn-submit" onclick="submitQuiz()">Submit</button>
@@ -2326,6 +2344,10 @@
         <div class="form-group"><label>Current Medications</label><textarea name="medication" placeholder="List any medications you are currently taking..." rows="3"></textarea></div>
         <div class="form-group"><label>Preferred Days &amp; Time for Contact</label><input type="text" name="contact_availability" placeholder="e.g. Mon-Fri, 9am-12pm" required></div>
         <div class="form-group"><label>Additional Information</label><textarea name="message" placeholder="Anything else you'd like us to know..." rows="3"></textarea></div>
+        <div class="sms-consent">
+          <input type="checkbox" id="consultationSmsConsent" name="sms_consent" required>
+          <label for="consultationSmsConsent">I agree to receive SMS messages from Freddy Fit regarding my consultation, appointments, coaching updates, and customer support. Message frequency varies. Message and data rates may apply. Reply STOP to unsubscribe and HELP for help. Privacy Policy | Terms of Service</label>
+        </div>
         <button type="submit" class="btn-submit">Request Consultation</button>
       </form>
       <div id="consultationSuccess" style="display:none;text-align:center;padding:32px 16px">
@@ -3222,6 +3244,7 @@ document.addEventListener('DOMContentLoaded', function() {
       medical_history:     [form.querySelector('[name="injuries"]').value.trim(), form.querySelector('[name="medication"]').value.trim()].filter(Boolean).join(' | '),
       preferred_contact_time: form.querySelector('[name="contact_availability"]').value.trim(),
       message:             form.querySelector('[name="message"]').value.trim(),
+      sms_consent:         form.querySelector('[name="sms_consent"]').checked,
       timestamp:           new Date().toLocaleString(),
       _form:               'consultation'
     };
@@ -3313,9 +3336,15 @@ function submitQuiz() {
   const days       = document.querySelector('input[name="Training Days Per Week"]:checked')?.value;
   const need       = document.querySelector('input[name="Biggest Need"]:checked')?.value;
   const commitment = document.querySelector('input[name="Commitment Level"]:checked')?.value;
+  const smsConsent = document.querySelector('input[name="SMS Consent"]')?.checked;
 
   if (!firstName || !email || !phone || !goal || !barrier || !days || !need || !commitment) {
     alert('Please fill in all required fields before submitting.');
+    return;
+  }
+
+  if (!smsConsent) {
+    alert('Please agree to receive SMS messages before submitting.');
     return;
   }
 
@@ -3328,6 +3357,7 @@ function submitQuiz() {
     days_per_week: days,
     need: need,
     commitment: commitment,
+    sms_consent: smsConsent,
     timestamp: new Date().toLocaleString(),
     _form: 'assessment'
   };
