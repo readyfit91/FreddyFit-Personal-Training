@@ -2392,15 +2392,17 @@
       <!-- Progress bar -->
       <div class="rm-progress">
         <div class="rm-progress-steps">
-          <button class="rm-step-dot active" onclick="goSlide(0)"><span>&#9733;</span></button>
+          <button class="rm-step-dot active" onclick="goSlide(0)"><span>&#9742;</span></button>
           <div class="rm-step-line"><div class="rm-step-line-fill"></div></div>
-          <button class="rm-step-dot" onclick="goSlide(1)"><span>01</span></button>
+          <button class="rm-step-dot" onclick="goSlide(1)"><span>&#9733;</span></button>
           <div class="rm-step-line"><div class="rm-step-line-fill"></div></div>
-          <button class="rm-step-dot" onclick="goSlide(2)"><span>02</span></button>
+          <button class="rm-step-dot" onclick="goSlide(2)"><span>01</span></button>
           <div class="rm-step-line"><div class="rm-step-line-fill"></div></div>
-          <button class="rm-step-dot" onclick="goSlide(3)"><span>03</span></button>
+          <button class="rm-step-dot" onclick="goSlide(3)"><span>02</span></button>
           <div class="rm-step-line"><div class="rm-step-line-fill"></div></div>
-          <button class="rm-step-dot" onclick="goSlide(4)"><span>04</span></button>
+          <button class="rm-step-dot" onclick="goSlide(4)"><span>03</span></button>
+          <div class="rm-step-line"><div class="rm-step-line-fill"></div></div>
+          <button class="rm-step-dot" onclick="goSlide(5)"><span>04</span></button>
         </div>
       </div>
 
@@ -2408,25 +2410,41 @@
       <div class="rm-slides-wrapper">
         <div class="rm-slides" id="rmSlides">
 
-          <!-- Consultation Slide -->
+          <!-- Phone Consultation Slide -->
           <div class="rm-slide active">
             <div class="rm-slide-header">
-              <div class="rm-slide-num" style="font-size:1.8rem;">&#9733;</div>
+              <div class="rm-slide-num" style="font-size:1.8rem;">&#9742;</div>
               <div>
-                <h3>Consultation</h3>
-                <p class="rm-slide-subtitle">Included with Week 1 &bull; 10&ndash;15 Minute Phone Call</p>
+                <h3>Phone Consultation</h3>
+                <p class="rm-slide-subtitle">10&ndash;15 Minute Call &bull; Prior to In-Person Consultation</p>
               </div>
             </div>
             <ul class="rm-slide-list">
               <li>A brief 10-15 minute phone call collecting preliminary information about you and your goals.</li>
-              <li>Discuss your goals using the SMART approach (Specific, Measurable, Attainable, Realistic, and Timely) for both short-term and long-term objectives.</li>
-              <li>Identify any mental and physical obstacles that may impact your training progress.</li>
               <li>Provide a way to collect any blood work panels from your primary care physician, if available.</li>
               <li>Go over your food preferences.</li>
+            </ul>
+            <div class="rm-slide-cta">
+              <span class="rm-free-badge">COMPLIMENTARY</span> Your phone consultation is complimentary &mdash; no commitment to Month 1 required.
+            </div>
+          </div>
+
+          <!-- In-Person Consultation Slide -->
+          <div class="rm-slide">
+            <div class="rm-slide-header">
+              <div class="rm-slide-num" style="font-size:1.8rem;">&#9733;</div>
+              <div>
+                <h3>In-Person Consultation</h3>
+                <p class="rm-slide-subtitle">Initial Assessment &amp; Goal Setting</p>
+              </div>
+            </div>
+            <ul class="rm-slide-list">
+              <li>Discuss your goals using the SMART approach (Specific, Measurable, Attainable, Realistic, and Timely) for both short-term and long-term objectives.</li>
+              <li>Identify any mental and physical obstacles that may impact your training progress.</li>
               <li>Build a strong foundation for your personalized fitness journey.</li>
             </ul>
             <div class="rm-slide-cta">
-              <span class="rm-free-badge">COMPLIMENTARY</span> Your consultation is complimentary and included at the start of your first month &mdash; no separate commitment required.
+              <span class="rm-free-badge">COMPLIMENTARY</span> Your in-person consultation is complimentary &mdash; no commitment to Month 1 required.
             </div>
           </div>
 
@@ -3278,7 +3296,7 @@ window.addEventListener('scroll', () => { document.getElementById('navbar').clas
 
 // Roadmap slideshow
 let currentSlide = 0;
-const totalSlides = 5;
+const totalSlides = 6;
 function updateSlideshow() {
   const slides = document.querySelectorAll('.rm-slide');
   const dots = document.querySelectorAll('.rm-step-dot');
