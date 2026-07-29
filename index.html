@@ -973,13 +973,15 @@
     padding: 0.25rem 0.6rem; border-radius: 4px; flex-shrink: 0;
   }
   .rm-session-badge {
-    display: inline-block; margin-top: 0.5rem;
-    background: rgba(46,163,213,0.08); color: var(--blue);
+    display: inline-flex; align-items: center; gap: 0.35rem; margin-top: 0.5rem;
+    background: linear-gradient(135deg, #f5c542, #d4a017); color: #3a2a00;
     font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
-    font-size: 0.7rem; letter-spacing: 1px; text-transform: uppercase;
-    padding: 0.2rem 0.55rem; border-radius: 4px;
-    border: 1px solid rgba(46,163,213,0.2);
+    font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase;
+    padding: 0.3rem 0.7rem; border-radius: 5px;
+    border: 1px solid #b8860b;
+    box-shadow: 0 2px 8px rgba(212,160,23,0.35);
   }
+  .rm-session-badge::before { content: '\2605'; font-size: 0.9rem; }
 
   @media (max-width: 600px) {
     .rm-slide-cta {
@@ -2448,6 +2450,7 @@
             <ul class="rm-slide-list">
               <li>Discuss your goals using the SMART approach (Specific, Measurable, Attainable, Realistic, and Timely) for both short-term and long-term objectives.</li>
               <li>Identify any mental and physical obstacles that may impact your training progress.</li>
+              <li>Assess weight, body fat, and BMI, and discuss how often we'll check in on weigh-ins.</li>
               <li>Go over your food preferences.</li>
               <li>Build a strong foundation for your personalized fitness journey.</li>
             </ul>
@@ -2470,7 +2473,6 @@
               <li>Identify current movement patterns and any potential limitations.</li>
               <li>Conduct a functional screening assessment of the lower body.</li>
               <li>Perform supporting lower-body breakout assessments as needed (ankle, knee, hip, and Lumbo-Pelvic-Hip Complex).</li>
-              <li>Assess weight, body fat, and BMI, and discuss how often we'll check in on weigh-ins.</li>
               <li>Start tracking behavioral trends alongside your physical baseline.</li>
               <li>Assign food logging to track nutrition habits and daily intake.</li>
               <li>Assign one individualized program to complete.</li>
