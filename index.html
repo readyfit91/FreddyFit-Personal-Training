@@ -972,6 +972,14 @@
     font-size: 0.75rem; letter-spacing: 1.5px;
     padding: 0.25rem 0.6rem; border-radius: 4px; flex-shrink: 0;
   }
+  .rm-session-badge {
+    display: inline-block; margin-top: 0.5rem;
+    background: rgba(46,163,213,0.08); color: var(--blue);
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    font-size: 0.7rem; letter-spacing: 1px; text-transform: uppercase;
+    padding: 0.2rem 0.55rem; border-radius: 4px;
+    border: 1px solid rgba(46,163,213,0.2);
+  }
 
   @media (max-width: 600px) {
     .rm-slide-cta {
@@ -2173,7 +2181,7 @@
         </div>
 
         <div class="sms-consent">
-          <input type="checkbox" id="quizSmsConsent" name="SMS Consent" required>
+          <input type="checkbox" id="quizSmsConsent" name="SMS Consent">
           <label for="quizSmsConsent">I agree to receive SMS messages from FreddyFit LLC regarding my consultation, appointments, coaching updates, and customer support. Message frequency varies. Message and data rates may apply. Reply STOP to unsubscribe and HELP for help. <a href="/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a> | <a href="/terms-and-conditions" target="_blank" rel="noopener">Terms of Service</a></label>
         </div>
 
@@ -2349,7 +2357,7 @@
         <div class="form-group"><label>Preferred Days &amp; Time for Contact</label><input type="text" name="contact_availability" placeholder="e.g. Mon-Fri, 9am-12pm" required></div>
         <div class="form-group"><label>Additional Information</label><textarea name="message" placeholder="Anything else you'd like us to know..." rows="3"></textarea></div>
         <div class="sms-consent">
-          <input type="checkbox" id="consultationSmsConsent" name="sms_consent" required>
+          <input type="checkbox" id="consultationSmsConsent" name="sms_consent">
           <label for="consultationSmsConsent">I agree to receive SMS messages from FreddyFit LLC regarding my consultation, appointments, coaching updates, and customer support. Message frequency varies. Message and data rates may apply. Reply STOP to unsubscribe and HELP for help. <a href="/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a> | <a href="/terms-and-conditions" target="_blank" rel="noopener">Terms of Service</a></label>
         </div>
         <button type="submit" class="btn-submit">Request Consultation</button>
@@ -2455,10 +2463,10 @@
               <div>
                 <h3>Week 1</h3>
                 <p class="rm-slide-subtitle">Lower Body Functional Screening</p>
+                <span class="rm-session-badge">60 Minute 1-1 Coaching Session</span>
               </div>
             </div>
             <ul class="rm-slide-list">
-              <li>60-minute coaching session.</li>
               <li>Identify current movement patterns and any potential limitations.</li>
               <li>Conduct a functional screening assessment of the lower body.</li>
               <li>Perform supporting lower-body breakout assessments as needed (ankle, knee, hip, and Lumbo-Pelvic-Hip Complex).</li>
@@ -2476,10 +2484,10 @@
               <div>
                 <h3>Week 2</h3>
                 <p class="rm-slide-subtitle">Corrective Protocol &amp; HIIT Workout</p>
+                <span class="rm-session-badge">60 Minute 1-1 Coaching Session</span>
               </div>
             </div>
             <ul class="rm-slide-list">
-              <li>60-minute 1-on-1 coaching session.</li>
               <li>Incorporate and assign a daily lower-body corrective protocol based on findings from Week 1.</li>
               <li>Review Phase 1 of your personalized nutrition plan.</li>
               <li>Complete a VO2 field screen to assess oxygen intake.</li>
@@ -2495,10 +2503,10 @@
               <div>
                 <h3>Week 3</h3>
                 <p class="rm-slide-subtitle">Upper Body Screening &amp; Assessments</p>
+                <span class="rm-session-badge">60 Minute 1-1 Coaching Session</span>
               </div>
             </div>
             <ul class="rm-slide-list">
-              <li>60-minute 1-on-1 coaching session.</li>
               <li>Conduct a functional screening assessment of the upper body.</li>
               <li>Perform supporting upper-body breakout assessments as needed (shoulder, neck, and elbow).</li>
               <li>Assign two individualized programs to complete between weeks.</li>
@@ -2515,10 +2523,10 @@
               <div>
                 <h3>Week 4</h3>
                 <p class="rm-slide-subtitle">Programming Foundation &amp; Strength Testing</p>
+                <span class="rm-session-badge">60 Minute 1-1 Coaching Session</span>
               </div>
             </div>
             <ul class="rm-slide-list">
-              <li>60-minute 1-on-1 coaching session.</li>
               <li>Incorporate and assign a daily upper-body corrective protocol based on findings from Week 3.</li>
               <li>Complete a HIIT circuit assessing strength and conditioning built on your Week 3 movement work and Week 2 cardiovascular baseline.</li>
               <li>Provide a customized eating plan based on your goals and any comprehensive blood work you provided.</li>
@@ -3373,11 +3381,6 @@ function submitQuiz() {
 
   if (!firstName || !email || !phone || !goal || !barrier || !days || !need || !commitment) {
     alert('Please fill in all required fields before submitting.');
-    return;
-  }
-
-  if (!smsConsent) {
-    alert('Please agree to receive SMS messages before submitting.');
     return;
   }
 
